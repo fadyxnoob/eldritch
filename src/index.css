@@ -11,7 +11,7 @@
 nav .navItems ul .navCustomStyle {}
 
 .bg-hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05)), url('src/assets/images/carousel.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05)), url('./assets/images/carousel.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -115,11 +115,11 @@ nav .navItems ul .navCustomStyle {}
     transform: perspective(400px) rotateY(0deg);
 }
 
-.winnerCard ul{
+.winnerCard ul {
     background: rgba(255, 255, 255, 0);
 }
 
-.winnerCard ul li{
+.winnerCard ul li {
     background: #333;
     height: 40px;
     width: 40px;
@@ -130,7 +130,7 @@ nav .navItems ul .navCustomStyle {}
     transform-origin: left;
 }
 
-.winnerCard:hover ul li{
+.winnerCard:hover ul li {
     transform: perspective(800px) rotateY(0deg);
     display: flex;
     align-items: center;
@@ -138,21 +138,24 @@ nav .navItems ul .navCustomStyle {}
     margin-top: 5px;
 }
 
-.winnerCard ul li:nth-child(1){
+.winnerCard ul li:nth-child(1) {
     transition-delay: 0.2s;
     margin-top: 0;
 }
-.winnerCard ul li:nth-child(2){
+
+.winnerCard ul li:nth-child(2) {
     transition-delay: 0.6s;
 }
-.winnerCard ul li:nth-child(3){
+
+.winnerCard ul li:nth-child(3) {
     transition-delay: 0.8s;
 }
-.winnerCard ul li:nth-child(4){
+
+.winnerCard ul li:nth-child(4) {
     transition-delay: 1s;
 }
 
-.winnerCard:hover ul li a{
+.winnerCard:hover ul li a {
     color: #ff5e14;
     background-color: rgba(255, 255, 255, 0);
 }
