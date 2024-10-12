@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+nav .navItems ul .navCustomStyle {}
+
+.bg-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05)), url('src/assets/images/carousel.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 83vh;
+}
+
+.productCard {
+    height: 500px !important;
+    width: 27%;
+}
+
+/* .liveStream {
+    background-image: url('./assets/images/stream.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+} */
+
+.playButton {
+    background: linear-gradient(rgba(255, 130, 0), rgba(255, 38, 0) 80%);
+    transition: all 0.3s ease-in-out 0s;
+    animation: 1.2s cubic-bezier(0.8, 0, 0, 1) 0s infinite normal none running pulse;
+    box-shadow: rgba(193, 244, 246, 0.698) 0px 0px 0px;
+    border: none;
+}
+
+.counterSection {
+    background: url(./assets/images/event.jpg), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 450px !important;
+}
+
+@keyframes pulse {
+    100% {
+        box-shadow: 0 0 0 45px rgba(193, 244, 246, 0);
+    }
+}
+
+
+.postCard {
+    width: 30%;
+}
+
+.postDatePart {
+    top: -20%;
+    right: 5%;
+    background: #fff;
+}
+
+.postDatePart .sectionInner::after {
+    content: '';
+    position: absolute;
+    background: #ff5e14;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    height: 5px;
+}
+
+.winnerCard {
+    height: 450px;
+    width: 300px;
+}
+
+.winnerCard::before {
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: 180%;
+    height: 100%;
+    width: 100%;
+    background: #ff5e143d;
+    z-index: 1;
+    transform: skew(45deg);
+    transition: 0.5s;
+}
+
+.winnerCard:hover:before {
+    left: -180%;
+}
+
+.winnerCard img {
+    filter: grayscale(100%);
+    transition: 2s;
+}
+
+.winnerCard:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.winnerCard>h2 {
+    transform-origin: right;
+    transition: 1s;
+    transform: perspective(400px) rotateY(90deg);
+}
+
+.winnerCard:hover>h2 {
+    transform: perspective(400px) rotateY(0deg);
+}
+
+.winnerCard ul{
+    background: rgba(255, 255, 255, 0);
+}
+
+.winnerCard ul li{
+    background: #333;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    transform: perspective(800px) rotateY(90deg);
+    transition: 0.5s;
+    transform-origin: left;
+}
+
+.winnerCard:hover ul li{
+    transform: perspective(800px) rotateY(0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.winnerCard ul li:nth-child(1){
+    transition-delay: 0.2s;
+    margin-top: 0;
+}
+.winnerCard ul li:nth-child(2){
+    transition-delay: 0.6s;
+}
+.winnerCard ul li:nth-child(3){
+    transition-delay: 0.8s;
+}
+.winnerCard ul li:nth-child(4){
+    transition-delay: 1s;
+}
+
+.winnerCard:hover ul li a{
+    color: #ff5e14;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.titlesSections {
+    position: relative;
+}
+
+.titlesSections::after {
+    content: "";
+    position: absolute;
+    width: 45%;
+    height: 2px;
+    background: #ff5e14;
+    bottom: -10%;
+    left: 0;
+}
+
+@media screen and (max-width:992px) {
+    .productCard {
+        width: 45%;
+    }
+
+    .productCardContainer {
+        padding: 0px 10px !important;
+    }
+
+    .counterSection {
+        height: fit-content !important;
+    }
+
+    .postCard {
+        width: 45%;
+    }
+
+}
