@@ -21,9 +21,9 @@ const Navbar = () => {
                             NavbarMenu.map((item) => {
                                 return (
                                     <li key={item.id}>
-                                        <a href={item.link}
+                                        <Link to={item.link}
                                             className='navCustomStyle inline-block text-primary text-lg font-medium'
-                                        >{item.title}</a>
+                                        >{item.title}</Link>
                                     </li>
                                 )
                             })

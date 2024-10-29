@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const Login = () => {
 
     const [isText, setIsText] = useState(true);
+        document.title = 'Byt3Blitz | Login'
 
     const changeInput = () => {
         setIsText((prev) => !prev);

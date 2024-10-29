@@ -50,7 +50,7 @@ const Footer = () => {
                 <div className='w-1/2 inline-block sm:w-auto '>
                     <h5 className='text-2xl font-normal text-primary titlesSections'>Pages</h5>
                     <ul className='mt-5 flex flex-col gap-2'>
-                        <li><a href="#" className='underline hover:text-blue-700 font-normal'>Entery</a></li>
+                        <li><Link to="/candidate" className='underline hover:text-blue-700 font-normal'>Entery</Link></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>FAQ's</a></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>User Guide</a></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>Privacy Policy</a></li>

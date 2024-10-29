@@ -12,6 +12,9 @@ import Login from "./Pages/Login/Login";
 import ForgetPassword from './Pages/ForgetPassword/ForgetPassword'
 import SignUp from "./Pages/SignUp/SignUp";
 import Layout from "./Pages/Layout/Layout";
+import Candidate from "./Pages/Candidate/Candidate";
+import CartIcon from "./Components/Cart/Cart";
+import MyCart from "./Pages/MyCart/MyCart";
 
 
 
@@ -34,5 +37,8 @@ export {
     Login,
     ForgetPassword,
     SignUp,
-    Layout
+    Layout,
+    Candidate,
+    CartIcon,
+    MyCart
 }

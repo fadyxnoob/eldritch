@@ -222,4 +222,32 @@ nav .navItems ul .navCustomStyle {}
     justify-content: center;
 }
 
+.banner {
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover ;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.candidateBanner{
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(./assets/images/candidate.jpg);
+}
 /* FORGET PASSWORD BANNER */
+
+.boxShadow {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.cartIcon{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.cartCounter{
+    color: white;
+    position: absolute;
+    top: 33%;
+    right: 35%;
+}

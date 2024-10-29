@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
     return (
@@ -8,11 +9,11 @@ const Banner = () => {
                     Join Our New Tournament
                 </div>
                 <div className='flex items-center justify-center mt-5'>
-                    <a href="#">
+                    <Link to="/candidate">
                         <button className='bg-primary rounded text-light text-xl h-12 w-44 flex items-center justify-center'>
                             Join Now
                         </button>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

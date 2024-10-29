@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const SignUp = () => {
     const [isPassText, setIsPassText] = useState(true);
     const [isConfirmPassText, setIsConfirmPassText] = useState(true);
+        document.title = 'Byt3Blitz | Sign Up'
 
     const changePassInput = () => {
         setIsPassText((prev) => !prev);

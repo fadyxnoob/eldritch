@@ -9,6 +9,8 @@ import Blog3 from '../../assets/images/blog3.jpg'
 import Candidate3 from '../../assets/images/candi3.jpg'
 import Candidate7 from '../../assets/images/candi7.jpg'
 import Candidate9 from '../../assets/images/candi9.jpg'
+
+    document.title = 'Byt3Blitz | Home'
 const Home = () => {
     return (
         <>
@@ -54,7 +56,6 @@ const Home = () => {
                     <PostCard image={Blog2} alt='Blog2' user='hammad' cat='tournament' day='31' month='Nov' title='Mastering the Battlegrounds : Your Ultimate PUBG Blog' />
                     <PostCard image={Blog3} alt='Blog3' user='yasir' cat='results' day='19' month='Mar' title='Recapping the Thrills and Spills : ELDRITCH S3 Tournament Results Unveiled ' />
                 </div>
-
             </div>
 
             <div className="my-20">
@@ -72,7 +73,6 @@ const Home = () => {
                     <WinnerCard image={Candidate7} alt='Final Winner' />
                     <WinnerCard image={Candidate9} alt='Final Winner' />
                 </div>
-
             </div>
         </>
     );

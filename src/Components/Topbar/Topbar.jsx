@@ -17,7 +17,7 @@ const Topbar = () => {
                 
                 <Link to="/login" className='flex items-center gap-1 underline '> <MdLogin /> Login</Link>
                 <Link to="/signup" className='flex items-center gap-1 underline '> <MdAccountBox /> Signup</Link>
-                <Link to="/join" className='flex items-center gap-1 underline '> <TbLogin /> Join</Link>
+                <Link to="/candidate" className='flex items-center gap-1 underline '> <TbLogin /> Join</Link>
             </div>
         </div>
     );
