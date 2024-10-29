@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 const Footer = () => {
     return (
         <div>
             <div className='px-10 my-5 flex md:justify-between flex-col md:flex-row items-center border-b-2 border-primary py-5'>
                 <div>
-                    <h5 className='text-4xl font-bold'>ELDRITCH</h5>
+                    <Link to={'/'}>
+                        <h5 className='text-4xl font-bold'>ELDRITCH</h5>
+                    </Link>
                 </div>
                 <div className="mt-5">
                     <ul className='flex gap-10'>
@@ -37,7 +40,7 @@ const Footer = () => {
                 <div className='w-1/2 inline-block sm:w-auto mb-2'>
                     <h5 className='text-2xl font-normal text-primary titlesSections'>Company</h5>
                     <ul className='mt-5 flex flex-col gap-2'>
-                        <li><a href="#" className='underline hover:text-blue-700 font-normal'>Home</a></li>
+                        <li><Link to="/" className='underline hover:text-blue-700 font-normal'>Home</Link></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>About Us</a></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>Our Blog</a></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>Our Shop</a></li>
@@ -57,8 +60,8 @@ const Footer = () => {
                 <div className='w-1/2 inline-block sm:w-auto '>
                     <h5 className='text-2xl font-normal text-primary titlesSections'>Account</h5>
                     <ul className='mt-5 flex flex-col gap-2'>
-                        <li><a href="#" className='underline hover:text-blue-700 font-normal'>Signup</a></li>
-                        <li><a href="#" className='underline hover:text-blue-700 font-normal'>Login</a></li>
+                        <li><Link to="/signup" className='underline hover:text-blue-700 font-normal'>Signup</Link></li>
+                        <li><Link to="/login" className='underline hover:text-blue-700 font-normal'>Login</Link></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>Profile</a></li>
                     </ul>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavbarMenu } from './data';
 import { MdMenu, MdOutlineSearch } from "react-icons/md";
-// import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom';
 import ResponsiveMenu from './ResponsiveMenu';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -10,7 +10,9 @@ const Navbar = () => {
             <nav className='h-16 w-full border px-2 lg:px-20 bg-light flex items-center justify-between'>
                 {/* LOGO section */}
                 <div className="logo flex justify-center items-center">
+                    <Link to='/'>
                     <h1 className='text-4xl text-black font-medium'>ELDRITCH</h1>
+                    </Link>
                 </div>
                 {/* Menu section */}
                 <div className="hidden lg:block navItems">

@@ -11,9 +11,7 @@ import Candidate7 from '../../assets/images/candi7.jpg'
 import Candidate9 from '../../assets/images/candi9.jpg'
 const Home = () => {
     return (
-        <main className='overflow-hidden'>
-            <Topbar />
-            <Navbar />
+        <>
             <Banner />
             <div className='my-20'>
                 <h2 className='text-5xl font-medium text-center'>
@@ -27,8 +25,8 @@ const Home = () => {
                    productCardContainer
                     ">
 
-                    <ProductCard image={Product1} alt='ProductOne'   />
-                    <ProductCard image={Product2} alt='ProductTwo'   />
+                    <ProductCard image={Product1} alt='ProductOne' />
+                    <ProductCard image={Product2} alt='ProductTwo' />
                     <ProductCard image={Product3} alt='ProductThree' />
                 </div>
             </div>
@@ -76,10 +74,7 @@ const Home = () => {
                 </div>
 
             </div>
-            <footer className='mt-10'>
-                <Footer />
-            </footer>
-        </main>
+        </>
     );
 }
 
