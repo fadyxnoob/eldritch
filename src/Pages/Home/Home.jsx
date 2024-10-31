@@ -6,9 +6,9 @@ import Product3 from '../../assets/images/product3.jpg'
 import Blog1 from '../../assets/images/blog1.jpg'
 import Blog2 from '../../assets/images/blog2.jpg'
 import Blog3 from '../../assets/images/blog3.jpg'
-import Candidate3 from '../../assets/images/candi3.jpg'
-import Candidate7 from '../../assets/images/candi7.jpg'
-import Candidate9 from '../../assets/images/candi9.jpg'
+import Candidate3 from '../../assets/images/Candi3.jpg'
+import Candidate7 from '../../assets/images/Candi7.jpg'
+import Candidate9 from '../../assets/images/Candi9.jpg'
 
     document.title = 'Byt3Blitz | Home'
 const Home = () => {
