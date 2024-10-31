@@ -4,7 +4,7 @@ import Products from '../../Components/ProductCard/Data';
 import { MdRemoveRedEye, MdShoppingBag } from "react-icons/md";
 import { Category } from '../../'
 
-const ProductCategory = ({ customWidth = 'w-[40%]' }) => {
+const ProductCategory = ({ customWidth = 'w-[40%]' }) => { 
   const productCate = useParams();
   console.log(productCate.categoryName);
   const cateProducts = Products.filter((pro) => pro.category === productCate.categoryName);
