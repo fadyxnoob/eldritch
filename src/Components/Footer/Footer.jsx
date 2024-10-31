@@ -41,7 +41,7 @@ const Footer = () => {
                     <h5 className='text-2xl font-normal text-primary titlesSections'>Company</h5>
                     <ul className='mt-5 flex flex-col gap-2'>
                         <li><Link to="/" className='underline hover:text-blue-700 font-normal'>Home</Link></li>
-                        <li><a href="#" className='underline hover:text-blue-700 font-normal'>About Us</a></li>
+                        <li><Link to="/aboutus" className='underline hover:text-blue-700 font-normal'>About Us</Link></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>Our Blog</a></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>Our Shop</a></li>
                         <li><a href="#" className='underline hover:text-blue-700 font-normal'>Contact Us</a></li>

@@ -15,6 +15,11 @@ import Layout from "./Pages/Layout/Layout";
 import Candidate from "./Pages/Candidate/Candidate";
 import CartIcon from "./Components/Cart/Cart";
 import MyCart from "./Pages/MyCart/MyCart";
+import About from "./Pages/About/About";
+import MemberCard from "./Components/MemberCard/MemberCard";
+import Shop from "./Pages/Shop/Shop";
+import Category from "./Components/Category/Category";
+import ProductCategory from "./Pages/ProductCategory/ProductCategory";
 
 
 
@@ -40,5 +45,10 @@ export {
     Layout,
     Candidate,
     CartIcon,
-    MyCart
+    MyCart,
+    About,
+    MemberCard,
+    Shop,
+    Category,
+    ProductCategory
 }

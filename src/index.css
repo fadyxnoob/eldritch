@@ -20,7 +20,6 @@ nav .navItems ul .navCustomStyle {}
 
 .productCard {
     height: 500px !important;
-    width: 27%;
 }
 
 /* .liveStream {
@@ -211,43 +210,103 @@ nav .navItems ul .navCustomStyle {}
 
 /* FORGET PASSWORD BANNER */
 
-.forgetPassBanner {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(./assets/images/forgetBanner.jpg);
+.forgetBanner {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/forgetBanner.jpg);
+}
+
+.banner {
     height: 400px;
     background-repeat: no-repeat;
-    background-size: cover ;
+    background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.banner {
-    height: 300px;
-    background-repeat: no-repeat;
-    background-size: cover ;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.candidateBanner {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/candidate.jpg);
 }
-.candidateBanner{
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(./assets/images/candidate.jpg);
-}
+
 /* FORGET PASSWORD BANNER */
 
 .boxShadow {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.cartIcon{
+.cartIcon {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
 
-.cartCounter{
+.cartCounter {
     color: white;
     position: absolute;
     top: 33%;
     right: 35%;
 }
+
+/* ABOUT PAGE  */
+.aboutBG {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/candidate.jpg);
+}
+
+
+.memberBox {
+    border-radius: 20px;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+        rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.memberBox>span {
+    position: absolute;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    top: -10px;
+    left: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.memberBox:hover{
+    transform: scale(0.9);
+}
+.memberBox>span::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 40px;
+    background-image: linear-gradient(45deg, #ff6547 0%, #ffb144 51%, #ff7053 100%);
+    transform: rotate(-45deg) translateY(-20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.23);
+}
+
+.memberBox>span::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-image: linear-gradient(45deg, #ff6547 0%, #ffb144 51%, #ff7053 100%);
+    box-shadow: 140px -140px #cc3f47;
+}
+
+/* ABOUT PAGE  */
+
+/* SHOP */
+
+.shopBg{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/shop.jpg); 
+}
+
+/* SHOP */

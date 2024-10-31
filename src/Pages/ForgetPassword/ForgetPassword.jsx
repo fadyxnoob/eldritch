@@ -4,7 +4,7 @@ const ForgetPassword = () => {
         document.title = 'Byt3Blitz | Forgetpassword'
     return (
         <div>
-            <div className='forgetPassBanner'>
+            <div className='banner forgetBanner'>
                 <h1 className='text-5xl text-light font-bold border-b-4 border-primary'>Forget Password</h1>
             </div>
             <div className='p-5 w-1/2 mx-auto my-10 border'>
