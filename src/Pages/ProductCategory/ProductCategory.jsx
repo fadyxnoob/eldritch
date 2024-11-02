@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Products from '../../Components/ProductCard/Data';
 import { MdRemoveRedEye, MdShoppingBag } from "react-icons/md";
 import { Category } from '../../'
-
+    
 const ProductCategory = ({ customWidth = 'w-[40%]' }) => { 
   const productCate = useParams();
   console.log(productCate.categoryName);

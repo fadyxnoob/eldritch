@@ -5,7 +5,7 @@ import Member3 from '../../assets/images/member3.jpg'
 import { MemberCard } from '../../'
 
 const About = () => {
-    return (
+    return ( 
         <>
             <div className='forgetBanner banner mb-10'>
                 <h1 className='text-5xl text-light font-bold border-b-4 border-primary'>About Us</h1>

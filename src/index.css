@@ -310,3 +310,17 @@ nav .navItems ul .navCustomStyle {}
 }
 
 /* SHOP */
+
+/* PRODUCT */
+.productBG{
+    background: linear-gradient(rgba(0, 0, 0, 0.834), rgba(0, 0, 0, 0.72)), url(./assets/images/bgProduct.jpg);
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    /* padding: 10px 50px;     */
+}
+/* PRODUCT */

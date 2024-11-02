@@ -20,6 +20,8 @@ import MemberCard from "./Components/MemberCard/MemberCard";
 import Shop from "./Pages/Shop/Shop";
 import Category from "./Components/Category/Category";
 import ProductCategory from "./Pages/ProductCategory/ProductCategory";
+import Product from "./Pages/Product/Product";
+import Comments from "./Components/Comments/Comments";
 
 
 
@@ -50,5 +52,7 @@ export {
     MemberCard,
     Shop,
     Category,
-    ProductCategory
+    ProductCategory,
+    Product,
+    Comments
 }

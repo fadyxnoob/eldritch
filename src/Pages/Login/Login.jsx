@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import { Link } from 'react-router-dom';
+
 
 const Login = () => {
 
@@ -14,6 +16,10 @@ const Login = () => {
     const submitHandler = (e) => {
         e.preventDefault();
     }
+
+  
+
+
     return (
         <div className='loginWrapper h-screen w-full'>
             <div className='border w-80 h-96 bg-[#00000049] rounded p-7 mx-auto'>

@@ -2,6 +2,7 @@ import HeadPhones from '../../assets/images/product1.jpg'
 import IPHone from '../../assets/images/product2.jpg'
 import Product3 from '../../assets/images/product3.jpg'
 import Product4 from '../../assets/images/product4.jpg'
+
 const Products = [
     {
         id : 1,
@@ -20,7 +21,7 @@ const Products = [
         price : '50',
         category : 'coolingFans',
         description : 'When the heat is on, and you need instant relief, there is one name you can trust: the CoolPro X, your ultimate cooling fan solution. Designed to keep you cool and comfortable, this',
-        status : false,
+        status : true,
         popStatus : false,
         comments : 0,
         image : Product3
@@ -31,7 +32,7 @@ const Products = [
         price : '50',
         category : 'headphones',
         description : 'Unleash the full potential of your gaming adventures with our high-performance gaming headphones. At [Your Gaming Headphones Brand], we understand that every click, every step, and every explosion matters in the gaming world. That is why we have crafted the',
-        status : false,
+        status : true,
         popStatus : false,
         comments : 0,
         image : HeadPhones

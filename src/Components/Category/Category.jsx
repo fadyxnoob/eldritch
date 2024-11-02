@@ -4,7 +4,7 @@ import Products from '../ProductCard/Data.js';
 import { NavLink } from 'react-router-dom';
 
 const Category = () => {
-
+    
     const activeCates = Categories.filter((cate) => cate.status);
     const activeProducts = Products.filter((pro)=> pro.status)
 

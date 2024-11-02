@@ -1,11 +1,31 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import  authService  from '../../Appwrite/Auth'
+import { useDispatch } from 'react-redux';
+import { login } from '../../Store/authSlice'
+
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleSignup = async (data) => {
+        try {
+            const userData = await authService.createAccount(data)
+            if (userData) {
+                const userData = await authService.getCurrentUser()
+                if (userData) dispatch(login(userData))
+                navigate('/')
+            }
+        } catch (error) {
+            console.log('User Account Creation ERROR :: ', error);
+        }
+    }
+
     const [isPassText, setIsPassText] = useState(true);
     const [isConfirmPassText, setIsConfirmPassText] = useState(true);
-        document.title = 'Byt3Blitz | Sign Up'
+    document.title = 'Byt3Blitz | Sign Up'
 
     const changePassInput = () => {
         setIsPassText((prev) => !prev);
@@ -45,7 +65,7 @@ const SignUp = () => {
                                 <input type={isPassText ? 'password' : 'text'} placeholder='Enter password...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
                                 <span className='absolute right-2 top-2 cursor-pointer' onClick={changePassInput}>
                                     {
-                                     isPassText ? <FaEye /> : <FaEyeSlash />
+                                        isPassText ? <FaEye /> : <FaEyeSlash />
                                     }
                                 </span>
                             </div>
@@ -56,7 +76,7 @@ const SignUp = () => {
                                 <input type={isConfirmPassText ? 'password' : 'text'} placeholder='Confirm password...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
                                 <span className='absolute right-2 top-2 cursor-pointer' onClick={changeConfirmPassInput}>
                                     {
-                                     isConfirmPassText ? <FaEye /> : <FaEyeSlash />
+                                        isConfirmPassText ? <FaEye /> : <FaEyeSlash />
                                     }
                                 </span>
                             </div>
@@ -66,8 +86,8 @@ const SignUp = () => {
 
                     <div className="mt-5 flex justify-between items-center">
                         <div>
-                              <label htmlFor="uploadImage" className='text-light border border-primary cursor-pointer p-2'>Upload Image</label>
-                              <input type="file" className='hidden' id='uploadImage'/>
+                            <label htmlFor="uploadImage" className='text-light border border-primary cursor-pointer p-2'>Upload Image</label>
+                            <input type="file" className='hidden' id='uploadImage' />
                         </div>
                         <button
                             className='h-8 w-20 bg-primary rounded-sm text-light'

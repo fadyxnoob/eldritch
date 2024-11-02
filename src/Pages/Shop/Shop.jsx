@@ -25,7 +25,7 @@ const Shop = () => {
                 </div>
             </div>
             {/* Paginations */}
-
+  
             {/* pops and catrgories */}
             <div className="flex mx-20">
                 <div className="w-[70%]">
