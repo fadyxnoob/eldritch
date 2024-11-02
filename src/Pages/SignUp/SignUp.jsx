@@ -60,7 +60,7 @@ const SignUp = () => {
                 name,
                 userName,
                 image,
-            });
+            }, navigate);
 
             if (userData) {
                 const currentUser = await authService.getCurrentUser();

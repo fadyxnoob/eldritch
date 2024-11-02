@@ -1,8 +1,5 @@
 import Config from "../Config/Config";
 import { Client, Account, ID, Databases, Storage, Query } from "appwrite";
-import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
-
 
 export class Service {
 
@@ -10,19 +7,17 @@ export class Service {
     account;
     databases;
     storage;
-    navigate;
 
-    constructor(navigate) {
+    constructor() {
         this.client
             .setEndpoint(Config.appWriteURL)
             .setProject(Config.appWriteProID);
         this.account = new Account(this.client);
         this.databases = new Databases(this.client)
         this.storage = new Storage(this.client);
-        this.navigate = navigate; 
     }
 
-    async createAccount({ email, password, name, userName, image }) {
+    async createAccount({ email, password, name, userName, image }, navigate) {
         try {
             // Step 1: Check if the username already exists
             const existingUser = await this.databases.listDocuments(
@@ -73,7 +68,7 @@ export class Service {
             }
 
             // Redirect to login page if session exists
-            this.navigate('/login'); // Adjust this URL to your login page
+            navigate('/login'); // Adjust this URL to your login page
         } catch (error) {
             console.error('Creating account in Appwrite ERROR :: ', error);
             // Rollback: If any error occurs, attempt to delete the user account if it was created
