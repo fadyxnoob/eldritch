@@ -8,7 +8,7 @@ import Candidate3 from '../../assets/images/Candi3.jpg'
 import Candidate7 from '../../assets/images/Candi7.jpg'
 import Candidate9 from '../../assets/images/Candi9.jpg'
 import authService from '../../Appwrite/Auth'
-import { login, logout } from '../../Store/authSlice'
+import { authLogin, logout } from '../../Store/authSlice'
 
 
 document.title = 'Byt3Blitz | Home'

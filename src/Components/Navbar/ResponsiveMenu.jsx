@@ -27,7 +27,7 @@ const ResponsiveMenu = ({ isOpen }) => {
                                     </div>
                                     <div>
                                         <form action="" method="post">
-                                            <input type="text" class="placeholder:text-light w-full border-b h-7 px-1 outline-none border-transparent bg-transparent focus:border-light text-base font-normal" placeholder='Type your search' />
+                                            <input type="text" className="placeholder:text-light w-full border-b h-7 px-1 outline-none border-transparent bg-transparent focus:border-light text-base font-normal" placeholder='Type your search' />
                                         </form>
                                     </div>
                                 </div>

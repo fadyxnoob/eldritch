@@ -1,30 +1,88 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
-import  authService  from '../../Appwrite/Auth'
+import authService from '../../Appwrite/Auth'
 import { useDispatch } from 'react-redux';
-import { login } from '../../Store/authSlice'
+import { authLogin } from '../../Store/authSlice'
+
 
 
 const SignUp = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [name, setName] = useState('');
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [image, setImage] = useState(null);
+    const [isPassText, setIsPassText] = useState(true);
+    const [isConfirmPassText, setIsConfirmPassText] = useState(true);
 
-    const handleSignup = async (data) => {
+    const handleSignup = async (e) => {
+        e.preventDefault();
+
+        if (!name) {
+            console.log("Missing name");
+            return;
+        }
+
+        if (!userName) {
+            console.log("Missing username");
+            return;
+        }
+
+        if (!email) {
+            console.log("Missing email");
+            return;
+        }
+        // Validation checks
+        if (!password) {
+            console.log('Please define password');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            console.log('Password does not match confirm password');
+            return;
+        }
+
+        if (!image) {
+            console.log("Missing image");
+            return;
+        }
+
+        // Attempt to create account after passing validations
         try {
-            const userData = await authService.createAccount(data)
+            const userData = await authService.createAccount({
+                email,
+                password,
+                name,
+                userName,
+                image,
+            });
+
             if (userData) {
-                const userData = await authService.getCurrentUser()
-                if (userData) dispatch(login(userData))
-                navigate('/')
+                const currentUser = await authService.getCurrentUser();
+                if (currentUser) {
+                    dispatch(authLogin(currentUser));
+                    navigate('/login');
+                }
+                
+                // Clear inputs after successful submission
+                setName('');
+                setUserName('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+                setImage(null);
             }
         } catch (error) {
             console.log('User Account Creation ERROR :: ', error);
         }
-    }
+    };
 
-    const [isPassText, setIsPassText] = useState(true);
-    const [isConfirmPassText, setIsConfirmPassText] = useState(true);
+
     document.title = 'Byt3Blitz | Sign Up'
 
     const changePassInput = () => {
@@ -33,36 +91,52 @@ const SignUp = () => {
     const changeConfirmPassInput = () => {
         setIsConfirmPassText((prev) => !prev);
     }
+
+    
     return (
         <div className='loginWrapper h-screen w-full'>
             <div className='w-full border border-primary md:w-[40%] h-96 bg-[#00000049] rounded px-7 py-10 mx-auto'>
                 <h1 className='text-center text-3xl font-bold text-white'>Sign Up</h1>
                 <form
+                    onSubmit={handleSignup}
                     className='mt-5'
                 >
                     <div>
                         <label htmlFor="name" className='text-base text-light'>Name</label> <br />
                         <input
+                            value={name}
                             className='outline-none px-2 text-sm w-full h-8 text-black'
                             type="text" placeholder='Enter Name...'
                             id='name'
+                            onChange={(e) => setName(e.target.value)}
                         />
                     </div>
                     <div className='w-full block md:flex md:gap-2 justify-between mt-2'>
                         <div>
-                            <label htmlFor="name" className='text-light text-sm '>Username</label> <br />
-                            <input type="text" placeholder='Enter username...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
+                            <label htmlFor="uname" className='text-light text-sm '>Username</label> <br />
+                            <input
+                                id='uname'
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                                type="text" placeholder='Enter username...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
                         </div>
                         <div>
-                            <label htmlFor="name" className='text-light text-sm '>Email</label> <br />
-                            <input type="email" placeholder='Enter email...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
+                            <label htmlFor="email" className='text-light text-sm '>Email</label> <br />
+                            <input
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                id='email' type="email" placeholder='Enter email...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
                         </div>
                     </div>
                     <div className='block md:flex md:gap-2 justify-between mt-2'>
                         <div>
-                            <label htmlFor="name" className='text-light text-sm '>Password</label> <br />
+                            <label htmlFor="password" className='text-light text-sm '>Password</label> <br />
                             <div className='relative'>
-                                <input type={isPassText ? 'password' : 'text'} placeholder='Enter password...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
+                                <input
+                                    value={password}
+                                    id='password'
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    type={isPassText ? 'password' : 'text'} placeholder='Enter password...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
                                 <span className='absolute right-2 top-2 cursor-pointer' onClick={changePassInput}>
                                     {
                                         isPassText ? <FaEye /> : <FaEyeSlash />
@@ -71,9 +145,13 @@ const SignUp = () => {
                             </div>
                         </div>
                         <div>
-                            <label htmlFor="name" className='text-light text-sm '>Confirm Password</label> <br />
+                            <label htmlFor="confirmPassword" className='text-light text-sm '>Confirm Password</label> <br />
                             <div className='relative'>
-                                <input type={isConfirmPassText ? 'password' : 'text'} placeholder='Confirm password...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
+                                <input
+                                    value={confirmPassword}
+                                    id='confirmPassword'
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    type={isConfirmPassText ? 'password' : 'text'} placeholder='Confirm password...' className='w-full text-sm border-none outline-none px-2 h-8 text-black' />
                                 <span className='absolute right-2 top-2 cursor-pointer' onClick={changeConfirmPassInput}>
                                     {
                                         isConfirmPassText ? <FaEye /> : <FaEyeSlash />
@@ -83,13 +161,15 @@ const SignUp = () => {
                         </div>
                     </div>
 
-
                     <div className="mt-5 flex justify-between items-center">
                         <div>
                             <label htmlFor="uploadImage" className='text-light border border-primary cursor-pointer p-2'>Upload Image</label>
-                            <input type="file" className='hidden' id='uploadImage' />
+                            <input type="file" className='hidden' id='uploadImage'
+                                onChange={(e) => setImage(e.target.files[0])}
+                                accept="image/*" />
                         </div>
                         <button
+                            type='submit'
                             className='h-8 w-20 bg-primary rounded-sm text-light'
                         >Signup</button>
                     </div>

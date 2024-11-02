@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ForgetPassword, Home, Login, SignUp, Layout, Candidate, MyCart, About, Shop, ProductCategory, Product } from './index.js'
+import { ForgetPassword, Home, Login, SignUp, Layout, Candidate, MyCart, About, Shop, ProductCategory, Product, MyProfile } from './index.js'
 import './index.css'
 import { Provider } from 'react-redux';
 import Store from './Store/Store.js'
@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route index element={<MyProfile />} />
             <Route path='forgetPassword' element={<ForgetPassword />} />
             <Route path='candidate' element={<Candidate />} />
             <Route path='myCart' element={<MyCart />} />

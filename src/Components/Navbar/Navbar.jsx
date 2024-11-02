@@ -8,12 +8,16 @@ const Navbar = () => {
     return (
         <>
             <nav className='h-16 w-full border px-2 lg:px-20 bg-light flex items-center justify-between'>
+
+                
                 {/* LOGO section */}
                 <div className="logo flex justify-center items-center">
                     <Link to='/'>
                     <h1 className='text-4xl text-black font-medium'>ELDRITCH</h1>
                     </Link>
                 </div>
+
+
                 {/* Menu section */}
                 <div className="hidden lg:block navItems">
                     <ul className='flex items-center gap-6'>

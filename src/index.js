@@ -22,6 +22,7 @@ import Category from "./Components/Category/Category";
 import ProductCategory from "./Pages/ProductCategory/ProductCategory";
 import Product from "./Pages/Product/Product";
 import Comments from "./Components/Comments/Comments";
+import MyProfile from "./Pages/MyProfile/MyProfile";
 
 
 
@@ -54,5 +55,6 @@ export {
     Category,
     ProductCategory,
     Product,
-    Comments
+    Comments,
+    MyProfile
 }
