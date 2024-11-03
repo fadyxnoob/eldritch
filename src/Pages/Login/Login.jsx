@@ -15,8 +15,6 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-
-
     const handleLogin = async (email, password) => {
         try {
             const session = await authService.login({ email, password });
@@ -26,6 +24,7 @@ const Login = () => {
                 const userData = await authService.getCurrentUser();
                 if (userData && userData.$id) {
                     dispatch(authLogin({ userdata: userData }));
+                    localStorage.setItem('authStatus', 'true')
                     navigate('/');
                 }
             } else {

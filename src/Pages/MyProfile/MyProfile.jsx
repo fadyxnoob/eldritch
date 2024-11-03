@@ -4,32 +4,7 @@ import authService from '../../Appwrite/Auth';
 import { useNavigate } from 'react-router-dom';
 
 const MyProfile = () => {
-    const [user, setUser] = useState(null);
-    const [error, setError] = useState(null);
-    const navigate = useNavigate();
-    
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                // Check if the user is authenticated before getting the session
-                const session = await authService.account.getSession('current');
-                if (session) {
-                    // User is authenticated, fetch user data
-                    const userData = await account.get();
-                    setUser(userData);
-                  
-                }
-            } catch (err) {
-                setError('Error checking session: ' + err.message);
-                console.error('Error checking session:', err);
-            }
-        };
-        fetchUserData();
-    }, [user]);
 
-    if (error) {
-        return <div>{error}</div>;
-    }
 
     return (
         <>
