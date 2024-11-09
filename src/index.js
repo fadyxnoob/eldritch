@@ -23,6 +23,8 @@ import ProductCategory from "./Pages/ProductCategory/ProductCategory";
 import Product from "./Pages/Product/Product";
 import Comments from "./Components/Comments/Comments";
 import MyProfile from "./Pages/MyProfile/MyProfile";
+import Alert from "./Components/Alert/Alert";
+import UpdateUserProfile from "./Pages/UpdateUserProfile/UpdateUserProfile";
 
 
 
@@ -56,5 +58,7 @@ export {
     ProductCategory,
     Product,
     Comments,
-    MyProfile
+    MyProfile,
+    Alert,
+    UpdateUserProfile
 }

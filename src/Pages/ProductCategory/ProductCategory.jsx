@@ -6,7 +6,6 @@ import { Category } from '../../'
     
 const ProductCategory = ({ customWidth = 'w-[40%]' }) => { 
   const productCate = useParams();
-  console.log(productCate.categoryName);
   const cateProducts = Products.filter((pro) => pro.category === productCate.categoryName);
   const activeProducts = cateProducts.filter((active) => active.status)
   return (

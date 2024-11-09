@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { MdMenu, MdOutlineSearch } from "react-icons/md";
+import { Link } from 'react-router-dom';
 const ResponsiveMenu = ({ isOpen }) => {
     return (
         <AnimatePresence mode='wait'>
@@ -14,12 +15,24 @@ const ResponsiveMenu = ({ isOpen }) => {
                 >
                     <div className='text-xl font-semibold text-light bg-primary py-10 m-2 rounded-lg h-fit'>
                         <ul className='flex flex-col items-center justify-center gap-5'>
-                            <li>Home</li>
-                            <li>About</li>
-                            <li>Matches</li>
-                            <li>Shop</li>
-                            <li>Blog</li>
-                            <li>Contact</li>
+                            <Link to={'/'}>
+                                <li>Home</li>
+                            </Link>
+                            <Link to={'/aboutus'}>
+                                <li>About</li>
+                            </Link>
+                            <Link>
+                                <li>Matches</li>
+                            </Link>
+                            <Link to={'/shope'}>
+                                <li>Shop</li>
+                            </Link>
+                            <Link>
+                                <li>Blog</li>
+                            </Link>
+                            <Link>
+                                <li>Contact</li>
+                            </Link>
                             <li>
                                 <div className=' flex items-center justify-center'>
                                     <div className="searcIcon">

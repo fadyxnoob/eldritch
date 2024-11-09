@@ -92,7 +92,7 @@ export class DBService {
     }
 
     // images uploading services
-    async uploadProImage(file){
+    async uploadImage(file){
         try {
             return await this.bucket.createFile(
                 Config.appWriteBucketID,
@@ -104,7 +104,7 @@ export class DBService {
         }
     }
 
-    async deleteProImage(fileId){
+    async deleteImage(fileId){
         try {
             await this.bucket.deleteFile(
                 Config.appWriteBucketID,
@@ -117,14 +117,36 @@ export class DBService {
         }
     }
 
-    ViewProImage(fileId){
+    ViewImage(fileId){
         return this.bucket.getFilePreview(
             Config.appWriteBucketID,
             fileId
         )
     }
 
-
+    async getUserDets({ userID }) {
+        try {
+            return await this.databases.listDocuments(
+                Config.appWriteDBID,
+                Config.appWriteUsersColl,
+                [Query.equal('id', userID)]
+            );
+        } catch (error) {
+            console.log('UserDets ::', error);
+        }
+    }
+     
+    async getUserSocials(id){
+        try{
+            return await this.databases.listDocuments(
+                Config.appWriteDBID,
+                Config.appWriteUserSocialColl,
+                [Query.equal('userID', id)]
+            )
+        }catch (error){
+            console.log('User Socials ::', error);
+        }
+    }
 }
 
 const service = new DBService();

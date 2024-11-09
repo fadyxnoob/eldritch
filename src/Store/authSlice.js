@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     status: false,
-    userdata: null
+    userdata: null,
 }
 
 const authSlice = createSlice({
@@ -11,15 +11,15 @@ const authSlice = createSlice({
     reducers: {
 
         login: (state, action) => {
-            console.log('Login user Data ::', action.payload.userdata);
-        
-            if (!action.payload || !action.payload.userdata) {
+            // console.log("Login user Data ::", action.payload); 
+
+            if (!action.payload) {
                 console.error("Invalid payload detected");
-                return state; 
+                return;
             }
-        
+
             state.status = true;
-            state.userdata = action.payload.userdata; 
+            state.userdata = action.payload.userdata;
         },
 
         logout: (state) => {

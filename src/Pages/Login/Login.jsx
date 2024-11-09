@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../Appwrite/Auth';
 import { authLogin } from '../../Store/authSlice'
 import { useDispatch } from 'react-redux';
+import { Alert } from '../../'
 
 
 
@@ -12,23 +13,26 @@ const Login = () => {
     const [isText, setIsText] = useState(true);
     const [email, setEmail] = useState('yasir@gmail.com');
     const [password, setPassword] = useState('12345678');
+    const [error, setError] = useState(null)
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
     const handleLogin = async (email, password) => {
         try {
-            const session = await authService.login({ email, password });
-    
+            const session = await authService.login({ email, password }, setError);
+
             if (session) {
                 localStorage.setItem('authStatus', 'true');
                 const userData = await authService.getCurrentUser();
                 if (userData && userData.$id) {
                     dispatch(authLogin({ userdata: userData }));
                     localStorage.setItem('authStatus', 'true')
-                    navigate('/');
+                    navigate('/myProfile');
                 }
             } else {
+                setError('No session created.');
                 console.error('No session created.');
+                return;
             }
         } catch (error) {
             console.error('Login ERROR:', error);
@@ -44,13 +48,20 @@ const Login = () => {
     document.title = 'Byt3Blitz | Login'
 
     return (
-        <div className='loginWrapper h-screen w-full'>
+        <div className='loginWrapper h-screen w-full flex-col'>
+            
+            {
+                error ? <div className='mb-5 w-80 bg-[#00000049] rounded mx-auto'>
+                    <Alert message={error} />
+                </div> : null
+            }
+
             <div className='border w-80 h-96 bg-[#00000049] rounded p-7 mx-auto'>
                 <h1 className='text-center text-3xl font-bold text-white'>Login</h1>
                 <form
-                     onSubmit={(e) => {
-                        e.preventDefault(); 
-                        handleLogin(email, password); 
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        handleLogin(email, password);
                     }}
                     className='mt-5 flex flex-col gap-5'>
                     <div className='flex bg-white p-2 gap-2 rounded items-center px-1'>
@@ -81,7 +92,7 @@ const Login = () => {
 
                     </div>
                     <button
-                     type="submit"
+                        type="submit"
                         className='w-full bg-primary h-10 rounded text-light'
                     >Login</button>
                 </form>

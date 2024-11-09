@@ -62,7 +62,7 @@ const Footer = () => {
                     <ul className='mt-5 flex flex-col gap-2'>
                         <li><Link to="/signup" className='underline hover:text-blue-700 font-normal'>Signup</Link></li>
                         <li><Link to="/login" className='underline hover:text-blue-700 font-normal'>Login</Link></li>
-                        <li><a href="#" className='underline hover:text-blue-700 font-normal'>Profile</a></li>
+                        <li><Link to="/myProfile" className='underline hover:text-blue-700 font-normal'>Profile</Link></li>
                     </ul>
                 </div>
                 <div className='w-1/2 inline-block sm:w-auto '>

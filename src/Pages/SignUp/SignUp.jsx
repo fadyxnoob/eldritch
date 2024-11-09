@@ -4,51 +4,52 @@ import { Link, useNavigate } from 'react-router-dom';
 import authService from '../../Appwrite/Auth'
 import { useDispatch } from 'react-redux';
 import { authLogin } from '../../Store/authSlice'
-
+import { Alert } from '../../'
 
 
 const SignUp = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [name, setName] = useState('');
-    const [userName, setUserName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [image, setImage] = useState(null);
+    const [name, setName] = useState('Yasir Mehboob');
+    const [userName, setUserName] = useState('yasir1');
+    const [email, setEmail] = useState('yasir@gmail.com');
+    const [password, setPassword] = useState('12345678');
+    const [confirmPassword, setConfirmPassword] = useState('12345678');
+    const [image, setImage] = useState();
     const [isPassText, setIsPassText] = useState(true);
     const [isConfirmPassText, setIsConfirmPassText] = useState(true);
+    const [error, setError] = useState(null)
 
     const handleSignup = async (e) => {
         e.preventDefault();
 
         if (!name) {
-            console.log("Missing name");
+            setError("Missing name");
             return;
         }
 
         if (!userName) {
-            console.log("Missing username");
+            setError("Missing username");
             return;
         }
 
         if (!email) {
-            console.log("Missing email");
+            setError("Missing email");
             return;
         }
         // Validation checks
         if (!password) {
-            console.log('Please define password');
+            setError('Please define password');
             return;
         }
 
         if (password !== confirmPassword) {
-            console.log('Password does not match confirm password');
+            setError('Password does not match confirm password');
             return;
         }
 
         if (!image) {
-            console.log("Missing image");
+            setError("Missing image");
             return;
         }
 
@@ -60,7 +61,7 @@ const SignUp = () => {
                 name,
                 userName,
                 image,
-            }, navigate);
+            }, navigate, setError);
 
             if (userData) {
                 const currentUser = await authService.getCurrentUser();
@@ -68,7 +69,7 @@ const SignUp = () => {
                     dispatch(authLogin(currentUser));
                     navigate('/login');
                 }
-                
+
                 // Clear inputs after successful submission
                 setName('');
                 setUserName('');
@@ -78,7 +79,7 @@ const SignUp = () => {
                 setImage(null);
             }
         } catch (error) {
-            console.log('User Account Creation ERROR :: ', error);
+            console.error('Account Creation ERROR :: ', error);
         }
     };
 
@@ -92,9 +93,16 @@ const SignUp = () => {
         setIsConfirmPassText((prev) => !prev);
     }
 
-    
+
     return (
-        <div className='loginWrapper h-screen w-full'>
+        <div className='loginWrapper h-screen w-full flex-col'>
+
+            {
+                error ? <div className='w-full mb-5 border-primary md:w-[40%] bg-[#00000049] rounded mx-auto'>
+                    <Alert message={error} />
+                </div> : null
+            }
+
             <div className='w-full border border-primary md:w-[40%] h-96 bg-[#00000049] rounded px-7 py-10 mx-auto'>
                 <h1 className='text-center text-3xl font-bold text-white'>Sign Up</h1>
                 <form
@@ -162,8 +170,9 @@ const SignUp = () => {
                     </div>
 
                     <div className="mt-5 flex justify-between items-center">
-                        <div>
+                        <div className='flex items-center gap-2'>
                             <label htmlFor="uploadImage" className='text-light border border-primary cursor-pointer p-2'>Upload Image</label>
+                            {image && <span className='text-light text-sm'>{image.name}</span>}
                             <input type="file" className='hidden' id='uploadImage'
                                 onChange={(e) => setImage(e.target.files[0])}
                                 accept="image/*" />
@@ -174,7 +183,7 @@ const SignUp = () => {
                         >Signup</button>
                     </div>
 
-                    <p className='mt-5 text-light'>Already Have an Account <Link to="/login" className='text-blue-500 font-bold underline'>Login</Link></p>
+                    <p className='mt-2 text-light'>Already Have an Account <Link to="/login" className='text-blue-500 font-bold underline '>Login</Link></p>
                 </form>
             </div>
         </div>
