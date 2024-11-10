@@ -5,5 +5,7 @@ const Config = {
     appWriteUsersColl : String(import.meta.env.VITE_APPWRITE_USER_COLLECTION),
     appWriteBucketID : String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
     appWriteUserSocialColl : String(import.meta.env.VITE_APPWRITE_USER_SOCIAL_COLLECTION),
+    appWriteManageCandidates : String(import.meta.env.VITE_APPWRITE_MANAGE_CANDIDATE_COLLECTION),
+    appWriteProductCollID : String(import.meta.env.VITE_APPWRITE_MANAGE_PRODUCTS_COLLECTION_ID),
 }
 export default Config;

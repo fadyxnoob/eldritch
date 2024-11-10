@@ -26,7 +26,7 @@ const UpdateUserProfile = () => {
         try {
             setName(userData?.name);
             setEmail(userData?.email);
-            const collection = await service.getUserDets({ userID: userData.$id });
+            const collection = await service.getUserDets(userData.$id);
             if (collection && collection.documents.length > 0) {
                 const userData = collection.documents[0];
                 const imageId = userData.image;
@@ -62,7 +62,6 @@ const UpdateUserProfile = () => {
             setImagePreview(URL.createObjectURL(file));
         }
     };
-
 
     return (
         <div className='mx-5 px-5 md:mx-20 md:px-20 my-20 py-10 rounded'>

@@ -202,7 +202,95 @@ export class Service {
         }
     }
 
+    async getUserSocial(userID) {
+        try {
+            return await this.databases.listDocuments(
+                Config.appWriteDBID,
+                Config.appWriteUserSocialColl,
+                [Query.equal('userID', userID)]
+            )
+        } catch (error) {
+            console.log('Get User Social ERROR ::', error);
+        }
+    }
 
+    async updateSocials(id, facebook, insta, youtube, twitter) {
+        try {
+            const response = await this.databases.listDocuments(
+                Config.appWriteDBID,
+                Config.appWriteUserSocialColl,
+                [Query.equal('userID', id)]
+            );
+
+            const document = response.documents[0];
+            return await this.databases.updateDocument(
+                Config.appWriteDBID,
+                Config.appWriteUserSocialColl,
+                document.$id,
+                {
+                    facebook: facebook,
+                    instagram: insta,
+                    youtube: youtube,
+                    twitter: twitter
+                }
+
+            )
+        } catch (error) {
+            console.log('Update User Social ERROR ::', error);
+        }
+    }
+
+    async registerCandidate({ id, userName, inGameName, inGameID }) {
+        try {
+            const date = new Date();
+            const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+            const docID = ID.unique()
+            await this.databases.createDocument(
+                Config.appWriteDBID,
+                Config.appWriteManageCandidates,
+                docID,
+                {
+                    uname: userName,
+                    ign_name: inGameName,
+                    ig_id: inGameID,
+                    date: formattedDate,
+                    userID: id,
+                }
+
+            )
+        } catch (error) {
+            console.log('Register Candidate ERROR ::', error);
+        }
+    }
+
+    async getCandidate(id) {
+        if (!id) {
+            console.log('Error: Missing user ID');
+            return null;
+        }
+
+        try {
+            return await this.databases.listDocuments(
+                Config.appWriteDBID,
+                Config.appWriteManageCandidates,
+                [Query.equal('userID', id)]
+            );
+        } catch (error) {
+            console.log('ERROR getting Candidate ::', error);
+        }
+    }
+
+    async getAllProducts() {
+        try {
+            return await this.databases.listDocuments(
+                Config.appWriteDBID,
+                Config.appWriteProductCollID,
+                [Query.equal('status', 'active')]
+            )
+        } catch (error) {
+            console.log('All Products Fetching ERROR ::', error);
+        }
+    }
 }
 
 const authService = new Service();

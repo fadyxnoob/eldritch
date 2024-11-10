@@ -124,7 +124,7 @@ export class DBService {
         )
     }
 
-    async getUserDets({ userID }) {
+    async getUserDets(userID) {
         try {
             return await this.databases.listDocuments(
                 Config.appWriteDBID,
@@ -147,6 +147,8 @@ export class DBService {
             console.log('User Socials ::', error);
         }
     }
+
+
 }
 
 const service = new DBService();

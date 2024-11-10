@@ -5,6 +5,7 @@ import authService from '../../Appwrite/Auth';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../Store/authSlice'
 import { Link } from 'react-router-dom';
+import { SocialMedia } from '../../'
 
 
 const MyProfile = () => {
@@ -16,11 +17,15 @@ const MyProfile = () => {
     const [userSocials, setUserSocials] = useState(null)
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [openModel, setOpenModel] = useState(false)
 
+    const closeModel = () => {
+        setOpenModel(false)
+    }
 
     const getCollection = async () => {
         try {
-            const collection = await service.getUserDets({ userID: userdata.$id });
+            const collection = await service.getUserDets(userdata.$id);
             if (collection && collection.documents.length > 0) {
                 const userData = collection.documents[0];
                 setUserDets(userData);
@@ -76,6 +81,10 @@ const MyProfile = () => {
 
     return (
         <>
+            {
+                openModel && <SocialMedia closeModel={closeModel} userID={userdata.$id} />
+            }
+
             <div className='banner myProfileBG'>
                 <h1 className='text-5xl text-light font-bold border-b-4 border-primary'>My Profile</h1>
             </div>
@@ -102,6 +111,7 @@ const MyProfile = () => {
                             Update
                         </Link>
                         <button
+                            onClick={() => setOpenModel(true)}
                             type='submit'
                             className='bg-primary px-5 py-1 text-light rounded-sm'
                         >

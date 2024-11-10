@@ -3,12 +3,14 @@ import { NavbarMenu } from './data';
 import { MdMenu, MdOutlineSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import ResponsiveMenu from './ResponsiveMenu';
+
 const Navbar = () => {
+
     const [isOpen, setIsOpen] = useState(false)
+
     return (
         <>
             <nav className='h-16 w-full border px-2 lg:px-20 bg-light flex items-center justify-between'>
-
                 
                 {/* LOGO section */}
                 <div className="logo flex justify-center items-center">
@@ -16,7 +18,6 @@ const Navbar = () => {
                     <h1 className='text-4xl text-black font-medium'>ELDRITCH</h1>
                     </Link>
                 </div>
-
 
                 {/* Menu section */}
                 <div className="hidden lg:block navItems">
@@ -40,8 +41,8 @@ const Navbar = () => {
                         <MdOutlineSearch  className='size-5'/>
                     </div>
                     <div>
-                        <form action="" method="post">
-                        <input type="text" class="w-fit border-b h-7 px-1 outline-none border-transparent focus:border-primary" placeholder='Type your search'/>
+                        <form>
+                        <input type="text" className="w-fit border-b h-7 px-1 outline-none border-transparent focus:border-primary" placeholder='Type your search'/>
                         </form>
                     </div>
                 </div>
