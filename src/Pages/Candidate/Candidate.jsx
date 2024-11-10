@@ -17,8 +17,6 @@ const Candidate = () => {
         }).catch((error) => {
             console.log(error);
         });
-
-
     };
 
     const registerCandi = () => {

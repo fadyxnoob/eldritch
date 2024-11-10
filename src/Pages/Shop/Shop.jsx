@@ -21,7 +21,7 @@ const Shop = () => {
                     sm:items-center sm:justify-start
                     productCardContainer
                     ">
-                     <ProductCard filterby='status'/>
+                     <ProductCard customWidth='w-[35%]'/>
                 </div>
             </div>
             {/* Paginations */}
@@ -36,7 +36,7 @@ const Shop = () => {
                     sm:items-center sm:justify-start
                     productCardContainer
                     ">
-                        <ProductCard customWidth='w-[45%]' filterby='popStatus' />
+                        <ProductCard customWidth='w-[full]' popular='true'/>
                        
                     </div>
                 </div>

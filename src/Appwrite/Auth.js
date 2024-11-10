@@ -280,15 +280,31 @@ export class Service {
         }
     }
 
-    async getAllProducts() {
+    async getAllProducts(popular) {
         try {
-            return await this.databases.listDocuments(
+            const data = await this.databases.listDocuments(
                 Config.appWriteDBID,
                 Config.appWriteProductCollID,
-                [Query.equal('status', 'active')]
+                [Query.equal('status', 'active', 'popular', popular)]
             )
+            return data
         } catch (error) {
             console.log('All Products Fetching ERROR ::', error);
+        }
+    }
+
+    async getSingleProduct(id) {
+        try {
+            if (!id) {
+                console.log('id is not found');
+            }
+            return await this.databases.getDocument(
+                Config.appWriteDBID,
+                Config.appWriteProductCollID,
+                id
+            )
+        } catch (error) {
+            console.log('');
         }
     }
 }

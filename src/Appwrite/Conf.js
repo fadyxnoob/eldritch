@@ -66,32 +66,6 @@ export class DBService {
         }
     }
 
-    async getSignleProduct(id){
-        try {
-            return await this.databases.getDocument(
-                Config.appWriteDBID,
-                Config.appWriteCollID,
-                id
-            )
-        }catch(error){
-            console.log('Fetching single Product ERROR :: ', error);
-        }
-    }
-
-    async getAllProducts(queries = [Query.equal('status', true)]){
-        try {
-        return await this.databases.listDocuments(
-            Config.appWriteDBID,
-            Config.appWriteCollID,
-            queries
-        )
-        }catch(error){
-            console.log('All Product fetching ERROR :: ', error);
-            return false;
-        }
-    }
-
-    // images uploading services
     async uploadImage(file){
         try {
             return await this.bucket.createFile(
