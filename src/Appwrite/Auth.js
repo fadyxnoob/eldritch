@@ -307,6 +307,63 @@ export class Service {
             console.log('');
         }
     }
+
+    async getAllCategories() {
+        try {
+            return await this.databases.listDocuments(
+                Config.appWriteDBID,
+                Config.appWriteCatsCollID
+            )
+        } catch (error) {
+            console.log('Getting All Categories ERROR ::', error);
+        }
+    }
+
+    async getCategory(id) {
+        try {
+            if (!id) {
+                console.log('Id miss hai bro');
+            }
+            return await this.databases.getDocument(
+                Config.appWriteDBID,
+                Config.appWriteCatsCollID,
+                id
+            )
+
+        } catch (error) {
+            console.log('Getting Category ERROR ::', error);
+
+        }
+    }
+
+    async getProsByCat(id) {
+        try {
+            if(id){
+                const data = await this.databases.listDocuments(
+                    Config.appWriteDBID,
+                    Config.appWriteProductCollID,
+                    [Query.equal('cat', id)]
+                );
+                return data;
+            }
+            
+        } catch (error) {
+            console.log('Getting Pros by CatID ERROR ::', error);
+        }
+    }
+
+    async getCatName(id){
+        try {
+            return await this.databases.getDocument(
+                Config.appWriteDBID,
+                Config.appWriteCatsCollID,
+                String(id)          
+            )
+        } catch (error) {
+            console.log('Getting Category Name ERROR ::', error);
+        }
+    }
+    
 }
 
 const authService = new Service();

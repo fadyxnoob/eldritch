@@ -8,27 +8,43 @@ const Product = () => {
     const [document, setDocument] = useState({});
     const [proImage, setViewImage] = useState('')
     const [loading, setLoading] = useState(true)
+    const [cat, setCat] = useState({})
 
     const getData = async () => {
-        const product = await authService.getSingleProduct(productID)
-        if(product){
-            setDocument(product)
-            const imageUrl = service.ViewImage(product?.image)
-            setViewImage(imageUrl)
+        try {
+            const product = await authService.getSingleProduct(productID);
+            if (product) {
+                if (product.cat) {
+                    const category = await authService.getCategory(product.cat);
+                    console.log("Fetched Category:", category);
+                    setCat(category || 'Unknown');
+                } else {
+                    console.log("Product Category ID is missing.");
+                    setCat('Unknown');
+                }
+                setDocument(product);
+                const imageUrl = service.ViewImage(product?.image);
+                setViewImage(imageUrl);
+            } else {
+                console.log("Product not found.");
+            }
+        } catch (error) {
+            console.log("Error fetching data:", error);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false)
-    }
+    };
 
-    useEffect(()=>{
+
+    useEffect(() => {
         getData()
-        
     }, [])
-    if(!loading){
+    if (!loading) {
         return (
             <>
                 <div className="productBG banner px-5 md:px-20 py-1">
                     <h1 className='text-light text-lg md:text-2xl capitalize'>
-                        Eldritch > Shop > {document?.cat} > {document?.name}
+                        Eldritch > Shop > {cat.cat_name} > {document?.name}
                     </h1>
                 </div>
                 <div className="my-10 md:flex justify-between md:mx-10 md:px-10">
@@ -51,12 +67,12 @@ const Product = () => {
                         <p className='text-sm'>{document.disc}</p>
                         <div className='flex gap-2 mt-5'>
                             <strong>Category :</strong>
-                            <p className='capitalize text-lg'>{document.cat}</p>
+                            <p className='capitalize text-lg'>{cat.cat_name}</p>
                         </div>
                         <div className='text-end md:text-start'>
                             <button className='mt-5 bg-primary px-5 py-2 text-light rounded'>Add To Cart</button>
                         </div>
-    
+
                         <div className="mt-10">
                             <h3 className='text-3xl font-medium'>Description</h3>
                             <p className='text-sm'>{document.disc}</p>
@@ -82,10 +98,10 @@ const Product = () => {
                 </div>
             </>
         );
-    }else{
+    } else {
         return <p>Loading....</p>
     }
-   
+
 }
 
 export default Product;

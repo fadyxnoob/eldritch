@@ -21,7 +21,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='aboutus' element={<About />} />
             <Route path='shop' element={<Shop />} />
             <Route path='myProfile' element={<MyProfile />} />
-            <Route path='category/:categoryName' element={<ProductCategory />} />
+            <Route path='category/:catID' element={<ProductCategory />} />
             <Route path='product/:productID' element={<Product />} />
             <Route path='update_user' element={<UpdateUserProfile />} />
           </Route>
