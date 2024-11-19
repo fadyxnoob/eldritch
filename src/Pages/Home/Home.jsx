@@ -27,7 +27,7 @@ const Home = () => {
                    productCardContainer
                     ">
 
-                    <ProductCard limit={3} />
+                    <ProductCard customWidth='w-[35%]' />
                 </div>
             </div>
 
@@ -50,9 +50,7 @@ const Home = () => {
                    sm:items-center sm:justify-center
                    productCardContainer
                     ">
-                    <PostCard image={Blog1} alt='Blog1' user='yasir' cat='results' day='29' month='Oct' title='Get Ready for Gamming Glory : Announcing the Next Tournament' />
-                    <PostCard image={Blog2} alt='Blog2' user='hammad' cat='tournament' day='31' month='Nov' title='Mastering the Battlegrounds : Your Ultimate PUBG Blog' />
-                    <PostCard image={Blog3} alt='Blog3' user='yasir' cat='results' day='19' month='Mar' title='Recapping the Thrills and Spills : ELDRITCH S3 Tournament Results Unveiled ' />
+                    <PostCard customWidth='w-[27%]'/>
                 </div>
             </div>
 

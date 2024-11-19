@@ -17,9 +17,11 @@ const Shop = () => {
                     flex flex-wrap  gap-5 mt-5
                     mobile:px-2 mobile:flex-col
                     sm:items-center sm:justify-start
-                    productCardContainer
-                    ">
+                    productCardContainer"
+                    >
+
                     <ProductCard customWidth='w-[35%]' />
+
                 </div>
             </div>
             {/* Paginations */}
@@ -35,10 +37,11 @@ const Shop = () => {
                     productCardContainer
                     ">
                         <ProductCard customWidth='w-[full]' popular='true' />
+
                     </div>
                 </div>
                 <div className="w-[30%] pt-8">
-                    <Category getType='product' />
+                    <Category getType='product' setType='pro' />
                 </div>
             </div>
         </>

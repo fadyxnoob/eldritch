@@ -338,32 +338,62 @@ export class Service {
 
     async getProsByCat(id) {
         try {
-            if(id){
+            if (id) {
                 const data = await this.databases.listDocuments(
                     Config.appWriteDBID,
                     Config.appWriteProductCollID,
-                    [Query.equal('cat', id)]
+                    [Query.equal('cat', id, 'status', 'active')]
                 );
                 return data;
             }
-            
+
         } catch (error) {
-            console.log('Getting Pros by CatID ERROR ::', error);
+            console.error('Error in getProsByCat:', error.message || error);
+            return { documents: [] };
         }
     }
 
-    async getCatName(id){
+    async getPostsByCat(id) {
+        try {
+            if (id) {
+                const data = await this.databases.listDocuments(
+                    Config.appWriteDBID,
+                    Config.appWritePostsCollID,
+                    [Query.equal('cat', id,)]
+                );
+                return data;
+            }
+
+        } catch (error) {
+            console.error('Error in getProsByCat:', error.message || error);
+            return { documents: [] };
+        }
+    }
+
+    async getCatName(id) {
         try {
             return await this.databases.getDocument(
                 Config.appWriteDBID,
                 Config.appWriteCatsCollID,
-                String(id)          
+                String(id)
             )
         } catch (error) {
             console.log('Getting Category Name ERROR ::', error);
         }
     }
-    
+
+    async getSinglePost(id){
+        try {
+            return await this.databases.getDocument(
+                Config.appWriteDBID,
+                Config.appWritePostsCollID,
+                id
+            )
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
 
 const authService = new Service();

@@ -330,3 +330,32 @@ nav .navItems ul .navCustomStyle {}
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/images/stream.jpg');
 }
 /* MY PROILE  */
+
+/* CONTACT US  */
+
+/* CONTACT US  */
+
+/* SCHEDULES */
+.tabHeader::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    background: #ff5e14;
+    height: 4px;
+    bottom: 0;
+    left: 0;
+}
+.tabHeader:hover::after{
+    width: 100%;
+    transition: 1s;
+}
+
+.tabHeader.active{
+    background: #ff5e14;
+    color: white;
+}
+.tabHeader.active .tabHeader::after{
+    /* width: 0%; */
+    background: #fff;
+}
+/* SCHEDULES */

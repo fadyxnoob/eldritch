@@ -21,16 +21,16 @@ const ResponsiveMenu = ({ isOpen }) => {
                             <Link to={'/aboutus'}>
                                 <li>About</li>
                             </Link>
-                            <Link>
+                            <Link to='/shedules'>
                                 <li>Matches</li>
                             </Link>
                             <Link to={'/shope'}>
                                 <li>Shop</li>
                             </Link>
-                            <Link>
+                            <Link to='/blog'>
                                 <li>Blog</li>
                             </Link>
-                            <Link>
+                            <Link to='/contact'>
                                 <li>Contact</li>
                             </Link>
                             <li>

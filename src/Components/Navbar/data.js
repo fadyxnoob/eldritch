@@ -22,11 +22,11 @@ export const NavbarMenu = [
     {
         id : 5,
         title : 'Blog',
-        link : '#'
+        link : '/blog'
     },
     {
         id : 6,
         title : 'Contact',
-        link : '#'
+        link : '/contact'
     },
 ]

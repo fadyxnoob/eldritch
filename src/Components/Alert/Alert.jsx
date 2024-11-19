@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react'
-
-const Alert = ({ message, type = 'error' }) => {
+import { FaXmark } from "react-icons/fa6";
+const Alert = ({ message, type = 'error', onClose }) => {
 
     const [visible, setVisible] = useState(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setVisible(false);
-        }, 30000); 
+        if (message) {
+            setVisible(true);
+            const timer = setTimeout(() => {
+                setVisible(false);
+            }, 5000);
 
-        return () => clearTimeout(timer); 
-    }, []);
+            return () => clearTimeout(timer);
+        }
+    }, [message, onClose]);
 
-    if (!visible) return null; 
+    if (!visible) return null;
 
     const alertStyles = {
         success: 'bg-green-500 text-white',
@@ -27,10 +30,13 @@ const Alert = ({ message, type = 'error' }) => {
             <div className="flex items-center justify-between">
                 <span>{message}</span>
                 <button
-                    onClick={() => setVisible(false)} 
-                    className="ml-4 text-lg focus:outline-none  text-light rounded-full"
+                    onClick={() => {
+                        setVisible(false);
+                        onClose();
+                    }}
+                    className="ml-4 text-lg focus:outline-none text-light rounded-md"
                 >
-                    &times;
+                    <FaXmark />
                 </button>
             </div>
         </div>

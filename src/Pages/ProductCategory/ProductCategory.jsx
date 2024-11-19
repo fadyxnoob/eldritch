@@ -1,42 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { MdRemoveRedEye, MdShoppingBag } from "react-icons/md";
 import { Category } from "../../";
 import authService from "../../Appwrite/Auth";
 import service from "../../Appwrite/Conf";
+import { Link } from "react-router-dom";
 
-const ProductCategory = ({ customWidth = "w-[40%]" }) => {
-  const { catID } = useParams();
+const ProductCategory = ({ customWidth = "w-[40%]", id }) => {
   const [loading, setLoading] = useState(true);
   const [pros, setPros] = useState([]);
   const [images, setImages] = useState({});
-  const [selectedCat, setSelectedCat] = useState('')
-
+  const [selectedCat, setSelectedCat] = useState("");
 
   const getCatProducts = async () => {
-    setLoading(true); // Set loading to true when fetching data
-    const fetchPros = await authService.getProsByCat(catID);
-    const catName   = await authService.getCatName(catID);
-    setSelectedCat(catName);
+    setLoading(true);
+    try {
+      const fetchPros = await authService.getProsByCat(id);
+      console.log('pross are ::', fetchPros);
+      const catName = await authService.getCatName(id);
 
-    if (fetchPros.documents && fetchPros.documents.length > 0) {
-      setPros(fetchPros.documents);
+      setSelectedCat(catName);
 
-      const newImages = {};
-      fetchPros.documents.forEach((pro) => {
-        newImages[pro.$id] = service.ViewImage(pro.image);
-      });
-      setImages(newImages);
-    } else {
-      setPros([]);
-      setImages({});
+      if (fetchPros.documents && fetchPros.documents.length > 0) {
+        setPros(fetchPros.documents);
+        const newImages = {};
+        fetchPros.documents.forEach((pro) => {
+          newImages[pro.$id] = service.ViewImage(pro.image);
+        });
+        setImages(newImages);
+      } else {
+        setPros([]);
+        setImages({});
+      }
+    } catch (error) {
+      console.error("Error fetching products or category name:", error);
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    getCatProducts();
-  }, [catID]);
+    if (id) {
+      getCatProducts();
+    }
+  }, [id]);
 
   if (loading) {
     return <p>Loading....</p>;
@@ -46,9 +51,10 @@ const ProductCategory = ({ customWidth = "w-[40%]" }) => {
     <>
       <div className="banner shopBg">
         <h1 className="text-5xl text-light font-bold border-b-4 border-primary capitalize">
-          Our {selectedCat.cat_name}
+          Our {selectedCat.cat_name || "Products"}
         </h1>
       </div>
+
       <div className="flex mx-20">
         <div className="w-[70%]">
           <div className="flex flex-wrap gap-5 mt-5 mobile:px-2 mobile:flex-col sm:items-center sm:justify-start productCardContainer">
@@ -68,9 +74,11 @@ const ProductCategory = ({ customWidth = "w-[40%]" }) => {
                         />
                       </div>
                       <div className="absolute top-5 right-5 gap-5 flex flex-col">
-                        <div className="w-10 h-10 flex items-center justify-center bg-primary rounded text-light">
-                          <MdRemoveRedEye className="w-5 h-5" />
-                        </div>
+                        <Link to={`/product/${pro.$id}`}>
+                          <div className='w-10 h-10 flex items-center justify-center bg-primary rounded text-light'>
+                            <MdRemoveRedEye className='w-5 h-5' />
+                          </div>
+                        </Link>
                         <div className="w-10 h-10 flex items-center justify-center bg-primary rounded text-light">
                           <MdShoppingBag className="w-5 h-5" />
                         </div>
@@ -86,8 +94,9 @@ const ProductCategory = ({ customWidth = "w-[40%]" }) => {
             )}
           </div>
         </div>
+
         <div className="w-[30%] pt-8">
-          <Category getType="product" />
+          <Category getType="product" setType="pro" />
         </div>
       </div>
     </>

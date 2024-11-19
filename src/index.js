@@ -26,7 +26,14 @@ import MyProfile from "./Pages/MyProfile/MyProfile";
 import Alert from "./Components/Alert/Alert";
 import UpdateUserProfile from "./Pages/UpdateUserProfile/UpdateUserProfile";
 import SocialMedia from "./Components/SocialMedia/SocialMedia";
-
+import Contact from "./Pages/Contact/Contact";
+import Blog from "./Pages/Blog/Blog";
+import CategoryPage from "./Components/CategoryPage/CategoryPage";
+import PostCategory from "./Pages/PostCategory/PostCategory";
+import Post from "./Pages/Post/Post";
+import Schedules from "./Pages/Schedules/Schedules";
+import Tab from "./Components/Tab/Tab";
+import Tabs from "./Components/Tabs/Tabs";
 
 
 
@@ -62,5 +69,13 @@ export {
     MyProfile,
     Alert,
     UpdateUserProfile,
-    SocialMedia
+    SocialMedia,
+    Contact,
+    Blog,
+    CategoryPage,
+    PostCategory,
+    Post,
+    Schedules,
+    Tab,
+    Tabs
 }
