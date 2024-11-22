@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigationType, useLocation } from 'react-router-dom';
 import { Topbar, Navbar, Footer, CartIcon } from '../../';
 import { useDispatch, useSelector } from 'react-redux';
-import { authLogin } from '../../Store/authSlice'
+import { authLogin, logout } from '../../Store/authSlice';
 import authService from '../../Appwrite/Auth';
+import LoadingBar from 'react-top-loading-bar';
 
 const Layout = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const userdata = useSelector((state) => state.auth.userdata);
-
+    const [progress, setProgress] = useState(0);
+    const location = useLocation();
 
     useEffect(() => {
-        if (userdata) {
-            setUser(userdata);
-        }else{
-            setUser(null)
-        }
-    }, [userdata]);
+        setProgress(30);
+        const timer = setTimeout(() => {
+            setProgress(100);
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [location]);
 
     useEffect(() => {
         authService.getCurrentUser()
@@ -30,23 +33,35 @@ const Layout = () => {
                 }
             })
             .finally(() => setLoading(false));
-           
-    }, [dispatch])
+    }, [dispatch]);
 
-    
-    return !loading ?
-        (
-            <main className='overflow-hidden'>
-                <Topbar user={user} />
-                <Navbar />
-                <Outlet />
-                <footer className='mt-10'>
-                    <Footer />
-                </footer>
-                <CartIcon />
-            </main>
-        ) : 'Loading ......'
-}
+    useEffect(() => {
+        if (userdata) {
+            setUser(userdata);
+        } else {
+            setUser(null);
+        }
+    }, [userdata]);
 
+    return !loading ? (
+        <main className="overflow-hidden">
+            <LoadingBar
+                color="#fff"
+                progress={progress}
+                onLoaderFinished={() => setProgress(0)} // Reset progress
+                height={2}
+            />
+            <Topbar user={user} />
+            <Navbar />
+            <Outlet />
+            <footer className="mt-10">
+                <Footer />
+            </footer>
+            <CartIcon />
+        </main>
+    ) : (
+        'Loading ......'
+    );
+};
 
-export default Layout;
+export default React.memo(Layout);

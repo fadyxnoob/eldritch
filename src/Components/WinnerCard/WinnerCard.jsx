@@ -18,4 +18,4 @@ const WinnerCard = ({image, alt}) => {
   );
 }
 
-export default WinnerCard;
+export default React.memo(WinnerCard);

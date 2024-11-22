@@ -66,6 +66,6 @@ const ProductCard = ({ customWidth = 'w-[27%]', popular = null }) => {
     );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);
 
 

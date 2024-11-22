@@ -22,4 +22,4 @@ const Comments = ({ product }) => {
     );
 }
 
-export default Comments;
+export default React.memo(Comments);

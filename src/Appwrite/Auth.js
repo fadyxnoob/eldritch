@@ -88,7 +88,6 @@ export class Service {
     async login({ email, password }, setLoginError) {
 
         try {
-            // await this.deleteSession();
             const session = await this.account.createEmailPasswordSession(email, password);
             if (session) {
                 setLoginError("Login successful");
@@ -382,7 +381,7 @@ export class Service {
         }
     }
 
-    async getSinglePost(id){
+    async getSinglePost(id) {
         try {
             return await this.databases.getDocument(
                 Config.appWriteDBID,
@@ -393,6 +392,8 @@ export class Service {
             console.log(error);
         }
     }
+
+    
 
 }
 

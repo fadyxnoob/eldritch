@@ -87,4 +87,4 @@ const Category = ({ getType }) => {
     );
 };
 
-export default Category;
+export default React.memo(Category);

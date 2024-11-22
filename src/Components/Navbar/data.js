@@ -12,7 +12,7 @@ export const NavbarMenu = [
     {
         id : 3,
         title : 'Matches',
-        link : '#'
+         link : '/schedules'
     },
     {
         id : 4,

@@ -128,4 +128,4 @@ const Candidate = () => {
 
 }
 
-export default Candidate;
+export default React.memo(Candidate);

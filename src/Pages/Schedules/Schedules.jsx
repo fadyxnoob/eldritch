@@ -30,4 +30,4 @@ const Schedules = () => {
         </>
     )
 }
-export default Schedules
+export default React.memo(Schedules)

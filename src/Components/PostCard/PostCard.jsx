@@ -117,4 +117,4 @@ const PostCard = ({ customWidth }) => {
     );
 };
 
-export default PostCard;
+export default React.memo(PostCard);

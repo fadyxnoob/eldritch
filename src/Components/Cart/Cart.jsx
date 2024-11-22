@@ -16,4 +16,4 @@ const CartIcon = () => {
     );
 }
 
-export default CartIcon;
+export default React.memo(CartIcon);

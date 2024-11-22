@@ -101,4 +101,4 @@ const MyCart = () => {
     );
 }
 
-export default MyCart;
+export default React.memo(MyCart);

@@ -35,4 +35,4 @@ const Topbar = ({ user }) => {
     );
 }
 
-export default Topbar;
+export default React.memo(Topbar);

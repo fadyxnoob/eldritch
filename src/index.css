@@ -272,9 +272,11 @@ nav .navItems ul .navCustomStyle {}
     align-items: center;
     justify-content: center;
 }
-.memberBox:hover{
+
+.memberBox:hover {
     transform: scale(0.9);
 }
+
 .memberBox>span::before {
     content: '';
     position: absolute;
@@ -305,14 +307,14 @@ nav .navItems ul .navCustomStyle {}
 
 /* SHOP */
 
-.shopBg{
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/shop.jpg); 
+.shopBg {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/shop.jpg);
 }
 
 /* SHOP */
 
 /* PRODUCT */
-.productBG{
+.productBG {
     background: linear-gradient(rgba(0, 0, 0, 0.834), rgba(0, 0, 0, 0.72)), url(./assets/images/bgProduct.jpg);
     height: 300px;
     background-repeat: no-repeat;
@@ -323,12 +325,14 @@ nav .navItems ul .navCustomStyle {}
     justify-content: start;
     /* padding: 10px 50px;     */
 }
+
 /* PRODUCT */
 
 /* MY PROILE  */
 .myProfileBG {
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/images/stream.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/images/stream.jpg');
 }
+
 /* MY PROILE  */
 
 /* CONTACT US  */
@@ -336,7 +340,7 @@ nav .navItems ul .navCustomStyle {}
 /* CONTACT US  */
 
 /* SCHEDULES */
-.tabHeader::after{
+.tabHeader::after {
     content: '';
     position: absolute;
     width: 0%;
@@ -345,17 +349,26 @@ nav .navItems ul .navCustomStyle {}
     bottom: 0;
     left: 0;
 }
-.tabHeader:hover::after{
+
+.tabHeader:hover::after {
     width: 100%;
     transition: 1s;
 }
 
-.tabHeader.active{
+.tabHeader.active {
     background: #ff5e14;
     color: white;
 }
-.tabHeader.active .tabHeader::after{
+
+.tabHeader.active .tabHeader::after {
     /* width: 0%; */
     background: #fff;
 }
+
 /* SCHEDULES */
+
+/* ADMIN */
+.inputShadow{
+    box-shadow: 0 0 0 0.2px #ff5e14b5;
+}
+/* ADMIN */

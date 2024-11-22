@@ -15,4 +15,4 @@ const MemberCard = ({name, role, rank, image}) => {
     );
 }
 
-export default MemberCard;
+export default React.memo(MemberCard);

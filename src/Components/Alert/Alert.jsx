@@ -43,4 +43,4 @@ const Alert = ({ message, type = 'error', onClose }) => {
     )
 }
 
-export default Alert
+export default React.memo(Alert)

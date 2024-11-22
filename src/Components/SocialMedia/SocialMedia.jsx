@@ -92,4 +92,4 @@ const SocialMedia = ({ closeModel, userID }) => {
     )
 }
 
-export default SocialMedia
+export default React.memo(SocialMedia)

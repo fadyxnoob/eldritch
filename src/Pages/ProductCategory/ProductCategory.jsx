@@ -103,4 +103,4 @@ const ProductCategory = ({ customWidth = "w-[40%]", id }) => {
   );
 };
 
-export default ProductCategory;
+export default React.memo(ProductCategory);

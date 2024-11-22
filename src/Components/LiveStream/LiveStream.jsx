@@ -18,4 +18,4 @@ const LiveStream = () => {
   );
 }
 
-export default LiveStream;
+export default React.memo(LiveStream);

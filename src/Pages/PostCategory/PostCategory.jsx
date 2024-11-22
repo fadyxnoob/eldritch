@@ -139,4 +139,4 @@ const PostCategory = ({ id }) => {
   );
 }
 
-export default PostCategory
+export default React.memo(PostCategory)

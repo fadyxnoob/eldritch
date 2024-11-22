@@ -2,11 +2,13 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { MdMenu, MdOutlineSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
+
+
 const ResponsiveMenu = ({ isOpen }) => {
     return (
         <AnimatePresence mode='wait'>
             {
-                isOpen && <motion.dev
+                isOpen && <motion.div
                     initial={{ opecity: 0, y: -100 }}
                     animate={{ opecity: 0, y: 0 }}
                     exit={{ opecity: 0, y: -100 }}
@@ -21,7 +23,7 @@ const ResponsiveMenu = ({ isOpen }) => {
                             <Link to={'/aboutus'}>
                                 <li>About</li>
                             </Link>
-                            <Link to='/shedules'>
+                            <Link to='/schedules'>
                                 <li>Matches</li>
                             </Link>
                             <Link to={'/shope'}>
@@ -44,16 +46,13 @@ const ResponsiveMenu = ({ isOpen }) => {
                                         </form>
                                     </div>
                                 </div>
-
                             </li>
                         </ul>
-
-
                     </div>
-                </motion.dev>
+                </motion.div>
             }
-        </AnimatePresence>
+        </AnimatePresence >
     );
 }
 
-export default ResponsiveMenu;
+export default React.memo(ResponsiveMenu);

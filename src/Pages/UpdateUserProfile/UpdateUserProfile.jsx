@@ -148,4 +148,4 @@ const UpdateUserProfile = () => {
     )
 }
 
-export default UpdateUserProfile
+export default React.memo(UpdateUserProfile)

@@ -21,4 +21,4 @@ const CategoryPage = () => {
     );
 };
 
-export default CategoryPage;
+export default React.memo(CategoryPage);
