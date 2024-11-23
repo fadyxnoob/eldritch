@@ -1,16 +1,29 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Button = ({ title, style }) => {
+const Button = ({ title, style, path }) => {
   return (
     <>
-      <button
-        type='submit'
-        className={`bg-[#ff5e14b5] hover:bg-primary border-primary-2 px-3 py-2 text-light font-semibold ${style}`}
-      >
-        {title}
-      </button>
+      {
+        path ? <Link to={path}>
+          <button
+            type='submit'
+            className={`bg-[#ff5e14b5] hover:bg-primary border-primary-2 px-3 py-2 text-light font-semibold ${style}`}
+          >
+            {title}
+          </button>
+        </Link> : (
+          <button
+            type='submit'
+            className={`bg-[#ff5e14b5] hover:bg-primary border-primary-2 px-3 py-2 text-light font-semibold ${style}`}
+          >
+            {title}
+          </button>
+        )
+      }
+
     </>
   )
 }
 
-export default Button
+export default React.memo(Button)

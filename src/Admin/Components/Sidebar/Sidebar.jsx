@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLocalStorage } from '../../../LocalStorage/LocalStorage';
 import { toggleSidebar } from "../../../Store/DashboardSlices/Sidebar";
 
+
+
 const Sidebar = () => {
   const dispatch = useDispatch();
   const openSidebar = useSelector((state) => state.sidebar.openSidebar)
@@ -35,18 +37,18 @@ const Sidebar = () => {
 
 
   return (
-    <div className={`h-screen-minus-header ${openSidebar ? 'w-[20%]' : 'w-[0%]'} fixed py-5 bg-black text-light overflow-y-scroll custom-scrollbar transition-all duration-500 ease-in-out `}>
+    <div className={`h-screen-minus-header ${openSidebar ? 'w-[20%]' : 'w-[0%]'} fixed py-10 bg-black text-light overflow-y-scroll custom-scrollbar transition-all duration-500 ease-in-out mt-10`}>
       <div className='opacity-100 transition-opacity duration-500'>
-        <h4 className="text-sm px-5">ADMIN</h4>
+        <h4 className="text-lg px-5">ADMIN</h4>
         <Link to="/admin/dashboard">
           <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
             <AiFillDashboard className="size-6" />
-            <h4 className="text-xl">Dashboard</h4>
+            <h4 className="text-base">Dashboard</h4>
           </div>
         </Link>
 
         <div className="mt-5">
-          <h4 className="text-sm px-5">INTERFACE</h4>
+          <h4 className="text-lg px-5">INTERFACE</h4>
 
           {/* Matches Menu */}
           <div className="mt-5">
@@ -75,15 +77,35 @@ const Sidebar = () => {
                 } bg-primary`}
             >
               <div className="flex flex-col justify-center">
-                <h4 className="bg-black px-5 py-2 align-middle">Candidates</h4>
-                <h4 className="bg-black px-5 py-2 align-middle">Add Match</h4>
-                <h4 className="bg-black px-5 py-2 align-middle">UpComing Matches</h4>
-                <h4 className="bg-black px-5 py-2 align-middle">Current Matches</h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  Manage Final Matches
+                  <Link to={'/admin/manageCandidates'}>
+                    Candidates
+                  </Link>
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  Manage Poll Results
+                  <Link to={'/admin/AddMatch'}>
+                    Add Match
+                  </Link>
+                </h4>
+                <h4 className="bg-black px-5 py-2 align-middle">
+                  <Link to={'/admin/currentMatches'}>
+                    Current Matches
+                  </Link>
+                </h4>
+                <h4 className="bg-black px-5 py-2 align-middle">
+                  <Link to={'/admin/manageUpcomingMatches'}>
+                    UpComing Matches
+                  </Link>
+                </h4>
+                <h4 className="bg-black px-5 py-2 align-middle">
+                  <Link to={'/admin/pollMatches'}>
+                    Manage Poll Results
+                  </Link>
+                </h4>
+                <h4 className="bg-black px-5 py-2 align-middle">
+                  <Link to={'/admin/manageFinalWinner'}>
+                    Manage Final Matches
+                  </Link>
                 </h4>
               </div>
             </div>
@@ -195,43 +217,50 @@ const Sidebar = () => {
           </div>
 
           <div>
-            <h4 className="text-sm px-5 my-5">COMPONENTS</h4>
+            <h4 className="text-lg px-5 my-5">COMPONENTS</h4>
+
             <Link to="/admin/manage-categories">
               <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
                 <FaCat className="size-6" />
-                <h4 className="text-lg">Manage Categories</h4>
+                <h4 className="text-base">Manage Categories</h4>
               </div>
             </Link>
-            <h4 className="text-sm px-5 my-5">ACCOUNTS</h4>
-            <Link to="#">
-              <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
-                <h4 className="text-lg">Admin</h4>
+            <h4 className="text-lg px-5 my-5">ACCOUNTS</h4>
+
+            <Link to="/admin/manageAdmins">
+              <div className="flex items-center mt-2 gap-2 hover:bg-primary px-5 h-8 transition-all">
+                <h4 className="text-base">Admin</h4>
               </div>
             </Link>
-            <Link to="#">
-              <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
-                <h4 className="text-lg">Users</h4>
+
+            <Link to="/admin/manageUsers">
+              <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
+                <h4 className="text-base">Users</h4>
               </div>
             </Link>
-            <h4 className="text-sm px-5 my-5">OTHERS</h4>
-            <Link to="#">
-              <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
-                <h4 className="text-lg">Manage Live Stream</h4>
+            <h4 className="text-lg px-5 my-5">OTHERS</h4>
+
+            <Link to="/admin/manageLiveStream">
+              <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
+                <h4 className="text-base">Manage Live Stream</h4>
               </div>
             </Link>
-            <Link to="#">
-              <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
-                <h4 className="text-lg">My Team</h4>
+
+            <Link to="/admin/manageTeam">
+              <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
+                <h4 className="text-base">My Team</h4>
               </div>
             </Link>
-            <Link to="#">
-              <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
-                <h4 className="text-lg">Comments</h4>
+
+            <Link to="/admin/manageComments">
+              <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
+                <h4 className="text-base">Comments</h4>
               </div>
             </Link>
+
             <Link to="#">
-              <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
-                <h4 className="text-lg">Reports</h4>
+              <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
+                <h4 className="text-base">Reports</h4>
               </div>
             </Link>
           </div>

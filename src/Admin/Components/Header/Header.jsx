@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from "../../../Store/DashboardSlices/Sidebar";
 import { setLocalStorage } from '../../../LocalStorage/LocalStorage';
 
+
+
 const Header = () => {
   const dispatch = useDispatch();
   const openSidebar = useSelector((state) => state.sidebar.openSidebar)
@@ -19,7 +21,7 @@ const Header = () => {
 };
 
   return (
-    <div className='h-16 bg-primary flex items-center justify-between px-5'>
+    <div className='h-16 bg-primary flex items-center justify-between px-5 fixed top-0 w-full z-10'>
       <div className='flex w-[20%] justify-between h-full items-center'>
         <h1 className='text-light text-4xl'>ELDRITCH</h1>
         <div

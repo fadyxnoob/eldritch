@@ -1,54 +1,87 @@
-import { useState } from "react";
-import CustomSelect from '../CustomSelect/CustomSelect'
+import React, { useState, useEffect, useCallback } from "react";
+import CustomSelect from "../CustomSelect/CustomSelect";
+import { getLocalStorage } from "../../../LocalStorage/LocalStorage";
 
-const Table = ({ title = "New Users", headers = {}, data = [] }) => {
+const Table = ({ title = '', headers = [], data = [], filter = false, searchInput = false }) => {
+
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const rowsPerPage = parseInt(localStorage.getItem("option"), 10) || 10;
+    const [rowsPerPage, setRowsPerPage] = useState(
+        parseInt(getLocalStorage("option"), 10) || 10
+    );
 
-    // Filtered data based on search
+    useEffect(() => {
+        const savedOption = parseInt(getLocalStorage("option"), 10) || 10;
+        setRowsPerPage(savedOption);
+        setCurrentPage(1);
+    }, []);
+
+    const handleRowsPerPageChange = useCallback((option) => {
+        setRowsPerPage(parseInt(option, 10));
+        setCurrentPage(1);
+    });
+
     const filteredData = data.filter((row) =>
         Object.values(row).some((value) =>
             String(value).toLowerCase().includes(searchTerm.toLowerCase())
         )
     );
 
-    // Paginated data
+    // Paginated data based on the selected rowsPerPage
     const paginatedData = filteredData.slice(
         (currentPage - 1) * rowsPerPage,
         currentPage * rowsPerPage
     );
 
+    // Calculate total pages
+    const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+    const propsOptions = ["2", "5", "10", "20", "30", "50"];
     return (
         <div className="table-container border rounded-md shadow-md p-4">
+            <div className="flex items-center justify-between mb-3 h-8">
+                <div>
+                    {filter && <CustomSelect onSelect={handleRowsPerPageChange} options={propsOptions} />}
+                </div>
+                <div>
+                    {searchInput && (
+                        <div className="flex justify-between items-center">
+                            {/* Search Input */}
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                className="h-8 px-4 py-2 focus:outline-none focus:border-b-2 border-primary inputShadow"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+                    )}
+                </div>
+            </div>
+
             {/* Table Title */}
             {title && <h2 className="text-lg font-bold mb-4">{title}</h2>}
 
-                  
-
             {/* Table Structure */}
-            <table className="table-auto w-full border-collapse border border-gray-300">
+            <table className="table-auto border-collapse border border-gray-300 overflow-x-scroll w-full">
                 <thead>
                     <tr>
-                        {/* Render headers dynamically */}
-                        {Object.keys(headers).map((key) => (
+                        {headers.map((header, index) => (
                             <th
-                                key={key}
-                                className="border border-gray-300 px-4 py-2 bg-gray-100 text-left"
+                                key={index}
+                                className="border border-gray-300 px-4 py-2 bg-gray-100 text-left capitalize font-medium"
                             >
-                                {headers[key]}
+                                {header}
                             </th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>
-                    {/* Render rows dynamically */}
                     {paginatedData.length > 0 ? (
                         paginatedData.map((row, rowIndex) => (
                             <tr key={rowIndex}>
-                                {Object.keys(headers).map((key) => (
-                                    <td key={key} className="border border-gray-300 px-4 py-2">
-                                        {row[key] || "-"} {/* Show "-" if the key is not present */}
+                                {Object.values(headers).map((headerKey) => (
+                                    <td key={headerKey} className="border border-gray-300 px-5 py-3 text-sm">
+                                        {row[headerKey] || "N/A"}
                                     </td>
                                 ))}
                             </tr>
@@ -67,34 +100,31 @@ const Table = ({ title = "New Users", headers = {}, data = [] }) => {
             </table>
 
             {/* Pagination Controls */}
-            <div className="flex justify-between items-center mt-4">
-                <button
-                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                    className="px-4 py-2 border border-gray-300 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    disabled={currentPage === 1}
-                >
-                    Previous
-                </button>
-                <span>
-                    Page {currentPage} of{" "}
-                    {Math.ceil(filteredData.length / rowsPerPage)}
-                </span>
-                <button
-                    onClick={() =>
-                        setCurrentPage((prev) =>
-                            Math.min(prev + 1, Math.ceil(filteredData.length / rowsPerPage))
-                        )
-                    }
-                    className="px-4 py-2 border border-gray-300 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    disabled={
-                        currentPage === Math.ceil(filteredData.length / rowsPerPage)
-                    }
-                >
-                    Next
-                </button>
-            </div>
+            {filter && (
+                <div className="flex justify-between items-center mt-4">
+                    <button
+                        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                        className="px-4 py-2 border border-gray-300 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+                    <span>
+                        Page {currentPage} of {totalPages}
+                    </span>
+                    <button
+                        onClick={() =>
+                            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                        }
+                        className="px-4 py-2 border border-gray-300 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                        disabled={currentPage === totalPages || totalPages === 0}
+                    >
+                        Next
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
 
-export default Table;
+export default React.memo(Table);

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getLocalStorage } from "../../LocalStorage/LocalStorage";
 const initialState = {
-    openSidebar: getLocalStorage('openSidebar') ?? true,
+    openSidebar: getLocalStorage('openSidebar') || true,
 };
 
 const sidebarSlice = createSlice({

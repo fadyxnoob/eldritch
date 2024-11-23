@@ -112,11 +112,9 @@ const UpdateUserProfile = () => {
                 </div>
                 <div className='mt-10 flex justify-between items-center'>
                     <div className='flex items-center gap-2'>
-
                         <label htmlFor="uploadImage" className='text-black border border-primary cursor-pointer p-2'>Upload Image</label>
 
                         {image && <span className="text-light text-sm">{image.name}</span>}
-
                         <input
                             type="file"
                             className="hidden"
@@ -124,7 +122,6 @@ const UpdateUserProfile = () => {
                             onChange={handleImageChange}
                             accept="image/*"
                         />
-
                     </div>
                     {imagePreview && (
                         <img

@@ -1,115 +1,45 @@
-import { useState } from "react";
-import CustomSelect from "./CustomSelect"; // Import CustomSelect here
+import React, { useState } from "react";
+import { setLocalStorage, getLocalStorage } from "../../../LocalStorage/LocalStorage";
 
-const Table = ({ title = "New Users", headers = {}, data = [] }) => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [currentPage, setCurrentPage] = useState(1);
-    const rowsPerPage = parseInt(localStorage.getItem("option"), 10) || 10;
+const CustomSelect = ({ onSelect, options= [] }) => {
+    const [selected, setSelected] = useState(getLocalStorage("option") || "10");
+    const [isOpen, setIsOpen] = useState(false);
+   
 
-    // Filtered data based on search
-    const filteredData = data.filter((row) =>
-        Object.values(row).some((value) =>
-            String(value).toLowerCase().includes(searchTerm.toLowerCase())
-        )
-    );
+    const toggleDropdown = () => setIsOpen((prev) => !prev);
 
-    // Paginated data
-    const paginatedData = filteredData.slice(
-        (currentPage - 1) * rowsPerPage,
-        currentPage * rowsPerPage
-    );
+    const handleSelect = (option) => {
+        setSelected(option);
+        setLocalStorage("option", option);
+        setIsOpen(false);
+        if (onSelect) onSelect(option); 
+    };
 
     return (
-        <div className="table-container border rounded-md shadow-md p-4">
-            {/* Table Title */}
-            {title && <h2 className="text-lg font-bold mb-4">{title}</h2>}
+        <div className="relative w-20">
+            <button
+                className="w-full h-8 px-5 border border-primary bg-white text-left outline-none"
+                onClick={toggleDropdown}
+            >
+                {selected}
+            </button>
 
-            {/* Rows Per Page Dropdown */}
-            <CustomSelect />
-
-            {/* Search and Rows Per Page Controls */}
-            <div className="flex justify-between items-center mb-4">
-                {/* Search Input */}
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-
-
-            </div>
-
-            {/* Table Structure */}
-            <table className="table-auto w-full border-collapse border border-gray-300">
-                <thead>
-                    <tr>
-                        {/* Render headers dynamically */}
-                        {Object.keys(headers).map((key) => (
-                            <th
-                                key={key}
-                                className="border border-gray-300 px-4 py-2 bg-gray-100 text-left"
-                            >
-                                {headers[key]}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* Render rows dynamically */}
-                    {paginatedData.length > 0 ? (
-                        paginatedData.map((row, rowIndex) => (
-                            <tr key={rowIndex}>
-                                {Object.keys(headers).map((key) => (
-                                    <td key={key} className="border border-gray-300 px-4 py-2">
-                                        {row[key] || "-"} {/* Show "-" if the key is not present */}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td
-                                className="border border-gray-300 px-4 py-2 text-center"
-                                colSpan={Object.keys(headers).length}
-                            >
-                                No data available
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-
-            {/* Pagination Controls */}
-            <div className="flex justify-between items-center mt-4">
-                <button
-                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                    className="px-4 py-2 border border-gray-300 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    disabled={currentPage === 1}
-                >
-                    Previous
-                </button>
-                <span>
-                    Page {currentPage} of{" "}
-                    {Math.ceil(filteredData.length / rowsPerPage)}
-                </span>
-                <button
-                    onClick={() =>
-                        setCurrentPage((prev) =>
-                            Math.min(prev + 1, Math.ceil(filteredData.length / rowsPerPage))
-                        )
-                    }
-                    className="px-4 py-2 border border-gray-300 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                    disabled={
-                        currentPage === Math.ceil(filteredData.length / rowsPerPage)
-                    }
-                >
-                    Next
-                </button>
-            </div>
+            {/* Dropdown options */}
+            {isOpen && (
+                <ul className="absolute w-full border border-primary bg-white z-10">
+                    {options.map((option) => (
+                        <li
+                            key={option}
+                            className="px-5 py-2 hover:bg-primary hover:text-white cursor-pointer rounded-none"
+                            onClick={() => handleSelect(option)}
+                        >
+                            {option}
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };
 
-export default Table;
+export default React.memo(CustomSelect);

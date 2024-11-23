@@ -28,16 +28,17 @@ const AdminLayout = () => {
 
   return (
     <div className="overflow-hidden">
-      <header>
-        <Header />
-      </header>
-
-      <LoadingBar
+       <LoadingBar
         color="#fff"
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
         height={2}
       />
+      <header>
+        <Header />
+      </header>
+
+     
 
       <aside>
         <Sidebar />
