@@ -36,6 +36,7 @@ const Table = ({ title = '', headers = [], data = [], filter = false, searchInpu
     // Calculate total pages
     const totalPages = Math.ceil(filteredData.length / rowsPerPage);
     const propsOptions = ["2", "5", "10", "20", "30", "50"];
+    
     return (
         <div className="table-container border rounded-md shadow-md p-4">
             <div className="flex items-center justify-between mb-3 h-8">

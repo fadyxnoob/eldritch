@@ -44,6 +44,20 @@ const ManageUpcomingMatches = lazy(() => import('./Admin/Pages/ManageUpcomingMat
 const ManageFinalWinner = lazy(() => import('./Admin/Pages/ManageFinalWinner/ManageFinalWinner.jsx'))
 const ManageCurrentMatches = lazy(() => import('./Admin/Pages/ManageCurrentMatches/ManageCurrentMatches.jsx'))
 const ManagePollMatches = lazy(() => import('./Admin/Pages/ManagePollMatches/ManagePollMatches.jsx'))
+const ManageWebsite = lazy(() => import('./Admin/Pages/ManageWebsite/ManageWebsite.jsx'))
+const ManageSlider = lazy(() => import('./Admin/Pages/ManageSlider/ManageSlider.jsx'))
+const ManageSocialMedia = lazy(() => import('./Admin/Pages/ManageSocialMedia/ManageSocialMedia.jsx'))
+const PendingOrders = lazy(() => import('./Admin/Pages/PendingOrders/PendingOrders.jsx'))
+const CompleteOrders = lazy(() => import('./Admin/Pages/CompleteOrders/CompleteOrders.jsx'))
+const ManageAbout = lazy(() => import('./Admin/Pages/About/About.jsx'))
+const ManagePosts = lazy(() => import('./Admin/Pages/ManagePosts/ManagePosts.jsx'))
+const ManageContactPage = lazy(() => import('./Admin/Pages/ManageContactPage/ManageContactPage'))
+const ManageTimer= lazy(() => import('./Admin/Pages/ManageTimer/ManageTimer.jsx'))
+const ManageFaqs= lazy(() => import('./Admin/Pages/ManageFaqs/ManageFaqs.jsx'))
+const ManagePolicy= lazy(() => import('./Admin/Pages/ManagePolicy/ManagePolicy.jsx'))
+const ManageProducts= lazy(() => import('./Admin/Pages/ManageProducts/ManageProducts.jsx'))
+const UserGuide= lazy(() => import('./Admin/Pages/UserGuide/UserGuide.jsx'))
+const TermsConditions= lazy(() => import('./Admin/Pages/TermsConditions/TermsConditions.jsx'))
 
 
 createRoot(document.getElementById('root')).render(
@@ -90,6 +104,21 @@ createRoot(document.getElementById('root')).render(
               <Route path="manageFinalWinner" element={<ManageFinalWinner />} />
               <Route path="currentMatches" element={<ManageCurrentMatches />} />
               <Route path="pollMatches" element={<ManagePollMatches />} />
+              <Route path="manageWebsite" element={<ManageWebsite />} />
+              <Route path="manageSlider" element={<ManageSlider />} />
+              <Route path="manageSocialMedia" element={<ManageSocialMedia />} />
+              <Route path="pendingOrders" element={<PendingOrders />} />
+              <Route path="completedOrders" element={<CompleteOrders />} />
+              <Route path="completedOrders" element={<CompleteOrders />} />
+              <Route path="manageAbout" element={<ManageAbout />} />
+              <Route path="managePosts" element={<ManagePosts />} />
+              <Route path="manageContactPage" element={<ManageContactPage />} />
+              <Route path="manageTimer" element={<ManageTimer />} />
+              <Route path="manageFaqs" element={<ManageFaqs />} />
+              <Route path="managePolicy" element={<ManagePolicy />} />
+              <Route path="manageProducts" element={<ManageProducts />} />
+              <Route path="userGuide" element={<UserGuide />} />
+              <Route path="termsConditions" element={<TermsConditions />} />
 
             </Route>
 

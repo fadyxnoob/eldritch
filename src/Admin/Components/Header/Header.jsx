@@ -14,9 +14,7 @@ const Header = () => {
 
   const handleOpenCloseSidebar = () => {
     dispatch(toggleSidebar()); 
-
     const currentState = !openSidebar; 
-    console.log(currentState);
     setLocalStorage('openSidebar', currentState);
 };
 
@@ -52,4 +50,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default React.memo(Header)

@@ -14,8 +14,6 @@ const Sidebar = () => {
   const openSidebar = useSelector((state) => state.sidebar.openSidebar)
   const [menuState, setMenuState] = useState({});
 
-  console.log(openSidebar);
-
   const handleMenuToggle = (menuId) => {
     setMenuState((prevState) => {
       const newState = Object.keys(prevState).reduce((acc, key) => {
@@ -42,7 +40,7 @@ const Sidebar = () => {
     <div className={`h-screen-minus-header ${openSidebar ? 'w-[20%]' : 'w-[0%]'} fixed py-10 bg-black text-light overflow-y-scroll custom-scrollbar transition-all duration-500 ease-in-out mt-10`}>
       <div className='opacity-100 transition-opacity duration-500'>
         <h4 className="text-lg px-5">ADMIN</h4>
-        <NavLink to="/admin/dashboard">
+        <NavLink   to="/admin/dashboard">
           <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
             <AiFillDashboard className="size-6" />
             <h4 className="text-base">Dashboard</h4>
@@ -80,32 +78,32 @@ const Sidebar = () => {
             >
               <div className="flex flex-col justify-center">
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageCandidates'}>
+                  <NavLink   to={'/admin/manageCandidates'}>
                     Candidates
                   </NavLink  >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/AddMatch'}>
+                  <NavLink   to={'/admin/AddMatch'}>
                     Add Match
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/currentMatches'}>
+                  <NavLink   to={'/admin/currentMatches'}>
                     Current Matches
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageUpcomingMatches'}>
+                  <NavLink  to={'/admin/manageUpcomingMatches'}>
                     UpComing Matches
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/pollMatches'}>
+                  <NavLink  to={'/admin/pollMatches'}>
                     Manage Poll Results
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageFinalWinner'}>
+                  <NavLink  to={'/admin/manageFinalWinner'}>
                     Manage Final Matches
                   </NavLink >
                 </h4>
@@ -143,17 +141,17 @@ const Sidebar = () => {
             >
               <div className="flex flex-col justify-center">
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageWebsite'}>
+                  <NavLink  to={'/admin/manageWebsite'}>
                     Website
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageSlider'}>
+                  <NavLink  to={'/admin/manageSlider'}>
                     Slider
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageSocialMedia'}>
+                  <NavLink  to={'/admin/manageSocialMedia'}>
                     Social Media
                   </NavLink >
                 </h4>
@@ -188,12 +186,12 @@ const Sidebar = () => {
             >
               <div className="flex flex-col justify-center">
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/pendingOrders'}>
+                  <NavLink  to={'/admin/pendingOrders'}>
                     Pending Orders
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/completedOrders'}>
+                  <NavLink  to={'/admin/completedOrders'}>
                     Completed Orders
                   </NavLink >
                 </h4>
@@ -227,44 +225,44 @@ const Sidebar = () => {
                 } bg-primary`}
             >
               <div className="flex flex-col justify-center">
-                <h4 className="bg-black px-5 py-2 align-middle"> <NavLink to={'/admin/manageAbout'}>About</NavLink ></h4>
+                <h4 className="bg-black px-5 py-2 align-middle"> <NavLink  to={'/admin/manageAbout'}>About</NavLink ></h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/managePosts'}>
+                  <NavLink  to={'/admin/managePosts'}>
                     Manage Posts
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageContactPage'}>
+                  <NavLink  to={'/admin/manageContactPage'}>
                     Contact Us
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageTimer'}>
+                  <NavLink  to={'/admin/manageTimer'}>
                     Manage Timer
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageFaqs'}>
+                  <NavLink  to={'/admin/manageFaqs'}>
                     Manage Faqs
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/managePolicy'}>
+                  <NavLink  to={'/admin/managePolicy'}>
                     Privacy Policy
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/manageProducts'}>
+                  <NavLink  to={'/admin/manageProducts'}>
                     Manage Products
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/userGuide'}>
+                  <NavLink  to={'/admin/userGuide'}>
                     User Guides
                   </NavLink >
                 </h4>
                 <h4 className="bg-black px-5 py-2 align-middle">
-                  <NavLink to={'/admin/termsConditions'}>
+                  <NavLink  to={'/admin/termsConditions'}>
                     Terms and Conditions
                   </NavLink >
                 </h4>
@@ -275,7 +273,7 @@ const Sidebar = () => {
           <div>
             <h4 className="text-lg px-5 my-5">COMPONENTS</h4>
 
-            <NavLink to="/admin/manage-categories">
+            <NavLink  to="/admin/manage-categories">
               <div className="flex items-center mt-5 gap-2 hover:bg-primary px-5 h-8 transition-all">
                 <FaCat className="size-6" />
                 <h4 className="text-base">Manage Categories</h4>
@@ -283,38 +281,38 @@ const Sidebar = () => {
             </NavLink >
             <h4 className="text-lg px-5 my-5">ACCOUNTS</h4>
 
-            <NavLink to="/admin/manageAdmins">
+            <NavLink  to="/admin/manageAdmins">
               <div className="flex items-center mt-2 gap-2 hover:bg-primary px-5 h-8 transition-all">
                 <h4 className="text-base">Admin</h4>
               </div>
             </NavLink >
 
-            <NavLink to="/admin/manageUsers">
+            <NavLink  to="/admin/manageUsers">
               <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
                 <h4 className="text-base">Users</h4>
               </div>
             </NavLink >
             <h4 className="text-lg px-5 my-5">OTHERS</h4>
 
-            <NavLink to="/admin/manageLiveStream">
+            <NavLink  to="/admin/manageLiveStream">
               <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
                 <h4 className="text-base">Manage Live Stream</h4>
               </div>
             </NavLink >
 
-            <NavLink to="/admin/manageTeam">
+            <NavLink  to="/admin/manageTeam">
               <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
                 <h4 className="text-base">My Team</h4>
               </div>
             </NavLink >
 
-            <NavLink to="/admin/manageComments">
+            <NavLink  to="/admin/manageComments">
               <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
                 <h4 className="text-base">Comments</h4>
               </div>
             </NavLink >
 
-            <NavLink to="#">
+            <NavLink  to="#">
               <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
                 <h4 className="text-base">Reports</h4>
               </div>
