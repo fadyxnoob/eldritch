@@ -13,10 +13,10 @@ const Header = () => {
   const openSidebar = useSelector((state) => state.sidebar.openSidebar)
 
   const handleOpenCloseSidebar = () => {
-    dispatch(toggleSidebar()); 
-    const currentState = !openSidebar; 
+    dispatch(toggleSidebar());
+    const currentState = !openSidebar;
     setLocalStorage('openSidebar', currentState);
-};
+  };
 
   return (
     <div className='h-16 bg-primary flex items-center justify-between px-5 fixed top-0 w-full z-10'>

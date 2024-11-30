@@ -39,7 +39,7 @@ const Table = ({ title = '', headers = [], data = [], filter = false, searchInpu
     
     return (
         <div className="table-container border rounded-md shadow-md p-4">
-            <div className="flex items-center justify-between mb-3 h-8">
+            <div className="flex items-center justify-between mb-3 h-8 flex-wrap">
                 <div>
                     {filter && <CustomSelect onSelect={handleRowsPerPageChange} options={propsOptions} />}
                 </div>
@@ -63,42 +63,44 @@ const Table = ({ title = '', headers = [], data = [], filter = false, searchInpu
             {title && <h2 className="text-lg font-bold mb-4">{title}</h2>}
 
             {/* Table Structure */}
-            <table className="table-auto border-collapse border border-gray-300 overflow-x-scroll w-full">
-                <thead>
-                    <tr>
-                        {headers.map((header, index) => (
-                            <th
-                                key={index}
-                                className="border border-gray-300 px-4 py-2 bg-gray-100 text-left capitalize font-medium"
-                            >
-                                {header}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {paginatedData.length > 0 ? (
-                        paginatedData.map((row, rowIndex) => (
-                            <tr key={rowIndex}>
-                                {Object.values(headers).map((headerKey) => (
-                                    <td key={headerKey} className="border border-gray-300 px-5 py-3 text-sm">
-                                        {row[headerKey] || "N/A"}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))
-                    ) : (
+            <div className="overflow-x-auto">
+                <table className="table-auto border-collapse border border-gray-300 w-full">
+                    <thead>
                         <tr>
-                            <td
-                                className="border border-gray-300 px-4 py-2 text-center"
-                                colSpan={Object.keys(headers).length}
-                            >
-                                No data available
-                            </td>
+                            {headers.map((header, index) => (
+                                <th
+                                    key={index}
+                                    className="border border-gray-300 px-4 py-2 bg-gray-100 text-left capitalize font-medium"
+                                >
+                                    {header}
+                                </th>
+                            ))}
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {paginatedData.length > 0 ? (
+                            paginatedData.map((row, rowIndex) => (
+                                <tr key={rowIndex}>
+                                    {Object.values(headers).map((headerKey) => (
+                                        <td key={headerKey} className="border border-gray-300 px-5 py-3 text-sm">
+                                            {row[headerKey] || "N/A"}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td
+                                    className="border border-gray-300 px-4 py-2 text-center"
+                                    colSpan={Object.keys(headers).length}
+                                >
+                                    No data available
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
 
             {/* Pagination Controls */}
             {filter && (

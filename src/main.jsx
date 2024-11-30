@@ -52,12 +52,23 @@ const CompleteOrders = lazy(() => import('./Admin/Pages/CompleteOrders/CompleteO
 const ManageAbout = lazy(() => import('./Admin/Pages/About/About.jsx'))
 const ManagePosts = lazy(() => import('./Admin/Pages/ManagePosts/ManagePosts.jsx'))
 const ManageContactPage = lazy(() => import('./Admin/Pages/ManageContactPage/ManageContactPage'))
-const ManageTimer= lazy(() => import('./Admin/Pages/ManageTimer/ManageTimer.jsx'))
-const ManageFaqs= lazy(() => import('./Admin/Pages/ManageFaqs/ManageFaqs.jsx'))
-const ManagePolicy= lazy(() => import('./Admin/Pages/ManagePolicy/ManagePolicy.jsx'))
-const ManageProducts= lazy(() => import('./Admin/Pages/ManageProducts/ManageProducts.jsx'))
-const UserGuide= lazy(() => import('./Admin/Pages/UserGuide/UserGuide.jsx'))
-const TermsConditions= lazy(() => import('./Admin/Pages/TermsConditions/TermsConditions.jsx'))
+const ManageTimer = lazy(() => import('./Admin/Pages/ManageTimer/ManageTimer.jsx'))
+const ManageFaqs = lazy(() => import('./Admin/Pages/ManageFaqs/ManageFaqs.jsx'))
+const ManagePolicy = lazy(() => import('./Admin/Pages/ManagePolicy/ManagePolicy.jsx'))
+const ManageProducts = lazy(() => import('./Admin/Pages/ManageProducts/ManageProducts.jsx'))
+const UserGuide = lazy(() => import('./Admin/Pages/UserGuide/UserGuide.jsx'))
+const TermsConditions = lazy(() => import('./Admin/Pages/TermsConditions/TermsConditions.jsx'))
+const AddPollResults = lazy(() => import('./Admin/Pages/AddPollResults/AddPollResults.jsx'))
+const UpdatePollResult = lazy(() => import('./Admin/Pages/UpdatePollResult/UpdatePollResult.jsx'))
+const AddFinalWinner = lazy(() => import('./Admin/Pages/AddFinalWinner/AddFinalWinner.jsx'))
+const UpdateFinalWinner = lazy(() => import('./Admin/Pages/UpdateFinalWinner/UpdateFinalWinner.jsx'))
+const AddPost = lazy(() => import('./Admin/Pages/AddPost/AddPost.jsx'))
+const UpdatePost = lazy(()=> import('./Admin/Pages/UpdatePost/UpdatePost.jsx'))
+
+
+
+
+
 
 
 createRoot(document.getElementById('root')).render(
@@ -119,6 +130,12 @@ createRoot(document.getElementById('root')).render(
               <Route path="manageProducts" element={<ManageProducts />} />
               <Route path="userGuide" element={<UserGuide />} />
               <Route path="termsConditions" element={<TermsConditions />} />
+              <Route path="addLastMatchResult" element={<AddPollResults />} />
+              <Route path="updateMatch/:matchID" element={<UpdatePollResult />} />
+              <Route path="addFinalWinner" element={<AddFinalWinner />} />
+              <Route path="updateFinalResult/:finalID" element={<UpdateFinalWinner />} />
+              <Route path="addPost" element={<AddPost />} />
+              <Route path="updatePost/:postID" element={<UpdatePost />} />
 
             </Route>
 

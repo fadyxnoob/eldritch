@@ -20,10 +20,10 @@ const ManageCandidates = () => {
         const collectionID = Config.appWriteManageCandidates;
         try {
             // Determine the new status based on the value
-            const newStatus = val === 'Pending' ? 'Active' : 'Pending';
+            const newStatus = val === 'Pending' ? 'active' : 'Pending';
             
             // Update the status in Appwrite
-            const comData = await DatabaseService.updateDocument(collectionID, docID, {'status' : newStatus});
+            const comData = await DatabaseService.updateDocument(collectionID, docID, 'status', newStatus);
             console.log('Status updated:', comData);
     
             // Immediately update the local state to reflect the status change
@@ -55,7 +55,7 @@ const ManageCandidates = () => {
                         processedCandidate[attributeMapping[key]] = "N/A";
                     }
                 });
-               
+
                 // Check if $id exists in the candidate
                 if (candidate['$id']) {
                     processedCandidate['$id'] = candidate['$id'];

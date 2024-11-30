@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { FaXmark } from "react-icons/fa6";
+
+
 const Alert = ({ message, type = 'error', onClose }) => {
 
     const [visible, setVisible] = useState(true);
@@ -26,15 +28,15 @@ const Alert = ({ message, type = 'error', onClose }) => {
 
 
     return (
-        <div className={`px-4 py-1 rounded-md shadow-md ${alertStyles[type]} bg-black`}>
-            <div className="flex items-center justify-between">
+        <div className={`px-4 py-1 rounded-md shadow-md ${alertStyles[type]} bg-black h-12 flex justify-between absolute w-[50%] right-5 top-2`}>
+            <div className="flex items-center justify-between w-full">
                 <span>{message}</span>
                 <button
                     onClick={() => {
                         setVisible(false);
                         onClose();
                     }}
-                    className="ml-4 text-lg focus:outline-none text-light rounded-md"
+                    className="ml-4 text-lg focus:outline-none text-black rounded-full bg-light p-2 "
                 >
                     <FaXmark />
                 </button>

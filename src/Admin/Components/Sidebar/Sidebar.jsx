@@ -14,8 +14,6 @@ const Sidebar = () => {
   const openSidebar = useSelector((state) => state.sidebar.openSidebar)
   const [menuState, setMenuState] = useState({});
 
-  console.log(openSidebar);
-
   const handleMenuToggle = (menuId) => {
     setMenuState((prevState) => {
       const newState = Object.keys(prevState).reduce((acc, key) => {
@@ -332,4 +330,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);

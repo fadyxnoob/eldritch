@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getLocalStorage } from "../../LocalStorage/LocalStorage";
 
-console.log(getLocalStorage('openSidebar'));
-
 const initialState = {
     openSidebar: getLocalStorage('openSidebar'),
 };
