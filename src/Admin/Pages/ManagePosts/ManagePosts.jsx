@@ -34,7 +34,6 @@ const ManagePosts = () => {
 
   // Handle post status update
   const handlePostStatus = useCallback(async (val, docID) => {
-    console.log({ val });
     const collection = Config.appWritePostsCollID;
     try {
       const newStatus = val === "Pending" ? "Active" : "Pending";

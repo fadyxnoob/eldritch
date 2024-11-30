@@ -156,7 +156,7 @@ export class DBService {
             const data = await this.databases.listDocuments(
                 Config.appWriteDBID,
                 Config.appWritePostsCollID,
-                [Query.equal('status', 'active')]
+                [Query.equal('status', 'Active')]
             )
 
             return data;

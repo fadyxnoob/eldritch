@@ -64,6 +64,8 @@ const AddFinalWinner = lazy(() => import('./Admin/Pages/AddFinalWinner/AddFinalW
 const UpdateFinalWinner = lazy(() => import('./Admin/Pages/UpdateFinalWinner/UpdateFinalWinner.jsx'))
 const AddPost = lazy(() => import('./Admin/Pages/AddPost/AddPost.jsx'))
 const UpdatePost = lazy(()=> import('./Admin/Pages/UpdatePost/UpdatePost.jsx'))
+const AddProduct = lazy(()=> import('./Admin/Pages/AddProduct/AddProduct.jsx'))
+const UpdateProduct = lazy(()=> import('./Admin/Pages/UpdateProduct/UpdateProduct.jsx'))
 
 
 
@@ -136,6 +138,8 @@ createRoot(document.getElementById('root')).render(
               <Route path="updateFinalResult/:finalID" element={<UpdateFinalWinner />} />
               <Route path="addPost" element={<AddPost />} />
               <Route path="updatePost/:postID" element={<UpdatePost />} />
+              <Route path="addProduct" element={<AddProduct />} />
+              <Route path="updateProduct/:productID" element={<UpdateProduct />} />
 
             </Route>
 

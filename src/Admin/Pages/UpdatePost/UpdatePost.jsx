@@ -54,7 +54,6 @@ const UpdatePost = () => {
         getPost();
     }, [getCategories, getPost]);
 
-    console.log(image);
 
     const handleSubmit = async () => {
         try {

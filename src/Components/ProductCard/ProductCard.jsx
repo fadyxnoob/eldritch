@@ -42,10 +42,10 @@ const ProductCard = ({ customWidth = 'w-[27%]', popular = null }) => {
         return <p>Loading....</p>
     }
     return (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex justify-center gap-4 flex-col md:flex-row w-full">
             {products.map((pro) => (
                 <div key={pro.$id}
-                 className={`${customWidth} h-[500px] cursor-pointer relative rounded overflow-hidden mobile:w-full shadow-md shadow-black`}
+                 className={`md:${customWidth} w-[60%] h-[500px] mx-auto cursor-pointer relative rounded overflow-hidden mobile:w-full shadow-md shadow-black`}
                  >
                     <div className='size-full'>
                         <img src={images[pro.$id]} alt={pro.name} className='size-full object-cover' />
