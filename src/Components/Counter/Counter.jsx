@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { setLocalStorage, getLocalStorage } from '../../LocalStorage/LocalStorage';
 
 const Counter = () => {
-    const [announce, setAnnounce] = useState(true);
+    const [announce, setAnnounce] = useState(false);
     const [time, setTime] = useState(null);
 
     const fetchDataFromDB = useCallback(async () => {
@@ -12,9 +12,11 @@ const Counter = () => {
         }
     }, []);
 
+
     useEffect(() => {
         fetchDataFromDB();
     }, [fetchDataFromDB]);
+
 
     useEffect(() => {
         if (!time) return;
@@ -45,7 +47,8 @@ const Counter = () => {
         return () => clearInterval(interval);
     }, [time]);
 
-    // Render loading state if time is still `null`
+
+
 
     return (
         <div className='counterSection p-5'>
