@@ -57,16 +57,16 @@ const Counter = () => {
                     announce && time && (
                         <div className="counting flex flex-col md:flex-row gap-5">
                             <div className="days h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                                {time?.days} Days
+                                {time.days} Days
                             </div>
                             <div className="hours h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                                {time?.hours} Hours
+                                {time.hours} Hours
                             </div>
                             <div className="mins h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                                {time?.minutes} Mins
+                                {time.minutes} Mins
                             </div>
                             <div className="secs h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                                {time?.seconds} Secs
+                                {time.seconds} Secs
                             </div>
                         </div>
                     )
