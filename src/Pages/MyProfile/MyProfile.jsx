@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../../Store/authSlice'
 import { Link } from 'react-router-dom';
 import { SocialMedia } from '../../'
+import { setLocalStorage } from '../../LocalStorage/LocalStorage';
 
 
 const MyProfile = () => {
@@ -62,7 +63,7 @@ const MyProfile = () => {
 
     const handleLogout = async () => {
         authService.logout().then(() => {
-            localStorage.removeItem('authStatus');
+            setLocalStorage('authStatus', '');
             dispatch(logout())
             navigate('/')
         }).catch((error) => {

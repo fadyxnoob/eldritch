@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Button = ({ title, style, path }) => {
+const Button = ({ title, style, path, submit = true }) => {
   return (
     <>
       {
@@ -14,7 +14,7 @@ const Button = ({ title, style, path }) => {
           </button>
         </Link> : (
           <button
-            type='submit'
+            type={submit ? 'submit' : 'button'}
             className={`bg-[#ff5e14b5] hover:bg-primary border-primary-2 px-3 py-2 text-light font-semibold ${style}`}
           >
             {title}

@@ -37,7 +37,6 @@ const ManagePosts = () => {
     const collection = Config.appWritePostsCollID;
     try {
       const newStatus = val === "Pending" ? "Active" : "Pending";
-      console.log({ newStatus });
       await DatabaseService.updateDocument(collection, docID, { status: newStatus });
       setAlert({
         message: `Post status updated to ${newStatus}`,

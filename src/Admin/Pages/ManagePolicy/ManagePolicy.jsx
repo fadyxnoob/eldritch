@@ -1,42 +1,86 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import Button from '../../Components/Button/Button';
+import DatabaseService from '../../Appwrite/Database';
+import Alert from '../../../Components/Alert/Alert'
 
 const ManagePolicy = () => {
+    const [collection] = useState(String('674ed0f0001f885c9935'))
+    const [documentID] = useState(String('674ed717001ba7f04585'))
+    const [alert, setAlert] = useState(null);
+    const [pageData, setPageData] = useState({ title: '', disc: '' });
+
+    const fetchDataFromDB = useCallback(async () => {
+        const res = await DatabaseService.getDocument(documentID, collection)
+        if (res) {
+            setPageData({
+                title: res.title,
+                disc: res.disc,
+                textHeading: res.textHeading
+            })
+        }
+    }, [])
+
+    useEffect(() => {
+        fetchDataFromDB()
+    }, []);
+
+    const handleSubmit = useCallback(async () => {
+        if (!pageData.title || !pageData.disc) {
+            setAlert({ type: 'error', message: 'All fields are required!' });
+            return;
+        }
+        const updateThisData = {
+            title: pageData.title,
+            disc: pageData.disc,
+            textHeading: pageData.textHeading
+        };
+
+        try {
+            const res = await DatabaseService.updateDocument(collection, documentID, updateThisData);
+            setAlert({ type: 'success', message: 'Data updated successfully!' });
+        } catch (error) {
+            console.error('Error updating document:', error);
+            setAlert({ type: 'error', message: 'Failed to update data.' });
+        }
+    }, [pageData, collection, documentID]);
+
     return (
         <div>
-            <h1 className="px-2">Manage Privacy Policy</h1>
-            <div>
-                <textarea cols="30" rows="10"
-                    className='resize-none mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-fit p-5'
+            {
+                alert && <Alert type={alert.type} message={alert.message} onClose={() => {setAlert(null)}} />
+            }
+            <h1 className="px-2">Mange Privacy Policy</h1>
+
+            <div className='boxShadow my-10 p-5'>
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault(),
+                            handleSubmit()
+                    }}
                 >
-                Introduction
-                Welcome to Eldritch Gaming Tournaments. At Eldritch Gaming Tournaments, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you visit our website, participate in gaming tournaments, or interact with our services. By accessing or using the Eldritch Gaming Tournaments website and our services, you agree to the terms and practices described in this Privacy Policy. If you do not agree with the terms of this Privacy Policy, please refrain from using our services.
-                
-                Information We Collect
-                Your name Contact information, such as email address Username or gamer tag Payment information, if you make purchases through our platform Age or date of birth (to verify eligibility for certain tournaments)
-                
-                Log Data
-                We collect information that your browser sends whenever you visit our Site. This may include your IP address, browser type, browser version, pages of our Site that you visit, the time and date of your visit, the time spent on those pages, and other statistics.
-                
-                Cookies and Tracking Technologies
-                We use cookies and similar tracking technologies to collect information about your interactions with our Site. This allows us to enhance your user experience, analyze trends, and improve our services. You can control the use of cookies through your browser settings.
-                
-                How We Use Your Information
-                We use the information collected for the following purposes:
-                
-                To Provide Services
-                We use your personal information to provide gaming tournaments, process payments, and communicate with you regarding tournament updates and important information.
-                
-                To Improve Services
-                We use data to analyze and enhance the performance of our gaming tournaments and the user experience on our Site.
-                
-                Marketing and Promotions
-                With your consent, we may use your information to send promotional materials, newsletters, and updates about our tournaments and services.
-                
-                Compliance and Security
-                We may use your information to comply with legal obligations and to ensure the security and integrity of our services.
-                
-                Sharing Your Information
-                We do not sell, rent, or trade your personal information to third parties. However, we may share your information in the following circumstances:</textarea>
+                    <div className='flex justify-between items-center gap-5'>
+                        <div className='w-full'>
+                            <label htmlFor="catName">Page Title</label> <br />
+                            <input
+                                id='catName'
+                                type="text"
+                                className='mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2'
+                                value={pageData.title}
+                                onChange={(e) => setPageData((prev) => ({ ...prev, title: e.target.value }))}
+                            />
+                        </div>
+                    </div>
+                    <div className='my-5'>
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            value={pageData.disc}
+                            onChange={(e) => setPageData((prev) => ({ ...prev, disc: e.target.value }))}
+                            id='description' cols="30" rows="10"
+                            className='resize-none mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-32 px-2'
+                        ></textarea>
+                    </div>
+                    <Button title={'Update Data'} style={'mt-5 px-1'} />
+                </form>
             </div>
         </div>
     )

@@ -66,6 +66,7 @@ const AddPost = lazy(() => import('./Admin/Pages/AddPost/AddPost.jsx'))
 const UpdatePost = lazy(()=> import('./Admin/Pages/UpdatePost/UpdatePost.jsx'))
 const AddProduct = lazy(()=> import('./Admin/Pages/AddProduct/AddProduct.jsx'))
 const UpdateProduct = lazy(()=> import('./Admin/Pages/UpdateProduct/UpdateProduct.jsx'))
+const AddFaq = lazy(()=> import('./Admin/Pages/AddFaq/AddFaq.jsx'))
 
 
 
@@ -140,6 +141,7 @@ createRoot(document.getElementById('root')).render(
               <Route path="updatePost/:postID" element={<UpdatePost />} />
               <Route path="addProduct" element={<AddProduct />} />
               <Route path="updateProduct/:productID" element={<UpdateProduct />} />
+              <Route path="addFaqs" element={<AddFaq />} />
 
             </Route>
 

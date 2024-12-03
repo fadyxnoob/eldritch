@@ -1,70 +1,100 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Button from '../../Components/Button/Button';
+import DatabaseService from '../../Appwrite/Database';
+import Alert from '../../../Components/Alert/Alert'
 
 const ManageContactPage = () => {
-    const [imagePreview, setImagePreview] = useState(null);
-    const [image, setImage] = useState(null);
+    const [collection] = useState(String('674ed0f0001f885c9935'))
+    const [documentID] = useState(String('674ed1b2003e7951148b'))
+    const [alert, setAlert] = useState(null);
+    const [pageData, setPageData] = useState({ title: '', disc: '', textHeading: '' });
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setImage(file);
-            setImagePreview(URL.createObjectURL(file));
+    const fetchDataFromDB = useCallback(async () => {
+        const res = await DatabaseService.getDocument(documentID, collection)
+        if (res) {
+            setPageData({
+                title: res.title,
+                disc: res.disc,
+                textHeading: res.textHeading
+            })
         }
+    }, [])
+
+    useEffect(() => {
+        fetchDataFromDB()
+    }, []);
+
+    const handleSubmit = useCallback(async () => {
+        if (!pageData.title || !pageData.disc || !pageData.textHeading) {
+            setAlert({ type: 'error', message: 'All fields are required!' });
+            return;
+        }
+        const updateThisData = {
+            title: pageData.title,
+            disc: pageData.disc,
+            textHeading: pageData.textHeading
+        };
+
+        try {
+            const res = await DatabaseService.updateDocument(collection, documentID, updateThisData);
+            setAlert({ type: 'success', message: 'Data updated successfully!' });
+        } catch (error) {
+            console.error('Error updating document:', error);
+            setAlert({ type: 'error', message: 'Failed to update data.' });
+        }
+    }, [pageData, collection, documentID]);
+    
+    const handleClose = () => {
+        setAlert(null);
     };
 
     return (
         <div>
+            {
+                alert && <Alert type={alert.type} message={alert.message} onClose={handleClose} />
+            }
             <h1 className="px-2">Mange Contact Page</h1>
 
             <div className='boxShadow my-10 p-5'>
-                <div className='flex justify-between items-center gap-5'>
-                    <div className='w-full'>
-                        <label htmlFor="catName">Page Title</label> <br />
-                        <input
-                            id='catName'
-                            type="text"
-                            className='mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2'
-                            value={'ABout Us'}
-                        />
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault(),
+                            handleSubmit()
+                    }}
+                >
+                    <div className='flex justify-between items-center gap-5'>
+                        <div className='w-full'>
+                            <label htmlFor="catName">Page Title</label> <br />
+                            <input
+                                id='catName'
+                                type="text"
+                                className='mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2'
+                                value={pageData.title}
+                                onChange={(e) => setPageData((prev) => ({ ...prev, title: e.target.value }))}
+                            />
+                        </div>
+                        <div className='w-full'>
+                            <label htmlFor="catName">Page Text</label> <br />
+                            <input
+                                id='catName'
+                                type="text"
+                                className='mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2'
+                                value={pageData.textHeading}
+                                onChange={(e) => setPageData((prev) => ({ ...prev, textHeading: e.target.value }))}
+                            />
+                        </div>
                     </div>
-                    <div className='w-full'>
-                        <label htmlFor="catName">Page Text</label> <br />
-                        <input
-                            id='catName'
-                            type="text"
-                            className='mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2'
-                            value={'my team'}
-                        />
+                    <div className='my-5'>
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            value={pageData.disc}
+                            onChange={(e) => setPageData((prev) => ({ ...prev, disc: e.target.value }))}
+                            id='description' cols="30" rows="10"
+                            className='resize-none mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-32 px-2'
+                        ></textarea>
                     </div>
-                </div>
-                <div>
-                    <textarea cols="30" rows="10"
-                        className='resize-none mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-32 px-2'
-                    ></textarea>
-                </div>
-                <div className='mt-10 flex justify-between items-center'>
-                    <div className='flex items-center gap-2'>
-                        <label htmlFor="uploadImage" className='text-black border border-primary cursor-pointer p-2'>Background Image</label>
-
-                        {image && <span className="text-black text-sm">{image.name}</span>}
-                        <input
-                            type="file"
-                            className="hidden"
-                            id="uploadImage"
-                            onChange={handleImageChange}
-                            accept="image/*"
-                        />
-                    </div>
-                    {imagePreview && (
-                        <img
-                            src={imagePreview}
-                            alt="Preview"
-                            className="object-cover w-24 h-24 rounded border"
-                        />
-                    )}
-                </div>
-                <Button title={'Update Page'} style={'mt-5 px-1'} />
+                    <Button title={'Update Data'} style={'mt-5 px-1'} />
+                </form>
             </div>
         </div>
     )

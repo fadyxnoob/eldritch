@@ -256,10 +256,11 @@ class AppWriteDatabase {
 
     async addDocument(collection, data, image) {
         try {
+            const docID = ID.unique()
             const createdDocument = await this.databases.createDocument(
                 Config.appWriteDBID,
                 collection,
-                ID.unique(),
+                docID,
                 data
             );
 
@@ -284,7 +285,6 @@ class AppWriteDatabase {
             return { type: 'error', message: error.message || 'Failed to add document.' };
         }
     }
-
 
     uploadFile(fileId, file) {
         try {
