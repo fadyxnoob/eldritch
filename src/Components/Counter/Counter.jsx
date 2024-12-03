@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { setLocalStorage, getLocalStorage } from '../../LocalStorage/LocalStorage';
 
 const Counter = () => {
-    const [announce, setAnnounce] = useState(false);
+    const [announce, setAnnounce] = useState(true);
     const [time, setTime] = useState(null);
 
     const fetchDataFromDB = useCallback(async () => {
