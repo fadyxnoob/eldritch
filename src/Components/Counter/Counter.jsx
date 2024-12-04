@@ -11,22 +11,15 @@ const Counter = () => {
         if (savedTime) {
             setTime(savedTime);
         } else {
-            console.log('timerData not found, initializing default time...');
+            console.log('timerData not found, initializing...');
             const defaultTime = { days: 0, hours: 0, minutes: 0, seconds: 0 };
             setTime(defaultTime);
             setLocalStorage('timerData', defaultTime);
         }
     }, []);
 
-
     useEffect(() => {
-        const savedTime = getLocalStorage('timerData');
-        console.log('Saved time from localStorage:', savedTime);
-        if (savedTime) {
-            setTime(savedTime);
-        } else {
-            console.log('No timerData found in localStorage.');
-        }
+        fetchDataFromDB();
     }, [fetchDataFromDB]);
 
     useEffect(() => {
@@ -58,7 +51,6 @@ const Counter = () => {
         return () => clearInterval(interval);
     }, [time]);
 
-
     if (!time) {
         return <div>Loading countdown...</div>;
     }
@@ -69,24 +61,22 @@ const Counter = () => {
                 <h3 className='text-5xl text-light text-center font-semibold mb-10'>
                     {announce ? 'Tournament Start' : 'Entries Closed'}
                 </h3>
-                {
-                    announce && time && (
-                        <div className="counting flex flex-col md:flex-row gap-5">
-                            <div className="days h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                                {time.days} Days
-                            </div>
-                            <div className="hours h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                                {time.hours} Hours
-                            </div>
-                            <div className="mins h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                                {time.minutes} Mins
-                            </div>
-                            <div className="secs h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                                {time.seconds} Secs
-                            </div>
+                {announce && (
+                    <div className="counting flex flex-col md:flex-row gap-5">
+                        <div className="days h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                            {time.days} Days
                         </div>
-                    )
-                }
+                        <div className="hours h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                            {time.hours} Hours
+                        </div>
+                        <div className="mins h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                            {time.minutes} Mins
+                        </div>
+                        <div className="secs h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                            {time.seconds} Secs
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
