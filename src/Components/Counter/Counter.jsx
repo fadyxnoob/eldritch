@@ -7,16 +7,27 @@ const Counter = () => {
 
     const fetchDataFromDB = useCallback(async () => {
         const savedTime = getLocalStorage('timerData');
+        console.log('Fetched timerData:', savedTime);
         if (savedTime) {
             setTime(savedTime);
+        } else {
+            console.log('timerData not found, initializing default time...');
+            const defaultTime = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+            setTime(defaultTime);
+            setLocalStorage('timerData', defaultTime);
         }
     }, []);
 
 
     useEffect(() => {
-        fetchDataFromDB();
+        const savedTime = getLocalStorage('timerData');
+        console.log('Saved time from localStorage:', savedTime);
+        if (savedTime) {
+            setTime(savedTime);
+        } else {
+            console.log('No timerData found in localStorage.');
+        }
     }, [fetchDataFromDB]);
-
 
     useEffect(() => {
         if (!time) return;
@@ -39,7 +50,7 @@ const Counter = () => {
                     setAnnounce(false);
                     return null;
                 }
-                setLocalStorage('timerData', updatedTime); 
+                setLocalStorage('timerData', updatedTime);
                 return updatedTime;
             });
         }, 1000);
@@ -48,7 +59,9 @@ const Counter = () => {
     }, [time]);
 
 
-
+    if (!time) {
+        return <div>Loading countdown...</div>;
+    }
 
     return (
         <div className='counterSection p-5'>
