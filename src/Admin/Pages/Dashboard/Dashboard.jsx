@@ -1,7 +1,11 @@
 import React from 'react';
 import Card from '../../Components/Card/Card';
 import Table from '../../Components/Table/Table';
+
+
+
 const Dashboard = () => {
+  
   return (
     <>
       <div className='w-full'>

@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Button from '../../Components/Button/Button';
 import DatabaseService from '../../Appwrite/Database';
 import Alert from '../../../Components/Alert/Alert'
+import Config from '../../../Config/Config';
 
 const ManagePolicy = () => {
-    const [collection] = useState(String('674ed0f0001f885c9935'))
+    const [collection] = useState(Config.appWritePagesCollID)
     const [documentID] = useState(String('674ed717001ba7f04585'))
     const [alert, setAlert] = useState(null);
     const [pageData, setPageData] = useState({ title: '', disc: '' });
@@ -47,7 +48,7 @@ const ManagePolicy = () => {
     return (
         <div>
             {
-                alert && <Alert type={alert.type} message={alert.message} onClose={() => {setAlert(null)}} />
+                alert && <Alert type={alert.type} message={alert.message} onClose={() => { setAlert(null) }} />
             }
             <h1 className="px-2">Mange Privacy Policy</h1>
 

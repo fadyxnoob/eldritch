@@ -6,12 +6,13 @@ import DatabaseService from '../../Appwrite/Database'
 import { Link } from 'react-router-dom'
 import { FaRegEdit } from "react-icons/fa";
 import { FaDeleteLeft } from "react-icons/fa6";
+import Config from '../../../Config/Config'
 
 const ManageFaqs = () => {
     const headers = ['#', 'question', 'answer', 'status', 'update', 'delete']
     const [faqsData, setFaqsData] = useState([])
     const [alert, setAlert] = useState(null)
-    const [collection] = useState(String('674ecd470023465bee73'))
+    const [collection] = useState(Config.appWriteManageFaqsCollID)
 
     const headerMapping = {
         '$id': '#',

@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import Button from "../../Components/Button/Button";
 import DatabaseService from "../../Appwrite/Database";
 import Alert from "../../../Components/Alert/Alert";
+import Config from "../../../Config/Config";
 
 const ManageTimer = () => {
-    const [collection] = useState("674ed94d0022fcc17518");
+    const [collection] = useState(Config.appWriteManageTimerCollID);
     const [documentID] = useState("674eda5100217e08f20e");
     const [alert, setAlert] = useState(null);
     const [pageData, setPageData] = useState({ title: "", days: 0, hours: 0, minutes: 0, seconds: 0, });

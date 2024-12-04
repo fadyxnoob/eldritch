@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Button from '../../Components/Button/Button';
 import DatabaseService from '../../Appwrite/Database';
 import Alert from '../../../Components/Alert/Alert'
+import Config from '../../../Config/Config';
 
 const UserGuide = () => {
-    const [collection] = useState(String('674ed0f0001f885c9935'))
+    const [collection] = useState(Config.appWritePagesCollID)
     const [documentID] = useState(String('674ed89c0007102895ae'))
     const [alert, setAlert] = useState(null);
     const [pageData, setPageData] = useState({ title: '', disc: '' });

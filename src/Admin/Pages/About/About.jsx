@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Button from '../../Components/Button/Button';
 import DatabaseService from '../../Appwrite/Database';
 import Alert from '../../../Components/Alert/Alert'
+import Config from '../../../Config/Config';
 
 const ManageAbout = () => {
     const [imagePreview, setImagePreview] = useState(null);
     const [image, setImage] = useState(null);
-    const [collection] = useState('674ed0f0001f885c9935')
+    const [collection] = useState(Config.appWritePagesCollID)
     const [documentID] = useState('674ed17d003bf8f62d07')
     const [alert, setAlert] = useState(null);
     const [aboutData, setAboutData] = useState({

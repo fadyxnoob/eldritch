@@ -54,6 +54,9 @@ const ManagePosts = () => {
     const res = await DatabaseService.deleteDocument(collection, postID, fileID)
     setAlert(res)
   }
+
+
+  
   // Fetch all posts
   const getAllPosts = useCallback(async () => {
     const collection = Config.appWritePostsCollID;
@@ -62,6 +65,7 @@ const ManagePosts = () => {
       const modifiedRes = await Promise.all(
         res.documents.map(async (post) => {
           const processedPost = {};
+
           Object.keys(headerMapping).forEach((key) => {
             processedPost[headerMapping[key]] = post[key] || "N/A";
           });

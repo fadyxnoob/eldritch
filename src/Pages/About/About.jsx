@@ -1,11 +1,9 @@
 import React from 'react';
 import AboutUs from '../../assets/images/aboutus.jpg'
-import Member2 from '../../assets/images/member2.jpg'
-import Member3 from '../../assets/images/member3.jpg'
 import { MemberCard } from '../../'
 
 const About = () => {
-    return ( 
+    return (
         <>
             <div className='forgetBanner banner mb-10'>
                 <h1 className='text-5xl text-light font-bold border-b-4 border-primary'>About Us</h1>
@@ -22,9 +20,8 @@ const About = () => {
             </div>
             <div className='mx-5 md:px-20 md:mx-20 mt-10'>
                 <h2 className='text-center text-4xl font-normal'>Our Team</h2>
-                <div className="relative flex items-center sm:flex-row flex-col justify-between mt-5">
-                    <MemberCard name='Usman' role='Content Creator' rank='100 World Top Ranker' image={Member2} />
-                    <MemberCard name='Deadpool' role='Content Creator' rank='95 All Time Conqueror' image={Member3} />
+                <div className="relative flex items-center sm:flex-row flex-col justify-between mt-5 gap-10">
+                    <MemberCard />
                 </div>
             </div>
         </>

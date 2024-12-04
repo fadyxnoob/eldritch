@@ -3,10 +3,11 @@ import Button from '../../Components/Button/Button'
 import Alert from '../../../Components/Alert/Alert'
 import DatabaseService from '../../Appwrite/Database'
 import { useNavigate } from 'react-router-dom'
+import Config from '../../../Config/Config'
 
 const AddFaq = () => {
     const [alert, setAlert] = useState(null)
-    const [collection] = useState(String('674ecd470023465bee73'))
+    const [collection] = useState(Config.appWriteManageFaqsCollID)
     const [faqData, setFaqData] = useState({ question: '', answer: '' })
     const navigate = useNavigate();
 

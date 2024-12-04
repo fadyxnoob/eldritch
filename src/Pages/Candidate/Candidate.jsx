@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import authService from '../../Appwrite/Auth';
 import service from '../../Appwrite/Conf';
 import { useSelector } from 'react-redux';
+
+
 const Candidate = () => {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');

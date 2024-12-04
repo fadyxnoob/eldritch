@@ -1,16 +1,27 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Table from '../../Components/Table/Table'
 import adminAvatar from '../../../assets/images/Candidates/Candi1.jpg'
 import { Link } from 'react-router-dom'
 import Button from '../../Components/Button/Button'
+import DatabaseService from '../../Appwrite/Database'
+import adminService from '../../Appwrite/Auth'
+import Config from '../../../Config/Config'
+
+
 const ManageAdmins = () => {
 
-    const headers = ["#", "Name", "Username", "Email", "Image", "Posts", "Update"]
+    const [allAdmins, setAllAdmins] = useState([])
+    const headers = ["#", "Name", "Email", "Image", "Posts", "Update"]
 
+    const getAllAdmins = useCallback(async () => {
+    }, [allAdmins])
+
+    useEffect(() => {
+        getAllAdmins()
+    }, []);
     const data = [{
         "#": 1,
         Name: "Yasir",
-        Username: "yasir123",
         Email: "yasir@yasir.com",
         Image: <img src={adminAvatar} alt="adminAvatar" className='size-12 object-cover' />,
         Posts: 12,

@@ -1,21 +1,32 @@
-import React, { useState } from 'react'
-import { FaBars } from "react-icons/fa";
+import React, { useState } from 'react';
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
-import image from '../../../assets/images/shop/product-1/product3.2.jpg'
+import image from '../../../assets/images/shop/product-1/product3.2.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from "../../../Store/DashboardSlices/Sidebar";
 import { setLocalStorage } from '../../../LocalStorage/LocalStorage';
-
-
+import adminService from '../../Appwrite/Auth';
+import { logoutAdmin } from '../../../Store/AdminSlice.js';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const openSidebar = useSelector((state) => state.sidebar.openSidebar)
+  const openSidebar = useSelector((state) => state.sidebar.openSidebar);
+  const navigate = useNavigate();
 
   const handleOpenCloseSidebar = () => {
     dispatch(toggleSidebar());
     const currentState = !openSidebar;
     setLocalStorage('openSidebar', currentState);
+  };
+
+  const logoutHandler = async () => {
+    const res = await adminService.adminLogout();
+    if (res) {
+      localStorage.removeItem('adminLogin')
+      localStorage.removeItem('adminData')
+      dispatch(logoutAdmin());
+      navigate('/admin/adminLogin');
+    }
   };
 
   return (
@@ -44,10 +55,11 @@ const Header = () => {
         </div>
         <button
           className='text-light text-xl border px-2'
+          onClick={logoutHandler}
         >Logout</button>
       </div>
     </div>
-  )
+  );
 }
 
-export default React.memo(Header)
+export default React.memo(Header);

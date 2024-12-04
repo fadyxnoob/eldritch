@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    status: false,
-    adminData: null,
+    status: JSON.parse(localStorage.getItem("adminLogin")) || false,
+    adminData: JSON.parse(localStorage.getItem("adminData")) || null,  
 };
 
 const adminSlice = createSlice({
@@ -10,17 +10,23 @@ const adminSlice = createSlice({
     initialState,
     reducers: {
         loginAdmin: (state, action) => {
-            console.log("Admin data:", action.payload);
             if (!action.payload || !action.payload.adminData) {
                 console.error("Invalid admin payload detected");
                 return;
             }
+
             state.status = true;
             state.adminData = action.payload.adminData;
+
+            // Save to localStorage when logged in
+            localStorage.setItem("adminData", JSON.stringify(action.payload.adminData));
         },
         logoutAdmin: (state) => {
             state.status = false;
             state.adminData = null;
+
+            // Remove from localStorage when logged out
+            localStorage.removeItem("adminData");
         },
     },
 });

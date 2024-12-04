@@ -17,12 +17,13 @@ const AddFinalWinner = () => {
     const [oneFinal, setOneFinal] = useState([]);
     const [alert, setAlert] = useState(null)
     const navigate = useNavigate();
+    const [collection] = useState(Config.appWriteMatchesResultsCollID)
+
 
     const getLatestFinals = useCallback(async () => {
-        const COLLID = Config.appWriteMatchesResultsCollID;
         const queryParams = [Query.equal('final', 'true')];
         try {
-            const res = await DatabaseService.getAllDocuments(COLLID, queryParams);
+            const res = await DatabaseService.getAllDocuments(collection, queryParams);
             setLatestFinals(res.documents);
             if (res.documents.length > 0) {
                 const firstMatch = res.documents[0];
@@ -43,8 +44,8 @@ const AddFinalWinner = () => {
     const getPlayerName = useCallback(async (id) => {
         if (playerNames[id]) return playerNames[id];
         try {
-            const collection = Config.appWriteManageCandidates
-            const res = await DatabaseService.getDocument(id, collection);
+            const collection1 = Config.appWriteManageCandidates
+            const res = await DatabaseService.getDocument(id, collection1);
             setPlayerNames((prev) => ({ ...prev, [id]: res.uname }));
             return res.uname;
         } catch (error) {
@@ -93,7 +94,7 @@ const AddFinalWinner = () => {
             }
             const matchId = selectedMatch?.matchid;
             const res = await DatabaseService.finalResult(winner, loser, scores, matchId);
-            if(res){
+            if (res) {
                 setAlert(res)
                 setTimeout(() => {
                     navigate('/admin/manageFinalWinner')

@@ -3,6 +3,7 @@ import Button from '../../Components/Button/Button'
 import DatabaseService from '../../Appwrite/Database';
 import Alert from '../../../Components/Alert/Alert'
 import { ID } from 'appwrite';
+import Config from '../../../Config/Config';
 
 const ManageWebsite = () => {
     const [imagePreview, setImagePreview] = useState(null);
@@ -17,7 +18,7 @@ const ManageWebsite = () => {
         currency: "",
         logo: "",
     });
-    const [collection] = useState('674ae58c00187d6cecad');
+    const [collection] = useState(Config.appWriteWebsiteCollID);
     const [documentId, setDocumentId] = useState(null);
     const [alert, setAlert] = useState(null);
 

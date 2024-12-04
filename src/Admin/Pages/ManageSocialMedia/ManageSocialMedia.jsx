@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react'
 import Button from '../../Components/Button/Button'
 import Alert from '../../../Components/Alert/Alert'
 import DatabaseService from '../../Appwrite/Database'
+import Config from '../../../Config/Config'
 
 const ManageSocialMedia = () => {
     const [socialData, setSocialData] = useState({
@@ -12,7 +13,7 @@ const ManageSocialMedia = () => {
     })
 
     const [alert, setAlert] = useState(null)
-    const [collection] = useState('674b129b000c81076ab6')
+    const [collection] = useState(Config.appWriteWebsiteSocialCollID)
     const [documentID, setDocumentID] = useState('')
 
     const getDataFromDB = useCallback(async () => {

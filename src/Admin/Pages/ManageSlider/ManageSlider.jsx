@@ -3,12 +3,13 @@ import Button from '../../Components/Button/Button'
 import DatabaseService from '../../Appwrite/Database';
 import Alert from '../../../Components/Alert/Alert'
 import { ID } from 'appwrite';
+import Config from '../../../Config/Config';
 
 
 const ManageSlider = () => {
     const [imagePreview, setImagePreview] = useState(null);
     const [image, setImage] = useState(null);
-    const [collection] = useState('674b08470029b2b289dc')
+    const [collection] = useState(Config.appWriteSliderCollID)
     const [slider, setSlider] = useState({ title: '', button: '', image: '' })
     const [documentId, setDocumentID] = useState('')
     const [alert, setAlert] = useState(null);

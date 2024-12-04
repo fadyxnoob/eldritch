@@ -24,6 +24,9 @@ const CategoryPage = lazy(() => import('./Components/CategoryPage/CategoryPage.j
 const Post = lazy(() => import('./Pages//Post/Post.jsx'));
 const Schedules = lazy(() => import('./Pages/Schedules/Schedules.jsx'));
 
+
+
+
 // Admin components
 const AdminLogin = lazy(() => import('./Admin/Pages/Login/Login.jsx'));
 const Dashboard = lazy(() => import('./Admin/Pages/Dashboard/Dashboard.jsx'));
@@ -63,10 +66,12 @@ const UpdatePollResult = lazy(() => import('./Admin/Pages/UpdatePollResult/Updat
 const AddFinalWinner = lazy(() => import('./Admin/Pages/AddFinalWinner/AddFinalWinner.jsx'))
 const UpdateFinalWinner = lazy(() => import('./Admin/Pages/UpdateFinalWinner/UpdateFinalWinner.jsx'))
 const AddPost = lazy(() => import('./Admin/Pages/AddPost/AddPost.jsx'))
-const UpdatePost = lazy(()=> import('./Admin/Pages/UpdatePost/UpdatePost.jsx'))
-const AddProduct = lazy(()=> import('./Admin/Pages/AddProduct/AddProduct.jsx'))
-const UpdateProduct = lazy(()=> import('./Admin/Pages/UpdateProduct/UpdateProduct.jsx'))
-const AddFaq = lazy(()=> import('./Admin/Pages/AddFaq/AddFaq.jsx'))
+const UpdatePost = lazy(() => import('./Admin/Pages/UpdatePost/UpdatePost.jsx'))
+const AddProduct = lazy(() => import('./Admin/Pages/AddProduct/AddProduct.jsx'))
+const UpdateProduct = lazy(() => import('./Admin/Pages/UpdateProduct/UpdateProduct.jsx'))
+const AddFaq = lazy(() => import('./Admin/Pages/AddFaq/AddFaq.jsx'))
+const AddTeamMember = lazy(() => import('./Admin/Pages/AddTeamMember/AddTeamMember.jsx'))
+const UpdateMember = lazy(() => import('./Admin/Pages/UpdateMember/UpdateMember.jsx'))
 
 
 
@@ -78,7 +83,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={Store}>
       <BrowserRouter>
-        <Suspense fallback={<div>Lazy is Loading...</div>}>
+        <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             {/* Main Site Routes */}
             <Route path="/" element={<Layout />}>
@@ -97,14 +102,19 @@ createRoot(document.getElementById('root')).render(
               <Route path="contact" element={<Contact />} />
               <Route path="schedules" element={<Schedules />} />
             </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
 
-            {/* Admin Routes */}
+            {/* Admin Login */}
+            <Route path="/admin/adminLogin" element={<AdminLogin />} />
+
+            {/* Admin Dashboard */}
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="manage-categories" element={<Categories />} />
               <Route path="addCategory" element={<AddCategory />} />
-              <Route path="updateCategory" element={<UpdateCategory />} />
+              <Route path="updateCategory/:categoryID" element={<UpdateCategory />} />
               <Route path="manageAdmins" element={<ManageAdmins />} />
               <Route path="updateAdmin" element={<UpdateAdmin />} />
               <Route path="manageUsers" element={<ManageUsers />} />
@@ -122,7 +132,6 @@ createRoot(document.getElementById('root')).render(
               <Route path="manageSlider" element={<ManageSlider />} />
               <Route path="manageSocialMedia" element={<ManageSocialMedia />} />
               <Route path="pendingOrders" element={<PendingOrders />} />
-              <Route path="completedOrders" element={<CompleteOrders />} />
               <Route path="completedOrders" element={<CompleteOrders />} />
               <Route path="manageAbout" element={<ManageAbout />} />
               <Route path="managePosts" element={<ManagePosts />} />
@@ -142,12 +151,11 @@ createRoot(document.getElementById('root')).render(
               <Route path="addProduct" element={<AddProduct />} />
               <Route path="updateProduct/:productID" element={<UpdateProduct />} />
               <Route path="addFaqs" element={<AddFaq />} />
-
+              <Route path="addMember" element={<AddTeamMember />} />
+              <Route path="updateMember/:memberID" element={<UpdateMember />} />
             </Route>
-
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
           </Routes>
+
         </Suspense>
       </BrowserRouter>
     </Provider>

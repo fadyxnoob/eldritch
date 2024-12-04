@@ -16,7 +16,7 @@ const Login = () => {
     const [error, setError] = useState(null)
     const navigate = useNavigate()
     const dispatch = useDispatch();
-
+     
     const handleLogin = async (email, password) => {
         try {
             const session = await authService.login({ email, password }, setError);

@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLocalStorage } from '../../../LocalStorage/LocalStorage';
 import { toggleSidebar } from "../../../Store/DashboardSlices/Sidebar";
 
-
-
 const Sidebar = () => {
   const dispatch = useDispatch();
   const openSidebar = useSelector((state) => state.sidebar.openSidebar)
   const [menuState, setMenuState] = useState({});
+  const adminData = useSelector((state) => state.admin.adminData);
+  const adminName = adminData?.name || 'Guest';
 
   const handleMenuToggle = (menuId) => {
     setMenuState((prevState) => {
@@ -321,7 +321,7 @@ const Sidebar = () => {
 
           <div className={`fixed bottom-0 left-0 bg-primary  ${openSidebar ? 'w-[20%]' : 'w-0'} h-8 flex items-center justify-start pl-5 transition-all duration-500 ease-in-out`}>
             <div className='opacity-100 transition-opacity duration-500'>
-              <span>Login as:</span><strong>Yasir</strong>
+              <span>Login as:</span><strong>{adminName}</strong>
             </div>
           </div>
         </div>
