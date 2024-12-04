@@ -5,16 +5,16 @@ const Counter = () => {
     const [announce, setAnnounce] = useState(true);
     const [time, setTime] = useState(null);
 
-    const fetchDataFromDB = useCallback(() => {
+    const fetchDataFromDB = () => {
         let savedTime = getLocalStorage('timerData');
-        if (!savedTime) {
-            console.log('timerData not found, initializing...');
-            const defaultTime = { days: 1, hours: 0, minutes: 0, seconds: 0 }; // Default values
+        if (!savedTime || (savedTime.days === 0 && savedTime.hours === 0 && savedTime.minutes === 0 && savedTime.seconds === 0)) {
+            console.log('Countdown expired or not initialized, setting default timer.');
+            const defaultTime = { days: 1, hours: 0, minutes: 0, seconds: 0 }; // Default timer
             setLocalStorage('timerData', defaultTime);
             savedTime = defaultTime;
         }
         setTime(savedTime);
-    }, []);
+    };
 
     useEffect(() => {
         fetchDataFromDB();
@@ -22,12 +22,20 @@ const Counter = () => {
 
     useEffect(() => {
         if (!time) return;
+
         const interval = setInterval(() => {
             setTime((prevTime) => {
                 if (!prevTime) return prevTime;
-                const { days, hours, minutes, seconds } = prevTime;
-                let updatedTime;
 
+                const { days, hours, minutes, seconds } = prevTime;
+
+                if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+                    clearInterval(interval);
+                    setAnnounce(false);
+                    return null;
+                }
+
+                let updatedTime;
                 if (seconds > 0) {
                     updatedTime = { ...prevTime, seconds: seconds - 1 };
                 } else if (minutes > 0) {
@@ -36,10 +44,6 @@ const Counter = () => {
                     updatedTime = { ...prevTime, hours: hours - 1, minutes: 59, seconds: 59 };
                 } else if (days > 0) {
                     updatedTime = { ...prevTime, days: days - 1, hours: 23, minutes: 59, seconds: 59 };
-                } else {
-                    clearInterval(interval);
-                    setAnnounce(false);
-                    return null;
                 }
                 setLocalStorage('timerData', updatedTime);
                 return updatedTime;
@@ -48,6 +52,10 @@ const Counter = () => {
 
         return () => clearInterval(interval);
     }, [time]);
+
+    if (!time && !announce) {
+        return <div className="expired-message">Countdown has ended!</div>;
+    }
 
     if (!time) {
         return <div>Loading countdown...</div>;
