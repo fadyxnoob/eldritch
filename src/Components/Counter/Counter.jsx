@@ -5,17 +5,15 @@ const Counter = () => {
     const [announce, setAnnounce] = useState(true);
     const [time, setTime] = useState(null);
 
-    const fetchDataFromDB = useCallback(async () => {
-        const savedTime = getLocalStorage('timerData');
-        console.log('Fetched timerData:', savedTime);
-        if (savedTime) {
-            setTime(savedTime);
-        } else {
+    const fetchDataFromDB = useCallback(() => {
+        let savedTime = getLocalStorage('timerData');
+        if (!savedTime) {
             console.log('timerData not found, initializing...');
-            const defaultTime = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-            setTime(defaultTime);
+            const defaultTime = { days: 1, hours: 0, minutes: 0, seconds: 0 }; // Default values
             setLocalStorage('timerData', defaultTime);
+            savedTime = defaultTime;
         }
+        setTime(savedTime);
     }, []);
 
     useEffect(() => {
