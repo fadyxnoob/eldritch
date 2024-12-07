@@ -1,25 +1,72 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import service from '../../Appwrite/Conf';
+import { format } from "date-fns";
+import { FaDeleteLeft } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
 
-const Comments = ({ product }) => {
-    console.log('uugewr',product);
+const Comments = ({ comments, post, setAlert, onDelete }) => {
+    const [usernames, setUsernames] = useState({});
+    const userData = useSelector((state) => state.auth.userdata);
+
+
+
+    const getUserName = useCallback(async (id) => {
+        if (usernames[id]) return;
+        try {
+            const res = await service.getUserName(id);
+            setUsernames((prev) => ({ ...prev, [id]: res?.documents['0']?.userName || 'guest' }));
+        } catch (error) {
+            console.error(`Error fetching username for ID ${id}:`, error);
+            setUsernames((prev) => ({ ...prev, [id]: 'Guest' }));
+        }
+    }, [usernames]);
+
+    useEffect(() => {
+        comments.forEach((comment) => {
+            if (comment.userID) {
+                getUserName(comment.userID);
+            }
+        });
+    }, [comments, getUserName]);
+
+    const deleteHandler = useCallback(async (commentID) => {
+        const res = await service.deleteComment(commentID)
+        console.log({res});
+        setAlert(res)
+        onDelete
+    }, [comments])
+
     return (
         <>
-            <h1>({product.comments}) comments for ( {product.title} )</h1>
-            {
-                product.comments ? <div className="border p-5 rounded-sm flex justify-between w-full mt-2">
-                    <div>
-                        <strong>Yasir</strong>
-                        <p className='text-sm mt-2'>
-                            Boht Acha product hai
-                        </p>
+            <h1>({Array.isArray(comments) ? comments.length : 0}) comments for ( {post.title || post.name || 'N/A'} )</h1>
+
+            {comments.map((comment, id) => (
+                <React.Fragment key={id}>
+                    <div className="border p-5 rounded-sm flex justify-between w-full mt-2">
+                        <div>
+                            {/* Display fetched username or a fallback */}
+                            <strong>{usernames[comment.userID] || 'Loading...'}</strong>
+                            <p className='text-sm mt-2'>
+                                {comment.message || 'User comment'}
+                            </p>
+                        </div>
+                        <div className='text-end'>
+                            {
+                                userData?.$id === comment?.userID ? (
+                                    <FaDeleteLeft
+                                        onClick={() => deleteHandler(comment?.$id)}
+                                        className='text-red-600 size-8 ms-auto cursor-pointer'
+                                    />
+                                ) : (null)
+                            }
+
+                            {format(new Date(comment.date), "PPpp") || '02/08/2010'}
+                        </div>
                     </div>
-                    <div>
-                        08 Nov 2024
-                    </div>
-                </div> : null
-            }
+                </React.Fragment>
+            ))}
         </>
     );
-}
+};
 
 export default React.memo(Comments);

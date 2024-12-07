@@ -8,10 +8,15 @@ const ManageTimer = () => {
     const [collection] = useState(Config.appWriteManageTimerCollID);
     const [documentID] = useState("674eda5100217e08f20e");
     const [alert, setAlert] = useState(null);
-    const [pageData, setPageData] = useState({ title: "", days: 0, hours: 0, minutes: 0, seconds: 0, });
+    const [pageData, setPageData] = useState({
+        title: "",
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+    });
     const [timerEndTime, setTimerEndTime] = useState(null);
     const [timeRemaining, setTimeRemaining] = useState(null);
-    const [isStorageUpdated, setIsStorageUpdated] = useState(false);
 
     // Fetch data from the database
     const fetchDataFromDB = useCallback(async () => {
@@ -36,7 +41,6 @@ const ManageTimer = () => {
 
     // Update the timer settings in the database
     const updateTimerInDB = useCallback(async (updatedData) => {
-        console.log({ updatedData });
         try {
             const updatedDocument = {
                 ...updatedData,
@@ -56,9 +60,7 @@ const ManageTimer = () => {
         if (!timerEndTime) return null;
         const now = new Date().getTime();
         const diff = timerEndTime - now;
-        if (diff <= 0) {
-            return null;
-        }
+        if (diff <= 0) return null;
         return {
             days: Math.floor(diff / (1000 * 60 * 60 * 24)),
             hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
@@ -75,7 +77,6 @@ const ManageTimer = () => {
                 if (!remaining) {
                     clearInterval(interval);
                     setTimeRemaining(null);
-                    localStorage.clear();
                 } else {
                     setTimeRemaining(remaining);
                 }
@@ -87,7 +88,6 @@ const ManageTimer = () => {
     const handleSubmit = useCallback(
         async (e) => {
             e.preventDefault();
-            // Calculate the duration and the end time
             const now = new Date().getTime();
             const duration =
                 pageData.days * 24 * 60 * 60 * 1000 +
@@ -96,52 +96,23 @@ const ManageTimer = () => {
                 pageData.seconds * 1000;
             const endTime = new Date(now + duration).toISOString();
 
-            // Create updated data
             const updatedData = {
                 ...pageData,
                 endTime,
             };
 
-            // Update the timer in the database
             try {
                 const res = await updateTimerInDB(updatedData);
                 if (res) {
-                    // Save updated data directly to localStorage only if it's not already updated
-                    if (!isStorageUpdated) {
-                        console.log({ updatedData });
-                        localStorage.setItem("timerData", JSON.stringify(updatedData));
-                        setIsStorageUpdated(true); // Set the flag to true to indicate the storage was updated
-                        console.log("Updated data stored in localStorage: ", updatedData);
-                    }
-                    // Immediately reflect changes in state
-                    setPageData(updatedData); // This is the fix
-
-                    // Update the endTime state
+                    setPageData(updatedData);
                     setTimerEndTime(new Date(endTime).getTime());
                 }
             } catch (error) {
                 console.error("Error updating timer: ", error);
             }
         },
-        [pageData, updateTimerInDB, isStorageUpdated]
+        [pageData, updateTimerInDB]
     );
-
-    // Sync local storage to the form when the component loads
-    useEffect(() => {
-        const storedTimerData = localStorage.getItem("timerData");
-        if (storedTimerData) {
-            const parsedData = JSON.parse(storedTimerData);
-            setPageData((prevState) => ({
-                ...prevState,
-                title: parsedData.title || prevState.title,
-                days: parsedData.days || prevState.days,
-                hours: parsedData.hours || prevState.hours,
-                minutes: parsedData.minutes || prevState.minutes,
-                seconds: parsedData.seconds || prevState.seconds,
-            }));
-            setTimerEndTime(parsedData.endTime ? new Date(parsedData.endTime).getTime() : null);
-        }
-    }, []);
 
     useEffect(() => {
         fetchDataFromDB();
@@ -176,9 +147,7 @@ const ManageTimer = () => {
                         </div>
                         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                             <div>
-                                <label className="block text-gray-700 font-bold">
-                                    Days:
-                                </label>
+                                <label className="block text-gray-700 font-bold">Days:</label>
                                 <input
                                     type="number"
                                     className="mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2"
@@ -193,9 +162,7 @@ const ManageTimer = () => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-gray-700 font-bold">
-                                    Hours:
-                                </label>
+                                <label className="block text-gray-700 font-bold">Hours:</label>
                                 <input
                                     type="number"
                                     className="mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2"
@@ -211,9 +178,7 @@ const ManageTimer = () => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-gray-700 font-bold">
-                                    Minutes:
-                                </label>
+                                <label className="block text-gray-700 font-bold">Minutes:</label>
                                 <input
                                     type="number"
                                     className="mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2"
@@ -229,9 +194,7 @@ const ManageTimer = () => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-gray-700 font-bold">
-                                    Seconds:
-                                </label>
+                                <label className="block text-gray-700 font-bold">Seconds:</label>
                                 <input
                                     type="number"
                                     className="mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2"
@@ -247,20 +210,18 @@ const ManageTimer = () => {
                                 />
                             </div>
                         </div>
-
                         <Button
                             style="bg-primary text-white py-2 px-6 rounded-md"
-                            title={'Update Timer'}
+                            title="Update Timer"
                         />
                     </div>
                 </form>
-
                 {timeRemaining && (
                     <div className="mt-10">
                         <h2>Time Remaining:</h2>
                         <p>
-                            {timeRemaining.days}d {timeRemaining.hours}h{" "}
-                            {timeRemaining.minutes}m {timeRemaining.seconds}s
+                            {timeRemaining.days}d {timeRemaining.hours}h {timeRemaining.minutes}m{" "}
+                            {timeRemaining.seconds}s
                         </p>
                     </div>
                 )}
@@ -269,4 +230,4 @@ const ManageTimer = () => {
     );
 };
 
-export default ManageTimer;
+export default React.memo(ManageTimer);

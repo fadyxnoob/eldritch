@@ -23,6 +23,10 @@ const Blog = lazy(() => import('./Pages/Blog/Blog.jsx'));
 const CategoryPage = lazy(() => import('./Components/CategoryPage/CategoryPage.jsx'));
 const Post = lazy(() => import('./Pages//Post/Post.jsx'));
 const Schedules = lazy(() => import('./Pages/Schedules/Schedules.jsx'));
+const FaqsPage = lazy(() => import('./Pages/FaqsPage/FaqsPage.jsx'));
+const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy/PrivacyPolicy.jsx'));
+const UsersGuide = lazy(() => import('./Pages/UsersGuide/UsersGuide.jsx'));
+const TermsAndConditions = lazy(() => import('./Pages/TermsAndConditions/TermsAndConditions.jsx'));
 
 
 
@@ -72,6 +76,7 @@ const UpdateProduct = lazy(() => import('./Admin/Pages/UpdateProduct/UpdateProdu
 const AddFaq = lazy(() => import('./Admin/Pages/AddFaq/AddFaq.jsx'))
 const AddTeamMember = lazy(() => import('./Admin/Pages/AddTeamMember/AddTeamMember.jsx'))
 const UpdateMember = lazy(() => import('./Admin/Pages/UpdateMember/UpdateMember.jsx'))
+const UpdateFaq = lazy(() => import('./Admin/Pages/UpdateFaq/UpdateFaq.jsx'))
 
 
 
@@ -101,6 +106,10 @@ createRoot(document.getElementById('root')).render(
               <Route path="blog" element={<Blog />} />
               <Route path="contact" element={<Contact />} />
               <Route path="schedules" element={<Schedules />} />
+              <Route path="faqsPage" element={<FaqsPage />} />
+              <Route path="privacyPolicy" element={<PrivacyPolicy />} />
+              <Route path="usersGuide" element={<UsersGuide />} />
+              <Route path="termsAndConditions" element={<TermsAndConditions />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
@@ -153,6 +162,7 @@ createRoot(document.getElementById('root')).render(
               <Route path="addFaqs" element={<AddFaq />} />
               <Route path="addMember" element={<AddTeamMember />} />
               <Route path="updateMember/:memberID" element={<UpdateMember />} />
+              <Route path="updateFaq/:faqID" element={<UpdateFaq />} />
             </Route>
           </Routes>
 

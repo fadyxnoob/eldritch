@@ -7,6 +7,7 @@ class AppWriteDatabase {
     databases;
     storage;
 
+
     constructor() {
         this.client
             .setEndpoint(Config.appWriteURL)
@@ -15,6 +16,22 @@ class AppWriteDatabase {
         this.account = new Account(this.client);
         this.databases = new Databases(this.client);
         this.storage = new Storage(this.client);
+
+    }
+
+    subscribeToCollection(collectionId, callback) {
+        console.log({collectionId});
+        console.log({callback});
+        try {
+            const subscription = this.client.subscribe(`collections.${collectionId}.documents`, callback);
+            console.log({subscription});
+            return () => {
+                // Unsubscribe when the component unmounts
+                subscription();
+            };
+        } catch (error) {
+            console.error('Subscription error:', error);  // Log any error for debugging
+        }
     }
 
     // GET ALL DOCUMENTS FOR DIFFERENT COLLECTIONS 
@@ -35,7 +52,6 @@ class AppWriteDatabase {
             console.log('Getting Docs for different Colls ERROR', error);
         }
     }
-
 
     //  Get all candidates or with the specific status
     async getAllCandidates(status = null) {
@@ -94,13 +110,24 @@ class AppWriteDatabase {
         }
     }
 
-    async getMatches(status) {
+    async getMatches(equal = null, notEqual = null) {
         try {
-            return await this.databases.listDocuments(
-                Config.appWriteDBID,
-                Config.appWriteManageMatchesCollID,
-                [Query.notEqual('status', status)]
-            )
+            if (equal && !notEqual) {
+                return await this.databases.listDocuments(
+                    Config.appWriteDBID,
+                    Config.appWriteManageMatchesCollID,
+                    [Query.equal('status', equal)]
+                )
+            }
+
+            if (notEqual && !equal) {
+                return await this.databases.listDocuments(
+                    Config.appWriteDBID,
+                    Config.appWriteManageMatchesCollID,
+                    [Query.notEqual('status', notEqual)]
+                )
+            }
+
         } catch (error) {
             console.log('Getting Matches ERROR ::', error);
         }

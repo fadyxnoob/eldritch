@@ -139,10 +139,10 @@ export class DBService {
                 Config.appWriteUsersContactsCollID,
                 id,
                 {
-                    userName : name,
-                    userEmail : email,
-                    userMessage : message,
-                    date : formattedDate
+                    userName: name,
+                    userEmail: email,
+                    userMessage: message,
+                    date: formattedDate
                 }
             )
         } catch (error) {
@@ -151,7 +151,7 @@ export class DBService {
         }
     }
 
-    async getAllPosts(){
+    async getAllPosts() {
         try {
             const data = await this.databases.listDocuments(
                 Config.appWriteDBID,
@@ -162,10 +162,65 @@ export class DBService {
             return data;
         } catch (error) {
             console.log('All Posts Gets ERROR ::', error);
-            
+
         }
     }
 
+    async addUserMessage(addData) {
+        const docID = ID.unique()
+        try {
+            await this.databases.createDocument(
+                Config.appWriteDBID,
+                Config.appWriteCommentsCollID,
+                docID,
+                addData
+            )
+
+            return { type: 'info', message: 'Your message is submitted.' }
+        } catch (error) {
+            console.log(error);
+            return { type: 'error', message: 'Failed to submit your message' }
+        }
+    }
+
+    async getUsersComments(params) {
+        try {
+            return await this.databases.listDocuments(
+                Config.appWriteDBID,
+                Config.appWriteCommentsCollID,
+                params
+            )
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getUserName(id) {
+        try {
+            const response = await this.databases.listDocuments(
+                Config.appWriteDBID,
+                Config.appWriteUsersColl,
+                [Query.equal('id', id)]
+            )
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async deleteComment(id){
+        try {
+            await this.databases.deleteDocument(
+                Config.appWriteDBID,
+                Config.appWriteCommentsCollID,
+                id
+            )
+            return {type:'warning', message:'Your comment is deleted.'}
+        } catch (error) {
+            console.log(error);
+            return {type:'error', message:'Failed to delete comment'}
+        }
+    }
 }
 
 const service = new DBService();

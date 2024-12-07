@@ -1,44 +1,69 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import Config from '../../../Config/Config'
+import Button from '../../Components/Button/Button'
+import DatabaseService from '../../Appwrite/Database'
+import Alert from '../../../Components/Alert/Alert'
 
 const TermsConditions = () => {
+  const [documentID] = useState('67514633001c4e5a1119')
+  const [collection] = useState(Config.appWritePagesCollID)
+  const [pageData, setPageData] = useState({ title: '', disc: '' })
+  const [alert, setAlert] = useState(null)
+
+  const getDataFromDB = useCallback(async () => {
+    const res = await DatabaseService.getDocument(documentID, collection)
+    setPageData({
+      title: res.title,
+      disc: res.disc
+    })
+  }, [])
+
+  useEffect(() => {
+    getDataFromDB()
+  }, [collection, documentID]);
+
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    console.log({pageData});
+    const data = {
+      title: pageData.title,
+      disc: pageData.disc
+    }
+    console.log({data});
+    const res = await DatabaseService.updateDocument(collection, documentID, data)
+    setAlert(res)
+    getDataFromDB()
+  }, [pageData])
+
   return (
     <div>
-            <h1 className="px-2">Manage Terms and Conditions</h1>
-            <div>
-                <textarea cols="30" rows="10"
-                    className='resize-none mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-fit p-5'
-                >
-                Introduction
-                Welcome to Eldritch Gaming Tournaments. At Eldritch Gaming Tournaments, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you visit our website, participate in gaming tournaments, or interact with our services. By accessing or using the Eldritch Gaming Tournaments website and our services, you agree to the terms and practices described in this Privacy Policy. If you do not agree with the terms of this Privacy Policy, please refrain from using our services.
-                
-                Information We Collect
-                Your name Contact information, such as email address Username or gamer tag Payment information, if you make purchases through our platform Age or date of birth (to verify eligibility for certain tournaments)
-                
-                Log Data
-                We collect information that your browser sends whenever you visit our Site. This may include your IP address, browser type, browser version, pages of our Site that you visit, the time and date of your visit, the time spent on those pages, and other statistics.
-                
-                Cookies and Tracking Technologies
-                We use cookies and similar tracking technologies to collect information about your interactions with our Site. This allows us to enhance your user experience, analyze trends, and improve our services. You can control the use of cookies through your browser settings.
-                
-                How We Use Your Information
-                We use the information collected for the following purposes:
-                
-                To Provide Services
-                We use your personal information to provide gaming tournaments, process payments, and communicate with you regarding tournament updates and important information.
-                
-                To Improve Services
-                We use data to analyze and enhance the performance of our gaming tournaments and the user experience on our Site.
-                
-                Marketing and Promotions
-                With your consent, we may use your information to send promotional materials, newsletters, and updates about our tournaments and services.
-                
-                Compliance and Security
-                We may use your information to comply with legal obligations and to ensure the security and integrity of our services.
-                
-                Sharing Your Information
-                We do not sell, rent, or trade your personal information to third parties. However, we may share your information in the following circumstances:</textarea>
-            </div>
+      {
+        alert && <Alert type={alert.type} message={alert.message} />
+      }
+      <h1 className="px-2">Manage Terms and Conditions</h1>
+      <form className='boxShadow p-5'
+        onSubmit={handleSubmit}
+      >
+        <div className="w-full mb-3">
+          <label htmlFor="Title">Title</label> <br />
+          <input
+            id="Title"
+            type="text"
+            className="mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-10 px-2"
+            value={pageData.title || ''}
+            onChange={(e) => setPageData((prev) => ({ ...prev, title: e.target.value }))}
+          />
         </div>
+        <div>
+          <textarea cols="30" rows="10"
+            className='resize-none mt-2 w-full bg-[#e8f0fe] focus:border-b-2 outline-none border-primary h-fit p-5'
+            value={pageData.disc || ''}
+            onChange={(e) => setPageData((prev) => ({ ...prev, disc: e.target.value }))}
+          ></textarea>
+        </div>
+        <Button title={'update'} />
+      </form>
+    </div>
   )
 }
 

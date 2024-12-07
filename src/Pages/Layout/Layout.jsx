@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, Link, useNavigationType, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Topbar, Navbar, Footer, CartIcon } from '../../';
 import { useDispatch, useSelector } from 'react-redux';
 import { authLogin, logout } from '../../Store/authSlice';
 import authService from '../../Appwrite/Auth';
 import LoadingBar from 'react-top-loading-bar';
+import { getLocalStorage } from '../../LocalStorage/LocalStorage';
 
 const Layout = () => {
     const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const Layout = () => {
     const userdata = useSelector((state) => state.auth.userdata);
     const [progress, setProgress] = useState(0);
     const location = useLocation();
+
+
 
     useEffect(() => {
         setProgress(30);
@@ -24,15 +27,21 @@ const Layout = () => {
     }, [location]);
 
     useEffect(() => {
-        authService.getCurrentUser()
-            .then((userData) => {
-                if (userData) {
-                    dispatch(authLogin({ userdata: userData }));
-                } else {
-                    dispatch(logout());
-                }
-            })
-            .finally(() => setLoading(false));
+        const checkUser = getLocalStorage('authStatus');
+        if (checkUser) {
+            authService.getCurrentUser()
+                .then((userData) => {
+                    if (userData) {
+                        dispatch(authLogin({ userdata: userData }));
+                    } else {
+                        dispatch(logout());
+                    }
+                })
+                .finally(() => setLoading(false));
+        } else {
+            setLoading(false)
+        }
+
     }, [dispatch]);
 
     useEffect(() => {

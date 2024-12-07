@@ -1,65 +1,64 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { setLocalStorage, getLocalStorage } from '../../LocalStorage/LocalStorage';
+import React, { useEffect, useState } from 'react';
+import DatabaseService from '../../Admin/Appwrite/Database';
+import Config from '../../Config/Config';
 
 const Counter = () => {
     const [announce, setAnnounce] = useState(true);
-    const [time, setTime] = useState(null);
+    const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    const [endTime, setEndTime] = useState(null);
+    const collection = Config.appWriteManageTimerCollID;
+    const documentID = "674eda5100217e08f20e";
 
-    const fetchDataFromDB = () => {
-        let savedTime = getLocalStorage('timerData');
-        if (!savedTime || (savedTime.days === 0 && savedTime.hours === 0 && savedTime.minutes === 0 && savedTime.seconds === 0)) {
-            console.log('Countdown expired or not initialized, setting default timer.');
-            const defaultTime = { days: 1, hours: 0, minutes: 0, seconds: 0 }; // Default timer
-            setLocalStorage('timerData', defaultTime);
-            savedTime = defaultTime;
+    // Fetch timer data from the database
+    const fetchTimerData = async () => {
+        try {
+            const res = await DatabaseService.getDocument(documentID, collection);
+            if (res && res.endTime) {
+                const endTimeFromDB = new Date(res.endTime).getTime();
+                setEndTime(endTimeFromDB);
+            } else {
+                console.error("Invalid or missing timer data in the database.");
+            }
+        } catch (error) {
+            console.error("Failed to fetch timer data:", error);
         }
-        setTime(savedTime);
     };
 
-    useEffect(() => {
-        fetchDataFromDB();
-    }, [fetchDataFromDB]);
+    // Update time state based on the current time and end time
+    const calculateRemainingTime = () => {
+        if (!endTime) return;
 
+        const now = new Date().getTime();
+        const timeDiff = endTime - now;
+
+        if (timeDiff <= 0) {
+            setAnnounce(false);
+            setTime({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            return;
+        }
+
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        setTime({ days, hours, minutes, seconds });
+    };
+
+    // Fetch data on component mount
     useEffect(() => {
-        if (!time) return;
+        fetchTimerData();
+    }, []);
+
+    // Start countdown logic
+    useEffect(() => {
+        if (!endTime) return;
 
         const interval = setInterval(() => {
-            setTime((prevTime) => {
-                if (!prevTime) return prevTime;
-
-                const { days, hours, minutes, seconds } = prevTime;
-
-                if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-                    clearInterval(interval);
-                    setAnnounce(false);
-                    return null;
-                }
-
-                let updatedTime;
-                if (seconds > 0) {
-                    updatedTime = { ...prevTime, seconds: seconds - 1 };
-                } else if (minutes > 0) {
-                    updatedTime = { ...prevTime, minutes: minutes - 1, seconds: 59 };
-                } else if (hours > 0) {
-                    updatedTime = { ...prevTime, hours: hours - 1, minutes: 59, seconds: 59 };
-                } else if (days > 0) {
-                    updatedTime = { ...prevTime, days: days - 1, hours: 23, minutes: 59, seconds: 59 };
-                }
-                setLocalStorage('timerData', updatedTime);
-                return updatedTime;
-            });
+            calculateRemainingTime();
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [time]);
-
-    if (!time && !announce) {
-        return <div className="expired-message">Countdown has ended!</div>;
-    }
-
-    if (!time) {
-        return <div>Loading countdown...</div>;
-    }
+    }, [endTime]);
 
     return (
         <div className='counterSection p-5'>
@@ -67,22 +66,20 @@ const Counter = () => {
                 <h3 className='text-5xl text-light text-center font-semibold mb-10'>
                     {announce ? 'Tournament Start' : 'Entries Closed'}
                 </h3>
-                {announce && (
-                    <div className="counting flex flex-col md:flex-row gap-5">
-                        <div className="days h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                            {time.days} Days
-                        </div>
-                        <div className="hours h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                            {time.hours} Hours
-                        </div>
-                        <div className="mins h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                            {time.minutes} Mins
-                        </div>
-                        <div className="secs h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
-                            {time.seconds} Secs
-                        </div>
+                <div className="counting flex flex-col md:flex-row gap-5">
+                    <div className="days h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                        {time.days} Days
                     </div>
-                )}
+                    <div className="hours h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                        {time.hours} Hours
+                    </div>
+                    <div className="mins h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                        {time.minutes} Mins
+                    </div>
+                    <div className="secs h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                        {time.seconds} Secs
+                    </div>
+                </div>
             </div>
         </div>
     );

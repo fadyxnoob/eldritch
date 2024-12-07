@@ -41,7 +41,7 @@ const ManageUpcomingMatches = () => {
 
     const getUpcomingMatches = useCallback(async () => {
         try {
-            const response = await DatabaseService.getMatches('Clear');
+            const response = await DatabaseService.getMatches(null, 'clear');
             const thisMatch = await Promise.all(
                 response.documents.map(async (match) => {
                     const processedMatch = {};
@@ -57,9 +57,10 @@ const ManageUpcomingMatches = () => {
                         : 'N/A';
 
                     // Fetch player1 and player2 details
+                    const candiCollection = Config.appWriteManageCandidates
                     if (match['player1']) {
                         try {
-                            const player1Data = await DatabaseService.getDocument(match['player1'], true);
+                            const player1Data = await DatabaseService.getDocument(match['player1'], candiCollection);
                             processedMatch['player 1'] = player1Data?.uname || 'N/A';
                         } catch (error) {
                             console.error(`Error fetching player1 data:`, error);
@@ -69,7 +70,7 @@ const ManageUpcomingMatches = () => {
 
                     if (match['player2']) {
                         try {
-                            const player2Data = await DatabaseService.getDocument(match['player2'], true);
+                            const player2Data = await DatabaseService.getDocument(match['player2'], candiCollection);
                             processedMatch['player 2'] = player2Data?.uname || 'N/A';
                         } catch (error) {
                             console.error(`Error fetching player2 data:`, error);

@@ -30,7 +30,7 @@ const MyProfile = () => {
             if (collection && collection.documents.length > 0) {
                 const userData = collection.documents[0];
                 setUserDets(userData);
-
+                
                 // Fetch image URL if the image ID exists
                 const imageId = userData.image;
                 if (imageId) {
@@ -128,10 +128,10 @@ const MyProfile = () => {
                             <p className='text-sm text-[#c1c1c1]'>{getUser?.email}</p>
                         </div>
                         <div>
-                            <h3>Account Status ({getUser?.status ? 'Active' : 'Blocked'}) </h3>
+                            <h3>Account Status ({userDets?.status === 'pending' ? 'Pending' : 'Active'}) </h3>
                             {
-                                getUser?.status ? (<p className='text-sm text-[green]'>Your Account is Acive</p>)
-                                    : (<p className='text-sm text-[red]'>Your Account is Blocked</p>)
+                                userDets?.status === 'pending' ? (<p className='text-sm text-[#E4A11B]'>Your Account is Pending</p>)
+                                    : (<p className='text-sm text-[red]'>Your Account is Active</p>)
                             }
                         </div>
                     </div>

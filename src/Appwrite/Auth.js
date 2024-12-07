@@ -52,6 +52,7 @@ export class Service {
                 id: userAccount.$id,
                 userName,
                 image: uploadResponse.$id,
+                status : 'pending'
             };
 
             await this.databases.createDocument(
@@ -80,7 +81,8 @@ export class Service {
 
             navigate('/login')
         } catch (error) {
-            setError('Auth Creating Account ERROR :: ', error);
+            setError('Auth Creating Account ERROR');
+            console.log('Auth Creating Account ERROR :: ', error);
             return
         }
     }

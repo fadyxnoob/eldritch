@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FaFacebookSquare, FaTwitterSquare, FaLinkedin, FaInstagramSquare } from "react-icons/fa";
 import service from '../../Appwrite/Conf';
 import { Alert } from '../../'
+import Config from '../../Config/Config';
+import DatabaseService from '../../Admin/Appwrite/Database';
+
 
 const Contact = () => {
-    
+    const [collection] = useState(Config.appWritePagesCollID)
+    const [documentID] = useState('674ed1b2003e7951148b')
+    const [socialCollection] = useState(Config.appWriteWebsiteSocialCollID)
+    const [socialDocument] = useState('674b138f002decfc99d6')
+    const [pageData, setPageData] = useState({ title: '', disc: '', textHeading: '' })
     const [error, setError] = useState(null)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
+    const [socialData, setSocialData] = useState({ instagram: '', facebook: '', twitter: '', linkedin: '' })
 
     const storeMessage = async () => {
-        setError(null); 
+        setError(null);
 
         // Validation for empty fields
         if (!name || !email || !message) {
@@ -35,8 +43,22 @@ const Contact = () => {
     };
 
     const handleAlertClose = () => {
-        setError(null); 
+        setError(null);
     };
+
+
+    const getPageData = useCallback(async () => {
+        const res = await DatabaseService.getDocument(documentID, collection)
+        setPageData({ title: res.title, disc: res.disc, textHeading: res.textHeading })
+        const socialRes = await DatabaseService.getDocument(socialDocument, socialCollection)
+        setSocialData({ instagram: socialRes.insta, facebook: socialRes.facebook, twitter: socialRes.twitter, linkedin: socialRes.linkedIn })
+        console.log({ socialRes });
+
+    }, [collection, socialCollection])
+    useEffect(() => {
+        getPageData()
+    }, [])
+
 
     return (
         <>
@@ -46,7 +68,7 @@ const Contact = () => {
                 <h1
                     className='text-5xl text-light font-bold border-b-4 border-primary'
                 >
-                    Contact Us
+                    {pageData.title}
                 </h1>
             </div>
             <div
@@ -55,24 +77,32 @@ const Contact = () => {
                 <div className='w-full'>
                     <h1
                         className='text-3xl font-bold px-2'
-                    >HAVE A QUESTION ? SHOOT AWAY</h1>
+                    >{pageData.textHeading}</h1>
                     <p
                         className='mt-7 px-2'
                     >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. At, vitae. Quasi cumque autem minima veniam architecto, sapiente nemo nulla. Consequatur exercitationem tenetur cupiditate porro qui laudantium iure veritatis fugiat quia dignissimos. Iste cupiditate eos consequatur unde vitae doloremque aperiam voluptatum! Reprehenderit magnam dolores fugit rem nulla perspiciatis quos voluptatibus. Saepe?</p>
+                        {pageData.disc}</p>
                     <div className='mt-5 flex items-center gap-5 px-2'>
                         <p>Follow us on :</p>
                         <div className='flex gap-5'>
-                            <FaFacebookSquare className='size-6 text-primary cursor-pointer' />
-                            <FaTwitterSquare className='size-6 text-primary cursor-pointer' />
-                            <FaLinkedin className='size-6 text-primary cursor-pointer' />
-                            <FaInstagramSquare className='size-6 text-primary cursor-pointer' />
+                            <a href={socialData.facebook}>
+                                <FaFacebookSquare className='size-6 text-primary cursor-pointer' />
+                            </a>
+                            <a href={socialData.twitter}>
+                                <FaTwitterSquare className='size-6 text-primary cursor-pointer' />
+                            </a>
+                            <a href={socialData.linkedin}>
+                                <FaLinkedin className='size-6 text-primary cursor-pointer' />
+                            </a>
+                            <a href={socialData.instagram}>
+                                <FaInstagramSquare className='size-6 text-primary cursor-pointer' />
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div className='w-full'>
                     {error && <div className='mb-2'>
-                        <Alert message={error} type='error' onClose={handleAlertClose}/>
+                        <Alert message={error} type='error' onClose={handleAlertClose} />
                     </div>}
                     <form
                         onSubmit={(e) => {

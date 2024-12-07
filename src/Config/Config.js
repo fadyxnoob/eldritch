@@ -22,6 +22,7 @@ const Config = {
     appWriteSliderCollID: String(import.meta.env.VITE_APPWRITE_SLIDER_COLL_ID),
     appWriteWebsiteSocialCollID: String(import.meta.env.VITE_APPWRITE_WEBSITE_SOCIALS_COLL_ID),
     appWriteWebsiteCollID: String(import.meta.env.VITE_APPWRITE_MANAGE_WEBSITE_COLL_ID),
+    appWriteCommentsCollID: String(import.meta.env.VITE_APPWRITE_MANAGE_COMMENTS_COLL_ID),
 
 }
 export default Config;
