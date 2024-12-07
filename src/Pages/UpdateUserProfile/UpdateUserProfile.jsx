@@ -32,6 +32,7 @@ const UpdateUserProfile = () => {
                 const imageId = userData.image;
                 if (imageId) {
                     const imageResponse = service.ViewImage(imageId);
+                    console.log({imageResponse});
                     setImagePreview(imageResponse);
                 }
             } else {

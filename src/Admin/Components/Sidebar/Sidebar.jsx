@@ -317,6 +317,11 @@ const Sidebar = () => {
                 <h4 className="text-base">Reports</h4>
               </div>
             </NavLink >
+            <NavLink to="/admin/userContacts">
+              <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
+                <h4 className="text-base">Contacts</h4>
+              </div>
+            </NavLink >
           </div>
 
           <div className={`fixed bottom-0 left-0 bg-primary  ${openSidebar ? 'w-[20%]' : 'w-0'} h-8 flex items-center justify-start pl-5 transition-all duration-500 ease-in-out`}>

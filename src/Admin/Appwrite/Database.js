@@ -7,7 +7,6 @@ class AppWriteDatabase {
     databases;
     storage;
 
-
     constructor() {
         this.client
             .setEndpoint(Config.appWriteURL)
@@ -20,11 +19,11 @@ class AppWriteDatabase {
     }
 
     subscribeToCollection(collectionId, callback) {
-        console.log({collectionId});
-        console.log({callback});
+        console.log({ collectionId });
+        console.log({ callback });
         try {
             const subscription = this.client.subscribe(`collections.${collectionId}.documents`, callback);
-            console.log({subscription});
+            console.log({ subscription });
             return () => {
                 // Unsubscribe when the component unmounts
                 subscription();
@@ -343,7 +342,6 @@ class AppWriteDatabase {
             throw error;
         }
     };
-
 
 }
 

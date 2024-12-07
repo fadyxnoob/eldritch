@@ -54,8 +54,6 @@ const ManagePosts = () => {
     const res = await DatabaseService.deleteDocument(collection, postID, fileID)
     setAlert(res)
   }
-
-
   
   // Fetch all posts
   const getAllPosts = useCallback(async () => {

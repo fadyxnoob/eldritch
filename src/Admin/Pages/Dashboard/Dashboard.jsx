@@ -4,6 +4,7 @@ import Table from '../../Components/Table/Table';
 import DatabaseService from '../../Appwrite/Database';
 import Config from '../../../Config/Config';
 import { Query, Client } from 'appwrite';
+import ManageComments from '../ManageComments/ManageComments'
 
 const Dashboard = () => {
   const client = new Client()
@@ -88,7 +89,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div>
-        <Table />
+        <ManageComments />
       </div>
     </>
   );
