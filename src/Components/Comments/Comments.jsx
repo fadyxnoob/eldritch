@@ -8,8 +8,6 @@ const Comments = ({ comments, post, setAlert, onDelete }) => {
     const [usernames, setUsernames] = useState({});
     const userData = useSelector((state) => state.auth.userdata);
 
-
-
     const getUserName = useCallback(async (id) => {
         if (usernames[id]) return;
         try {
@@ -31,7 +29,7 @@ const Comments = ({ comments, post, setAlert, onDelete }) => {
 
     const deleteHandler = useCallback(async (commentID) => {
         const res = await service.deleteComment(commentID)
-        console.log({res});
+        console.log({ res });
         setAlert(res)
         onDelete
     }, [comments])
@@ -49,6 +47,11 @@ const Comments = ({ comments, post, setAlert, onDelete }) => {
                             <p className='text-sm mt-2'>
                                 {comment.message || 'User comment'}
                             </p>
+                            {comment.reply && (
+                                <div className='mt-2 text-xs text-primary'>
+                                    <strong>Reply by admin:</strong> {comment.reply}
+                                </div>
+                            )}
                         </div>
                         <div className='text-end'>
                             {

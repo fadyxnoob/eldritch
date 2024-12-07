@@ -23,7 +23,7 @@ const Post = () => {
     const [allComments, setAllComments] = useState([])
 
     const getAllComments = useCallback(async () => {
-        const params = [Query.equal('postID', postID)]
+        const params = [Query.equal('documentID', postID)]
         const res = await service.getUsersComments(params)
         setAllComments(res.documents)
     }, [])
@@ -54,7 +54,7 @@ const Post = () => {
             })
 
         getAllComments()
-    }, [])
+    }, [getAllComments])
 
     const formatDate = (dateString) => {
         const [day, month, year] = dateString.split('/');
@@ -83,7 +83,8 @@ const Post = () => {
         const data = {
             userID: userID,
             message: userMessage,
-            postID: postID,
+            documentID: postID,
+            docType : 'post',
             date: new Date().toISOString(),
         }
         console.log({ data });

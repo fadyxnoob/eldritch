@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback  } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import authService from '../../Appwrite/Auth';
 import service from '../../Appwrite/Conf';
@@ -22,10 +22,10 @@ const Product = () => {
 
 
     const getAllComments = useCallback(async () => {
-        const params = [Query.equal('productID', productID)]
+        const params = [Query.equal('documentID', productID)]
         const res = await service.getUsersComments(params)
         setAllComments(res.documents)
-    }, [])
+    }, [productID])
 
 
     const getData = async () => {
@@ -68,7 +68,8 @@ const Product = () => {
         const data = {
             userID: userID,
             message: userMessage,
-            productID: productID,
+            documentID: productID,
+            docType: 'product',
             date: new Date().toISOString(),
         }
         console.log({ data });

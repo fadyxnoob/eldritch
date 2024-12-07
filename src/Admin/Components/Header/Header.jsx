@@ -6,7 +6,7 @@ import { toggleSidebar } from "../../../Store/DashboardSlices/Sidebar";
 import { setLocalStorage } from '../../../LocalStorage/LocalStorage';
 import adminService from '../../Appwrite/Auth';
 import { logoutAdmin } from '../../../Store/AdminSlice.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,9 @@ const Header = () => {
   return (
     <div className='h-16 bg-primary flex items-center justify-between px-5 fixed top-0 w-full z-10'>
       <div className='flex w-[20%] justify-between h-full items-center'>
-        <h1 className='text-light text-4xl'>ELDRITCH</h1>
+       <Link to={'/admin'}>
+       <h1 className='text-light text-4xl'>ELDRITCH</h1>
+       </Link>
         <div
           className="relative flex items-center justify-center"
           onClick={handleOpenCloseSidebar}

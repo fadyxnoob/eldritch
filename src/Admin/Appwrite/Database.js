@@ -141,7 +141,7 @@ class AppWriteDatabase {
                 docID
             )
         } catch (error) {
-            console.log('Getting Document ERROR ::', error.message);
+            console.log('Getting Document ERROR ::', docID, 'in', collection, error.message);
         }
     }
 

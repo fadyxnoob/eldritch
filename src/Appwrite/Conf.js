@@ -178,7 +178,7 @@ export class DBService {
 
             return { type: 'info', message: 'Your message is submitted.' }
         } catch (error) {
-            console.log(error);
+            console.log('failed to add Comment::', error);
             return { type: 'error', message: 'Failed to submit your message' }
         }
     }

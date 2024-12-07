@@ -3,14 +3,16 @@ import Card from '../../Components/Card/Card';
 import Table from '../../Components/Table/Table';
 import DatabaseService from '../../Appwrite/Database';
 import Config from '../../../Config/Config';
-import { Query } from 'appwrite';
-
+import { Query, Client } from 'appwrite';
 
 const Dashboard = () => {
-  
+  const client = new Client()
+    .setEndpoint(Config.appWriteURL)
+    .setProject(Config.appWriteProID);
+
   const [counter, setCounter] = useState({
     newMembers: 0,
-    newComments: 0,  
+    newComments: 0,
   });
 
   const getCountersFromDB = useCallback(async () => {
@@ -20,12 +22,12 @@ const Dashboard = () => {
 
     setCounter((prev) => ({
       ...prev,
-      newMembers: memberRes.total, 
+      newMembers: memberRes.total,
     }));
   }, []);
 
   useEffect(() => {
-    getCountersFromDB(); 
+    getCountersFromDB();
   }, [getCountersFromDB]);
 
   const handleResetCommentsCounter = async () => {
@@ -33,58 +35,55 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = DatabaseService.subscribeToCollection(
-      `${Config.appWriteDBID}.collections.${Config.appWriteCommentsCollID}.documents`,
+    const unsubscribe = client.subscribe(
+      `databases.${Config.appWriteDBID}.collections.${Config.appWriteCommentsCollID}.documents`,
       (response) => {
-        console.log({ response });  
-        if (response.events && response.events.includes('databases.*.collections.*.documents.create')) {
+        console.log("Direct subscription response:", response);
+  
+        // Check if any event includes ".create" (for new documents)
+        const isCreateEvent = response.events.some((event) =>
+          event.endsWith(".create")
+        );
+  
+        if (isCreateEvent) {
+          console.log("Document created event detected!");
           setCounter((prev) => ({
             ...prev,
-            newComments: (prev.newComments || 0) + 1,
+            newComments: prev.newComments + 1,
           }));
         }
       }
     );
-
+  
     return () => unsubscribe();
-  }, []);  
-
+  }, [client]);
+  
 
   return (
     <>
-      <div className='w-full'>
-        <h1 className='px-2'>Dashboard</h1>
-        <div className='flex gap-5'>
+      <div className="w-full">
+        <h1 className="px-2">Dashboard</h1>
+        <div className="flex gap-5">
           <div className="w-full">
             <Card
               title={'New Candidates'}
               counter={counter.newMembers}
-              path='manageUsers'
+              path="manageUsers"
             />
+          </div>
+          <div className="w-full">
+            <Card title={'Pending Reports'} counter={'9'} path={''} />
+          </div>
+          <div className="w-full">
+            <Card title={'Pending Orders'} counter={'90'} path={'pendingOrders'} />
           </div>
           <div className="w-full">
             <Card
-              title={'Pending Reports'}
-              counter={'9'}
-              path={''}
+              title={'New Comments'}
+              counter={counter.newComments}
+              onClickHandler={handleResetCommentsCounter}
+              path={'manageComments'}
             />
-          </div>
-          <div className="w-full">
-            <Card
-              title={'Pending Orders'}
-              counter={'90'}
-              path={'pendingOrders'}
-            />
-          </div>
-          <div className="w-full">
-            <div className="w-full">
-              <Card
-                title={'New Comments'}
-                counter={counter.newComments}
-                onClickHandler={handleResetCommentsCounter}
-                path={'manageComments'}
-              />
-            </div>
           </div>
         </div>
       </div>
