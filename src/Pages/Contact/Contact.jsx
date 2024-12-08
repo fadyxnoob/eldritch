@@ -23,22 +23,22 @@ const Contact = () => {
 
         // Validation for empty fields
         if (!name || !email || !message) {
-            setError('All fields are required.');
+            setError({ type: 'warning', message: 'All fields are required.' });
             return;
         }
         try {
             const data = await service.storeUserMessage({ name, email, message }, setError);
             if (data === null || data === undefined) {
-                setError('Failed to Send Message..');
+                setError({type:'error', message:'Failed to Send Message..'});
             } else {
-                setError('Your Message has been sent...');
+                setError({type:'success', message:'Your Message has been sent...'});
                 setName('')
                 setEmail('')
                 setMessage('')
             }
         } catch (error) {
-            console.error('Failed to store data:', error);
-            setError('An unexpected error occurred');
+            console.error('Failed to store data:', error)
+            setError({type:'error', message:'Something went wrong.'})
         }
     };
 
@@ -62,9 +62,10 @@ const Contact = () => {
 
     return (
         <>
-            <div
-                className='banner aboutBG'
-            >
+            {error &&
+                <Alert message={error.message} type={error.type} onClose={handleAlertClose} />
+            }
+            <div className='banner aboutBG'>
                 <h1
                     className='text-5xl text-light font-bold border-b-4 border-primary'
                 >
@@ -101,9 +102,7 @@ const Contact = () => {
                     </div>
                 </div>
                 <div className='w-full'>
-                    {error && <div className='mb-2'>
-                        <Alert message={error} type='error' onClose={handleAlertClose} />
-                    </div>}
+
                     <form
                         onSubmit={(e) => {
                             e.preventDefault(),

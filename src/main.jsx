@@ -77,6 +77,7 @@ const AddFaq = lazy(() => import('./Admin/Pages/AddFaq/AddFaq.jsx'))
 const AddTeamMember = lazy(() => import('./Admin/Pages/AddTeamMember/AddTeamMember.jsx'))
 const UpdateMember = lazy(() => import('./Admin/Pages/UpdateMember/UpdateMember.jsx'))
 const UpdateFaq = lazy(() => import('./Admin/Pages/UpdateFaq/UpdateFaq.jsx'))
+const ManageUserContacts = lazy(() => import('./Admin/Pages/ManageUserContacts/ManageUserContacts.jsx'))
 
 
 
@@ -163,6 +164,7 @@ createRoot(document.getElementById('root')).render(
               <Route path="addMember" element={<AddTeamMember />} />
               <Route path="updateMember/:memberID" element={<UpdateMember />} />
               <Route path="updateFaq/:faqID" element={<UpdateFaq />} />
+              <Route path="manageUserContacts" element={<ManageUserContacts />} />
             </Route>
           </Routes>
 

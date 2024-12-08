@@ -239,13 +239,6 @@ nav .navItems ul .navCustomStyle {}
     border-bottom-right-radius: 20px;
 }
 
-.cartCounter {
-    color: white;
-    position: absolute;
-    top: 33%;
-    right: 35%;
-}
-
 /* ABOUT PAGE  */
 .aboutBG {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/candidate.jpg);

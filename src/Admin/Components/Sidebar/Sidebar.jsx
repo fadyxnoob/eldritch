@@ -317,7 +317,7 @@ const Sidebar = () => {
                 <h4 className="text-base">Reports</h4>
               </div>
             </NavLink >
-            <NavLink to="/admin/userContacts">
+            <NavLink to="/admin/manageUserContacts">
               <div className="flex items-center mt-1 gap-2 hover:bg-primary px-5 h-8 transition-all">
                 <h4 className="text-base">Contacts</h4>
               </div>

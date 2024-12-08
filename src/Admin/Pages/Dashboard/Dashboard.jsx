@@ -5,6 +5,8 @@ import DatabaseService from '../../Appwrite/Database';
 import Config from '../../../Config/Config';
 import { Query, Client } from 'appwrite';
 import ManageComments from '../ManageComments/ManageComments'
+import ManageUsers from '../ManageUsers/ManageUsers';
+import ManageUserContacts from '../ManageUserContacts/ManageUserContacts';
 
 const Dashboard = () => {
   const client = new Client()
@@ -90,6 +92,12 @@ const Dashboard = () => {
       </div>
       <div>
         <ManageComments />
+      </div>
+      <div>
+        <ManageUsers getCountersFromDB={getCountersFromDB} />
+      </div>
+      <div>
+        <ManageUserContacts />
       </div>
     </>
   );
