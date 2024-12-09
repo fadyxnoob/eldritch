@@ -12,6 +12,7 @@ const About = () => {
         const res = await DatabaseService.getDocument(documentID, collection)
         setPageData({ title: res.title, disc: res.disc, textHeading: res.textHeading, image: res.image })
     }, [collection])
+    
     useEffect(() => {
         getPageData()
     }, [])

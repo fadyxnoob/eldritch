@@ -2,24 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-nav .navItems ul .navCustomStyle {}
+nav .navItems ul .navCustomStyle {
+}
 
 .bg-hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05)), url('./assets/images/carousel.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 83vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05)),
+    url("./assets/images/carousel.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 83vh;
 }
 
 .productCard {
-    height: 500px !important;
+  height: 500px !important;
 }
 
 /* .liveStream {
@@ -30,176 +32,173 @@ nav .navItems ul .navCustomStyle {}
 } */
 
 .playButton {
-    background: linear-gradient(rgba(255, 130, 0), rgba(255, 38, 0) 80%);
-    transition: all 0.3s ease-in-out 0s;
-    animation: 1.2s cubic-bezier(0.8, 0, 0, 1) 0s infinite normal none running pulse;
-    box-shadow: rgba(193, 244, 246, 0.698) 0px 0px 0px;
-    border: none;
+  background: linear-gradient(rgba(255, 130, 0), rgba(255, 38, 0) 80%);
+  transition: all 0.3s ease-in-out 0s;
+  animation: 1.2s cubic-bezier(0.8, 0, 0, 1) 0s infinite normal none running
+    pulse;
+  box-shadow: rgba(193, 244, 246, 0.698) 0px 0px 0px;
+  border: none;
 }
 
 .counterSection {
-    background: url(./assets/images/event.jpg), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 450px !important;
+  background: url(./assets/images/event.jpg),
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 450px !important;
 }
 
 @keyframes pulse {
-    100% {
-        box-shadow: 0 0 0 45px rgba(193, 244, 246, 0);
-    }
+  100% {
+    box-shadow: 0 0 0 45px rgba(193, 244, 246, 0);
+  }
 }
 
-
 .postCard {
-    width: 30%;
+  width: 30%;
 }
 
 .postDatePart {
-    top: -20%;
-    right: 5%;
-    background: #fff;
+  top: -20%;
+  right: 5%;
+  background: #fff;
 }
 
 .postDatePart .sectionInner::after {
-    content: '';
-    position: absolute;
-    background: #ff5e14;
-    width: 100%;
-    top: 0;
-    z-index: 10;
-    height: 5px;
+  content: "";
+  position: absolute;
+  background: #ff5e14;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  height: 5px;
 }
 
-
 .winnerCard::before {
-    content: "";
-    position: absolute;
-    top: 0%;
-    left: 180%;
-    height: 100%;
-    width: 100%;
-    background: #ff5e143d;
-    z-index: 1;
-    transform: skew(45deg);
-    transition: 0.5s;
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 180%;
+  height: 100%;
+  width: 100%;
+  background: #ff5e143d;
+  z-index: 1;
+  transform: skew(45deg);
+  transition: 0.5s;
 }
 
 .winnerCard:hover:before {
-    left: -180%;
+  left: -180%;
 }
 
 .winnerCard img {
-    filter: grayscale(100%);
-    transition: 2s;
+  filter: grayscale(100%);
+  transition: 2s;
 }
 
 .winnerCard:hover img {
-    filter: grayscale(0%);
-    transform: scale(1.1);
+  filter: grayscale(0%);
+  transform: scale(1.1);
 }
 
-.winnerCard>h2 {
-    transform-origin: right;
-    transition: 1s;
-    transform: perspective(400px) rotateY(90deg);
+.winnerCard > h2 {
+  transform-origin: right;
+  transition: 1s;
+  transform: perspective(400px) rotateY(90deg);
 }
 
-.winnerCard:hover>h2 {
-    transform: perspective(400px) rotateY(0deg);
+.winnerCard:hover > h2 {
+  transform: perspective(400px) rotateY(0deg);
 }
 
 .winnerCard ul {
-    background: rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0);
 }
 
 .winnerCard ul li {
-    background: #333;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    line-height: 40px;
-    transform: perspective(800px) rotateY(90deg);
-    transition: 0.5s;
-    transform-origin: left;
+  background: #333;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+  transform: perspective(800px) rotateY(90deg);
+  transition: 0.5s;
+  transform-origin: left;
 }
 
 .winnerCard:hover ul li {
-    transform: perspective(800px) rotateY(0deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
+  transform: perspective(800px) rotateY(0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
 }
 
 .winnerCard ul li:nth-child(1) {
-    transition-delay: 0.2s;
-    margin-top: 0;
+  transition-delay: 0.2s;
+  margin-top: 0;
 }
 
 .winnerCard ul li:nth-child(2) {
-    transition-delay: 0.6s;
+  transition-delay: 0.6s;
 }
 
 .winnerCard ul li:nth-child(3) {
-    transition-delay: 0.8s;
+  transition-delay: 0.8s;
 }
 
 .winnerCard ul li:nth-child(4) {
-    transition-delay: 1s;
+  transition-delay: 1s;
 }
 
 .winnerCard:hover ul li a {
-    color: #ff5e14;
-    background-color: rgba(255, 255, 255, 0);
+  color: #ff5e14;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .titlesSections {
-    position: relative;
+  position: relative;
 }
 
 .titlesSections::after {
-    content: "";
-    position: absolute;
-    width: 45%;
-    height: 2px;
-    background: #ff5e14;
-    bottom: -10%;
-    left: 0;
+  content: "";
+  position: absolute;
+  width: 45%;
+  height: 2px;
+  background: #ff5e14;
+  bottom: -10%;
+  left: 0;
 }
 
+@media screen and (max-width: 992px) {
+  .productCard {
+    width: 45%;
+  }
 
+  .productCardContainer {
+    padding: 0px 10px !important;
+  }
 
-@media screen and (max-width:992px) {
-    .productCard {
-        width: 45%;
-    }
+  .counterSection {
+    height: fit-content !important;
+  }
 
-    .productCardContainer {
-        padding: 0px 10px !important;
-    }
-
-    .counterSection {
-        height: fit-content !important;
-    }
-
-    .postCard {
-        width: 45%;
-    }
-
+  .postCard {
+    width: 45%;
+  }
 }
 
 /* LOGIN  */
 
 .loginWrapper {
-    background: url(./assets/images/signup.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: url(./assets/images/signup.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* LOGIN  */
@@ -207,89 +206,101 @@ nav .navItems ul .navCustomStyle {}
 /* FORGET PASSWORD BANNER */
 
 .forgetBanner {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/forgetBanner.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(./assets/images/forgetBanner.jpg);
 }
 
 .banner {
-    height: 400px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .candidateBanner {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/candidate.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(./assets/images/candidate.jpg);
 }
 
 /* FORGET PASSWORD BANNER */
 
 .boxShadow {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .cartIcon {
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 /* ABOUT PAGE  */
 .aboutBG {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/candidate.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(./assets/images/candidate.jpg);
 }
-
 
 .memberBox {
-    border-radius: 20px;
-    position: relative;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
-        rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    cursor: pointer;
-    transition: all 0.3s;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-.memberBox>span {
-    position: absolute;
-    overflow: hidden;
-    width: 150px;
-    height: 150px;
-    top: -10px;
-    left: -10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.memberBox > span {
+  position: absolute;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  top: -10px;
+  left: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .memberBox:hover {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }
 
-.memberBox>span::before {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 40px;
-    background-image: linear-gradient(45deg, #ff6547 0%, #ffb144 51%, #ff7053 100%);
-    transform: rotate(-45deg) translateY(-20px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.23);
+.memberBox > span::before {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 40px;
+  background-image: linear-gradient(
+    45deg,
+    #ff6547 0%,
+    #ffb144 51%,
+    #ff7053 100%
+  );
+  transform: rotate(-45deg) translateY(-20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.23);
 }
 
-.memberBox>span::after {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    background-image: linear-gradient(45deg, #ff6547 0%, #ffb144 51%, #ff7053 100%);
-    box-shadow: 140px -140px #cc3f47;
+.memberBox > span::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-image: linear-gradient(
+    45deg,
+    #ff6547 0%,
+    #ffb144 51%,
+    #ff7053 100%
+  );
+  box-shadow: 140px -140px #cc3f47;
 }
 
 /* ABOUT PAGE  */
@@ -297,29 +308,32 @@ nav .navItems ul .navCustomStyle {}
 /* SHOP */
 
 .shopBg {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/images/shop.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(./assets/images/shop.jpg);
 }
 
 /* SHOP */
 
 /* PRODUCT */
 .productBG {
-    background: linear-gradient(rgba(0, 0, 0, 0.834), rgba(0, 0, 0, 0.72)), url(./assets/images/bgProduct.jpg);
-    height: 300px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    /* padding: 10px 50px;     */
+  background: linear-gradient(rgba(0, 0, 0, 0.834), rgba(0, 0, 0, 0.72)),
+    url(./assets/images/bgProduct.jpg);
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  /* padding: 10px 50px;     */
 }
 
 /* PRODUCT */
 
 /* MY PROILE  */
 .myProfileBG {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./assets/images/stream.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./assets/images/stream.jpg");
 }
 
 /* MY PROILE  */
@@ -330,34 +344,56 @@ nav .navItems ul .navCustomStyle {}
 
 /* SCHEDULES */
 .tabHeader::after {
-    content: '';
-    position: absolute;
-    width: 0%;
-    background: #ff5e14;
-    height: 4px;
-    bottom: 0;
-    left: 0;
+  content: "";
+  position: absolute;
+  width: 0%;
+  background: #ff5e14;
+  height: 4px;
+  bottom: 0;
+  left: 0;
 }
 
 .tabHeader:hover::after {
-    width: 100%;
-    transition: 1s;
+  width: 100%;
+  transition: 1s;
 }
 
 .tabHeader.active {
-    background: #ff5e14;
-    color: white;
+  background: #ff5e14;
+  color: white;
 }
 
 .tabHeader.active .tabHeader::after {
-    /* width: 0%; */
-    background: #fff;
+  /* width: 0%; */
+  background: #fff;
 }
 
+.singlePlayerCard {
+    position: relative;
+    overflow: hidden; 
+    z-index: 0; 
+    transition: all 0.5s;
+  }
+  
+  .singlePlayerCard::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ff5e14; 
+    height: 0%;
+    width: 100%;
+    z-index: -1; 
+    transition: height 0.5s ease; 
+  }
+  
+  .singlePlayerCard:hover::after {
+    height: 100%; 
+  }
 /* SCHEDULES */
 
 /* ADMIN */
-.inputShadow{
-    box-shadow: 0 0 0 0.2px #ff5e14b5;
+.inputShadow {
+  box-shadow: 0 0 0 0.2px #ff5e14b5;
 }
 /* ADMIN */
