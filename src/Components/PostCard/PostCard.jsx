@@ -78,7 +78,7 @@ const PostCard = () => {
 
                 return (
                     <div key={post.$id}
-                        className={`w-[90%] relative rounded overflow-hidden shadow-md shadow-black sm:w-[45%] md:w-[32%]`}
+                        className={`w-full relative rounded overflow-hidden shadow-md shadow-black sm:w-[45%] md:w-[32%]`}
                     >
                         <div className="overflow-hidden">
                             <img
