@@ -8,7 +8,6 @@ const MemberCard = () => {
 
     const getMembers = useCallback(async () => {
         const res = await DatabaseService.getAllDocuments(collection)
-        console.log(res.documents);
         setMembers(res.documents)
     }, [])
 
@@ -19,8 +18,8 @@ const MemberCard = () => {
     return (
         <>
             {members?.map((member) => (
-                <div key={member.$id} className="w-full sm:w-[50%] lg:w-[35%]">
-                    <div className="memberBox size-full">
+                <div key={member.$id} className="w-[80%] sm:w-1/3 md:w-1/3 lg:w-1/4 flex-shrink-0">
+                    <div className="memberBox bg-yellow-600 overflow-hidden">
                         <img
                             src={DatabaseService.ViewImage(member?.image)}
                             alt={member?.title || 'Team Member'}

@@ -21,17 +21,17 @@ const About = () => {
             <div className='forgetBanner banner mb-10'>
                 <h1 className='text-5xl text-light font-bold border-b-4 border-primary'>{pageData.title}</h1>
             </div>
-            <div className="px-5 md:flex md:px-20 gap-5 mt-20 w-full md:mx-20">
-                <div className='md:w-[45%]'>
-                    <img src={DatabaseService.ViewImage(pageData.image)} alt={pageData.image} className='h-screen w-full rounded' />
+            <div className="px-5 flex flex-col sm:flex-row md:px-20 gap-5 mt-20 w-full md:mx-20">
+                <div className='w-full h-[500px] sm:w-[40%] md:w-[40%]'>
+                    <img src={DatabaseService.ViewImage(pageData.image)} alt={pageData.image} className='size-full rounded object-fill'/>
                 </div>
-                <div className='md:w-[50%]'>
+                <div className='w-full sm:w-[40%] md:w-[50%]'>
                     <p>{pageData.disc}</p>
                 </div>
             </div>
-            <div className='mx-5 md:px-20 md:mx-20 mt-10'>
+            <div className='mx-5 my-10'>
                 <h2 className='text-center text-4xl font-normal'>{pageData.textHeading}</h2>
-                <div className="relative flex items-center sm:flex-row flex-col justify-between mt-5 gap-10">
+                <div className="relative flex flex-wrap justify-center gap-10 mt-5">
                     <MemberCard />
                 </div>
             </div>
