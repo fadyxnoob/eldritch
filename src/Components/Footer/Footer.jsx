@@ -13,12 +13,13 @@ const Footer = () => {
         const socialRes = await DatabaseService.getDocument(socialDocument, socialCollection)
         setSocialData({ instagram: socialRes.insta, facebook: socialRes.facebook, twitter: socialRes.twitter, linkedin: socialRes.linkedIn })
     }, [socialCollection])
+    
     useEffect(() => {
         getPageData()
     }, [])
 
     return (
-        <div>
+        <>
             <div className='px-10 my-5 flex md:justify-between flex-col md:flex-row items-center border-b-2 border-primary py-5'>
                 <div>
                     <Link to={'/'}>
@@ -51,43 +52,51 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="block sm:flex flex-wrap justify-between gap-1 px-20 mb-10">
-                <div className='w-1/2 inline-block sm:w-auto mb-2'>
-                    <h5 className='text-2xl font-normal text-primary titlesSections'>Company</h5>
-                    <ul className='mt-5 flex flex-col gap-2'>
-                        <li><Link to="/" className='underline hover:text-blue-700 font-normal'>Home</Link></li>
-                        <li><Link to="/aboutus" className='underline hover:text-blue-700 font-normal'>About Us</Link></li>
-                        <li><Link to="/blog" className='underline hover:text-blue-700 font-normal'>Our Blog</Link></li>
-                        <li><Link to="/shop" className='underline hover:text-blue-700 font-normal'>Our Shop</Link></li>
-                        <li><Link to="/contact" className='underline hover:text-blue-700 font-normal'>Contact Us</Link></li>
+            <div className="flex flex-wrap justify-between gap-1 px-5 mb-10">
+                {/* Website Section */}
+                <div className="w-1/3 md:w-1/5 mb-2">
+                    <h5 className="text-2xl font-normal text-primary titlesSections">Company</h5>
+                    <ul className="mt-5 flex flex-col gap-2">
+                        <li><Link to="/" className="underline hover:text-blue-700 font-normal">Home</Link></li>
+                        <li><Link to="/aboutus" className="underline hover:text-blue-700 font-normal">About Us</Link></li>
+                        <li><Link to="/blog" className="underline hover:text-blue-700 font-normal">Our Blog</Link></li>
+                        <li><Link to="/shop" className="underline hover:text-blue-700 font-normal">Our Shop</Link></li>
+                        <li><Link to="/contact" className="underline hover:text-blue-700 font-normal">Contact Us</Link></li>
                     </ul>
                 </div>
-                <div className='w-1/2 inline-block sm:w-auto '>
-                    <h5 className='text-2xl font-normal text-primary titlesSections'>Pages</h5>
-                    <ul className='mt-5 flex flex-col gap-2'>
-                        <li><Link to="/candidate" className='underline hover:text-blue-700 font-normal'>Entery</Link></li>
-                        <li><Link to="/faqsPage" className='underline hover:text-blue-700 font-normal'>FAQ's</Link></li>
-                        <li><Link to="/usersGuide" className='underline hover:text-blue-700 font-normal'>User Guide</Link></li>
-                        <li><Link to="/privacyPolicy" className='underline hover:text-blue-700 font-normal'>Privacy Policy</Link></li>
-                        <li><Link to="/termsAndConditions" className='underline hover:text-blue-700 font-normal'>Terms & Conditions</Link></li>
+
+                {/* Pages Section */}
+                <div className="w-1/3 md:w-1/5 mb-2">
+                    <h5 className="text-2xl font-normal text-primary titlesSections">Pages</h5>
+                    <ul className="mt-5 flex flex-col gap-2">
+                        <li><Link to="/candidate" className="underline hover:text-blue-700 font-normal">Entery</Link></li>
+                        <li><Link to="/faqsPage" className="underline hover:text-blue-700 font-normal">FAQ's</Link></li>
+                        <li><Link to="/usersGuide" className="underline hover:text-blue-700 font-normal">User Guide</Link></li>
+                        <li><Link to="/privacyPolicy" className="underline hover:text-blue-700 font-normal">Privacy Policy</Link></li>
+                        <li><Link to="/termsAndConditions" className="underline hover:text-blue-700 font-normal">Terms & Conditions</Link></li>
                     </ul>
                 </div>
-                <div className='w-1/2 inline-block sm:w-auto '>
-                    <h5 className='text-2xl font-normal text-primary titlesSections'>Account</h5>
-                    <ul className='mt-5 flex flex-col gap-2'>
-                        <li><Link to="/signup" className='underline hover:text-blue-700 font-normal'>Signup</Link></li>
-                        <li><Link to="/login" className='underline hover:text-blue-700 font-normal'>Login</Link></li>
-                        <li><Link to="/myProfile" className='underline hover:text-blue-700 font-normal'>Profile</Link></li>
+
+                {/* Users Section  */}
+                <div className="w-1/3 md:w-1/5 mb-2">
+                    <h5 className="text-2xl font-normal text-primary titlesSections">Account</h5>
+                    <ul className="mt-5 flex flex-col gap-2">
+                        <li><Link to="/signup" className="underline hover:text-blue-700 font-normal">Signup</Link></li>
+                        <li><Link to="/login" className="underline hover:text-blue-700 font-normal">Login</Link></li>
+                        <li><Link to="/myProfile" className="underline hover:text-blue-700 font-normal">Profile</Link></li>
                     </ul>
                 </div>
-                <div className='w-1/2 inline-block sm:w-auto '>
-                    <h5 className='text-2xl font-normal text-primary titlesSections'>Matches</h5>
-                    <ul className='mt-5 flex flex-col gap-2'>
-                        <li><Link to="/schedules" className='underline hover:text-blue-700 font-normal'>Schedules</Link></li>
+
+                {/* Matches Section */}
+                <div className="w-1/3 md:w-1/5 mb-2">
+                    <h5 className="text-2xl font-normal text-primary titlesSections">Matches</h5>
+                    <ul className="mt-5 flex flex-col gap-2">
+                        <li><Link to="/schedules" className="underline hover:text-blue-700 font-normal">Schedules</Link></li>
                     </ul>
                 </div>
             </div>
-            <div className="px-20 py-5 flex flex-wrap sm:justify-between bg-primary text-light">
+
+            <div className="px-2 py-5 flex flex-wrap sm:justify-between bg-primary text-light sm:px-20">
                 <div>
                     <p>
                         Copyright @ 2024 Eldritch. All right reserved
@@ -106,7 +115,7 @@ const Footer = () => {
                     </p>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

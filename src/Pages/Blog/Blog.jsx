@@ -17,12 +17,9 @@ const Blog = () => {
                     Our Posts
                 </h2>
                 <div
-                    className="flex flex-wrap  gap-5 mt-5
-                    mobile:px-2 mobile:flex-col
-                    sm:items-center sm:justify-start
-                    productCardContainer"
+                    className="flex flex-wrap items-start justify-center gap-5 mt-20 px-2 md:px-20 productCardContainer"
                 >
-                    <PostCard customWidth='w-[27%]' />
+                    <PostCard />
 
                 </div>
             </div>
@@ -32,11 +29,11 @@ const Blog = () => {
                 <div className="w-[70%]">
                 </div>
                 <div className="w-[30%] pt-8">
-                <Category getType='post' />
+                    <Category getType='post' />
                 </div>
             </div>
         </>
     )
-}    
+}
 
 export default React.memo(Blog)

@@ -14,9 +14,7 @@ const Home = () => {
             <Banner />
             <div className='my-20'>
                 <h3 className='text-5xl font-medium text-center'>Our Products</h3>
-                <div
-                    className="flex flex-wrap items-center justify-center gap-5 mt-20 px-2 md:px-20 productCardContainer"
-                >
+                <div>
                     <ProductCard />
                 </div>
             </div>

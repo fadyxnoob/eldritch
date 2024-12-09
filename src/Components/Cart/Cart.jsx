@@ -35,7 +35,7 @@ const CartIcon = () => {
       )}
       <div
         onClick={onClickHandler}
-        className="bg-primary fixed bottom-12 w-24 left-0 h-12 cartIcon flex items-center justify-end px-5 cursor-pointer"
+        className="bg-primary fixed bottom-24 w-24 left-0 h-12 cartIcon flex items-center justify-end px-5 cursor-pointer"
       >
         <div className="relative">
           <FaBagShopping className="text-white h-[40px] w-[40px] font-light" />

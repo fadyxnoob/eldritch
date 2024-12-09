@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
-import { MdMenu, MdOutlineSearch } from "react-icons/md";
+import { MdOutlineSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 
@@ -13,7 +13,7 @@ const ResponsiveMenu = ({ isOpen }) => {
                     animate={{ opecity: 0, y: 0 }}
                     exit={{ opecity: 0, y: -100 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute top-20 left-0 w-full z-20 lg:hidden"
+                    className="absolute top-20 left-0 w-full z-20 md:hidden"
                 >
                     <div className='text-xl font-semibold text-light bg-primary py-10 m-2 rounded-lg h-fit'>
                         <ul className='flex flex-col items-center justify-center gap-5'>
@@ -26,7 +26,7 @@ const ResponsiveMenu = ({ isOpen }) => {
                             <Link to='/schedules'>
                                 <li>Matches</li>
                             </Link>
-                            <Link to={'/shope'}>
+                            <Link to={'/shop'}>
                                 <li>Shop</li>
                             </Link>
                             <Link to='/blog'>

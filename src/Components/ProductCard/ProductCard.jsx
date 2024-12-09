@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../Store/cartSlice';
 import Alert from '../../Components/Alert/Alert';
 
-const ProductCard = ({ popular = null }) => {
+const ProductCard = ({ popular = null, style='sm:w-[45%] md:w-[28%]' }) => {
     
     const [products, setProducts] = useState([]);
     const [images, setImages] = useState({});
@@ -16,6 +16,7 @@ const ProductCard = ({ popular = null }) => {
     const userdata = useSelector((state) => state.auth.userdata);
     const cart = useSelector((state) => state.cart.products)
     const [alert, setAlert] = useState(null);
+
     const fetchProducts = () => {
         authService.getAllProducts()
             .then((data) => {
@@ -56,7 +57,6 @@ const ProductCard = ({ popular = null }) => {
         setAlert({ type: 'success', message: 'Item added to the cart.' });
     }
 
-
     if (loading) {
         return <p>Loading....</p>
     }          
@@ -68,7 +68,7 @@ const ProductCard = ({ popular = null }) => {
             }
             {products.map((pro) => (
                 <div key={pro.$id}
-                    className={`w-[90%] h-[500px] mx-auto cursor-pointer relative rounded overflow-hidden shadow-md shadow-black sm:w-[45%] md:w-[28%]`}
+                     className={`w-[100%] h-[400px] md:h-[500px] cursor-pointer relative rounded overflow-hidden shadow-md shadow-black ${style}`}
                 >
                     <div className='size-full'>
                         <img src={images[pro.$id]} alt={pro.name} className='size-full object-cover' />

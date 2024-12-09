@@ -85,7 +85,7 @@ const Schedules = () => {
              className='p-2 flex flex-col items-center justify-around gap-5 my-5 w-full mx-auto overflow-hidden sm:flex-row md:w-1/2'
              >
                 <div className='singlePlayerCard rounded shadow'>
-                    <div className='flex items-center rounded justify-between my-2 bg-primary p-2 text-light'>
+                    <div className='flex items-center rounded justify-between bg-primary p-2 text-light'>
                         <h2 className='text-center text-2xl m-0 p-0'>Player 1</h2>
                         <h3 className='text-center m-0 p-0'>{playerData.player1Name}</h3>
                     </div>
@@ -96,7 +96,7 @@ const Schedules = () => {
                 </div>
 
                 <div className='singlePlayerCard rounded shadow'>
-                    <div className='flex items-center  rounded justify-between my-2 bg-primary p-2 text-light'>
+                    <div className='flex items-center  rounded justify-between bg-primary p-2 text-light'>
                         <h2 className='text-center text-2xl m-0 p-0'>Player 2</h2>
                         <h3 className='text-center m-0 p-0'>{playerData.player2Name}</h3>
                     </div>
