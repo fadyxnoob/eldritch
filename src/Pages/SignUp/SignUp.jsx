@@ -10,11 +10,11 @@ import { Alert } from '../../'
 const SignUp = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [name, setName] = useState('Yasir Mehboob');
-    const [userName, setUserName] = useState('yasir1');
-    const [email, setEmail] = useState('yasir@gmail.com');
-    const [password, setPassword] = useState('12345678');
-    const [confirmPassword, setConfirmPassword] = useState('12345678');
+    const [name, setName] = useState('');
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [image, setImage] = useState();
     const [isPassText, setIsPassText] = useState(true);
     const [isConfirmPassText, setIsConfirmPassText] = useState(true);
@@ -96,13 +96,11 @@ const SignUp = () => {
 
     return (
         <div className='loginWrapper h-screen w-full flex-col'>
-
             {
                 error ? <div className='w-full mb-5 border-primary md:w-[40%] bg-[#00000049] rounded mx-auto'>
                     <Alert message={error} />
                 </div> : null
             }
-
             <div className='w-full border border-primary md:w-[40%] h-96 bg-[#00000049] rounded px-7 py-10 mx-auto'>
                 <h1 className='text-center text-3xl font-bold text-white'>Sign Up</h1>
                 <form

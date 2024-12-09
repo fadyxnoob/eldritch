@@ -13,18 +13,11 @@ const Home = () => {
         <>
             <Banner />
             <div className='my-20'>
-                <h2 className='text-5xl font-medium text-center'>
-                    OUR PRODUCTS
-                </h2>
-
-                <div className="
-                    flex md:px-20 gap-5 mt-20
-                    px-2 flex-col md:flex-row
-                    items-center justify-center
-                    productCardContainer 
-                ">
-
-                    <ProductCard customWidth='w-[30%]' />
+                <h3 className='text-5xl font-medium text-center'>Our Products</h3>
+                <div
+                    className="flex flex-wrap items-center justify-center gap-5 mt-20 px-2 md:px-20 productCardContainer"
+                >
+                    <ProductCard />
                 </div>
             </div>
 
@@ -38,30 +31,24 @@ const Home = () => {
 
             <div className="my-20">
                 <h2 className='text-5xl font-medium text-center'>
-                    LATEST BLOGS
+                    Latest Blogs
                 </h2>
 
-                <div className="
-                    flex flex-wrap px-20 gap-5 mt-20
-                    mobile:px-2 mobile:flex-col
-                   sm:items-center sm:justify-center
-                   productCardContainer
-                    ">
-                    <PostCard customWidth='w-[32%]' />
+                <div
+                    className="flex flex-wrap items-center justify-center gap-5 mt-20 px-2 md:px-20 productCardContainer"
+                >
+                    <PostCard />
                 </div>
             </div>
 
             <div className="my-20">
-                <h2 className='text-5xl font-medium text-center'>
-                    LATEST WINNERS
+                <h2
+                    className='text-5xl font-medium text-center'>
+                    Latest Winners
                 </h2>
-
-                <div className="
-                    flex flex-wrap px-20 gap-5 mt-20
-                    mobile:px-2 mobile:flex-col
-                    sm:items-center justify-center
-                    productCardContainer
-                    ">
+                <div
+                    className="flex items-center justify-center gap-5 mt-20 mx-auto px-2 flex-col sm:flex-row"
+                >
                     <WinnerCard image={Candidate3} alt='Final Winner' />
                     <WinnerCard image={Candidate7} alt='Final Winner' />
                     <WinnerCard image={Candidate9} alt='Final Winner' />

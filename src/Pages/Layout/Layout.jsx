@@ -16,7 +16,6 @@ const Layout = () => {
     const location = useLocation();
 
 
-
     useEffect(() => {
         setProgress(30);
         const timer = setTimeout(() => {
@@ -53,7 +52,7 @@ const Layout = () => {
     }, [userdata]);
 
     return !loading ? (
-        <main className="overflow-hidden">
+        <main className="overflow-hidden w=[1270px]">
             <LoadingBar
                 color="#fff"
                 progress={progress}

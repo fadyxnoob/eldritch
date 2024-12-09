@@ -3,8 +3,10 @@ import { CiCircleRemove } from "react-icons/ci";
 import { useSelector, useDispatch } from 'react-redux';
 import { changeQuantity, removeItem } from '../../Store/cartSlice';
 import { CiSquarePlus, CiSquareMinus } from "react-icons/ci";
+import Alert from "../../Components/Alert/Alert";
 
 const MyCart = () => {
+    const [alert, setAlert] = useState(null);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -39,8 +41,9 @@ const MyCart = () => {
     }
 
     const handleRemoveItem = (id) => {
-        console.log('trying to remove');
-        dispatch(removeItem({id}))
+        dispatch(removeItem({ id }))
+        setAlert({type:'info', message:'Item removed from the cart.'})
+
     }
 
     // Calculate total items, total quantity, and total price
@@ -51,8 +54,14 @@ const MyCart = () => {
 
     return (
         <div className='mt-10'>
+            {alert && (
+                <Alert
+                    type={alert.type}
+                    message={alert.message}
+                    onClose={() => setAlert(null)}
+                />
+            )}
             <table className='rounded boxShadow w-[70%] border mx-auto'>
-
                 <thead>
                     <tr>
                         <th colSpan={6}>
@@ -90,7 +99,7 @@ const MyCart = () => {
                                 <td className='text-center border font-light'>${pro.quantity * pro.price}</td>
                                 <td className='text-center border font-light'>
                                     <button
-                                        onClick={()=>handleRemoveItem(pro.id)}
+                                        onClick={() => handleRemoveItem(pro.id)}
                                     >
                                         <CiCircleRemove className='text-primary size-8 mx-auto cursor-pointer' />
                                     </button>

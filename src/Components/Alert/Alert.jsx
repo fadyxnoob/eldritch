@@ -11,7 +11,7 @@ const Alert = ({ message, type = 'error', onClose }) => {
             setVisible(true);
             const timer = setTimeout(() => {
                 setVisible(false);
-            }, 5000);
+            }, 1000);
 
             return () => clearTimeout(timer);
         }
@@ -28,7 +28,7 @@ const Alert = ({ message, type = 'error', onClose }) => {
 
 
     return (
-        <div className={`px-4 py-1 rounded-md shadow-md ${alertStyles[type]} bg-black h-12 flex justify-between fixed z-10 w-fit right-5 top-2`}>
+        <div className={`px-4 py-1 rounded-md shadow-md ${alertStyles[type]} bg-black h-12 flex justify-between fixed z-50 w-fit right-5 top-2`}>
             <div className="flex items-center justify-between w-full">
                 <span>{message}</span>
                 <button

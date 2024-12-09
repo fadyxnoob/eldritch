@@ -63,20 +63,28 @@ const Counter = () => {
     return (
         <div className='counterSection p-5'>
             <div className="content size-full flex items-center justify-center flex-col">
-                <h3 className='text-5xl text-light text-center font-semibold mb-10'>
+                <h3 className='text-3xl md:text-5xl text-light text-center font-semibold mb-10'>
                     {announce ? 'Tournament Start' : 'Entries Closed'}
                 </h3>
-                <div className="counting flex flex-col md:flex-row gap-5">
-                    <div className="days h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                <div className="counting flex flex-row gap-5">
+                    <div
+                        className="days size-14 sm:size-20 md:size-28 px-5 rounded bg-primary text-light flex items-center justify-center sm:text-xl md:text-3xl font-semibold p-2 text-center">
+
                         {time.days} Days
                     </div>
-                    <div className="hours h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                    <div
+                        className="hours size-14 sm:size-20 md:size-28 px-5 rounded bg-primary text-light flex items-center justify-center sm:text-xl md:text-3xl font-semibold p-2 text-center">
+
                         {time.hours} Hours
                     </div>
-                    <div className="mins h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                    <div
+                        className="mins size-14 sm:size-20 md:size-28 px-5 rounded bg-primary text-light flex items-center justify-center sm:text-xl md:text-3xl font-semibold p-2 text-center">
+
                         {time.minutes} Mins
                     </div>
-                    <div className="secs h-28 px-5 rounded bg-primary text-light flex items-center justify-center text-3xl font-semibold p-2 text-center">
+                    <div
+                        className="secs size-14 sm:size-20 md:size-28 px-5 rounded bg-primary text-light flex items-center justify-center sm:text-xl md:text-3xl font-semibold p-2 text-center">
+
                         {time.seconds} Secs
                     </div>
                 </div>

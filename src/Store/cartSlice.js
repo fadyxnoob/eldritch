@@ -10,6 +10,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+
         addToCart: (state, action) => {
             const { id, quantity, name, price } = action.payload
             const indexedProductID = (state.products).findIndex(pro => pro.id === id)
@@ -20,7 +21,6 @@ const cartSlice = createSlice({
             }
             setLocalStorage('carts', state.products)
             state.totalPrice = state.products.reduce((sum, product) => sum + product.quantity * product.price, 0);
-            console.log(state.products, state.totalPrice);
         },
 
         changeQuantity: (state, action) => {

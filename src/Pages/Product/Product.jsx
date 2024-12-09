@@ -95,16 +95,15 @@ const Product = () => {
 
     // Cart actions
     const handleCart = (id, quantity, name, price) => {
-        dispatch(
-            addToCart({
-                id,
-                quantity,
-                name,
-                price,
-            })
-        );
+        if (!userdata) {
+            setAlert({ type: 'warning', message: 'Please login first.' });
+            return;
+        } else {
+            dispatch(addToCart({ id, quantity, name, price }));
+            setAlert({ type: 'success', message: 'Item added to the cart.' });
+        }
     };
-
+    
     const handleMinusQuantity = () =>
         setQuantity((prev) => (prev > 0 ? prev - 1 : 0));
 

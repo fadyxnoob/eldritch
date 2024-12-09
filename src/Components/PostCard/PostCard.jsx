@@ -4,7 +4,7 @@ import service from '../../Appwrite/Conf';
 import authService from '../../Appwrite/Auth';
 import { Link } from 'react-router-dom';
 
-const PostCard = ({ customWidth }) => {
+const PostCard = () => {
     const [posts, setPosts] = useState([]);
     const [images, setImages] = useState({});
     const [loading, setLoading] = useState(true);
@@ -78,7 +78,7 @@ const PostCard = ({ customWidth }) => {
 
                 return (
                     <div key={post.$id}
-                        className={`${customWidth} relative rounded overflow-hidden mobile:w-full shadow-md shadow-black `}
+                        className={`w-[90%] relative rounded overflow-hidden shadow-md shadow-black sm:w-[45%] md:w-[28%] mx-auto`}
                     >
                         <div className="overflow-hidden">
                             <img

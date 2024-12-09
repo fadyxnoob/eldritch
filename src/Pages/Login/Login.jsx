@@ -11,8 +11,8 @@ import { Alert } from '../../'
 const Login = () => {
 
     const [isText, setIsText] = useState(true);
-    const [email, setEmail] = useState('yasir@gmail.com');
-    const [password, setPassword] = useState('12345678');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState(null)
     const navigate = useNavigate()
     const dispatch = useDispatch();

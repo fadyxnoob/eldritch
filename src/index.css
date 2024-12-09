@@ -72,10 +72,6 @@ nav .navItems ul .navCustomStyle {}
     height: 5px;
 }
 
-.winnerCard {
-    height: 450px;
-    width: 300px;
-}
 
 .winnerCard::before {
     content: "";

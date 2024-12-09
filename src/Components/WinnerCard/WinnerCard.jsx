@@ -3,7 +3,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube  } from "react-icons/fa"
 
 const WinnerCard = ({image, alt}) => {
   return (
-    <div className='relative overflow-hidden winnerCard'>
+    <div className='relative overflow-hidden winnerCard h-[450px] w-[90%] sm:w-[300px]'>
         <img src={image} alt={alt} className='size-full object-cover'/>
         <h2 className='uppercase bg-primary text-light text-center py-2.5 m-0 absolute bottom-0 w-full '>
             user hunter24
