@@ -28,7 +28,7 @@ const Topbar = ({ user }) => {
                 <a href={socialData.twitter}> <FaTwitter />    </a>
                 <a href={socialData.linkedin}> <FaLinkedinIn /> </a>
                 <a href={socialData.instagram}> <FaInstagram />  </a>
-            </div>
+            </div> 
             {
                 user ?
                     <Link to='/myProfile'>
