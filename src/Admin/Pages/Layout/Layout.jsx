@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar';
 import Container from '../../Components/Container/Container'
 import Header from '../../Components/Header/Header'
@@ -16,6 +16,7 @@ const AdminLayout = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { adminData, status } = useSelector((state) => state.admin);
+  const navigate = useNavigate();
 
   const someConditionToLogin = !adminData;
   const fetchedAdminData = JSON.parse(localStorage.getItem("adminData"));
@@ -27,7 +28,7 @@ const AdminLayout = () => {
   }, [dispatch, adminData, someConditionToLogin, fetchedAdminData]);
 
   if (!status) {
-    return <div>Please log in to access the admin dashboard</div>;
+     navigate('/admin/adminLogin');
   }
 
 

@@ -8,7 +8,7 @@ const Counter = () => {
     const [endTime, setEndTime] = useState(null);
     const collection = Config.appWriteManageTimerCollID;
     const documentID = "674eda5100217e08f20e";
-    console.log({time, endTime});
+    console.log({ time, endTime });
     // Fetch timer data from the database
     const fetchTimerData = async () => {
         try {
@@ -66,30 +66,26 @@ const Counter = () => {
                 <h3 className='text-3xl md:text-5xl text-light text-center font-semibold mb-10'>
                     {announce ? 'Tournament Start' : 'Entries Closed'}
                 </h3>
-                {
-                    !time === 0 ? <div className="counting flex flex-row gap-5">
+                {announce && ( // Conditional rendering based on `announce` state
+                    <div className="counting flex flex-row gap-5">
                         <div
                             className="days size-14 sm:size-20 md:size-28 px-5 rounded bg-primary text-light flex items-center justify-center sm:text-xl md:text-3xl font-semibold p-2 text-center">
-
                             {time.days} Days
                         </div>
                         <div
                             className="hours size-14 sm:size-20 md:size-28 px-5 rounded bg-primary text-light flex items-center justify-center sm:text-xl md:text-3xl font-semibold p-2 text-center">
-
                             {time.hours} Hours
                         </div>
                         <div
                             className="mins size-14 sm:size-20 md:size-28 px-5 rounded bg-primary text-light flex items-center justify-center sm:text-xl md:text-3xl font-semibold p-2 text-center">
-
                             {time.minutes} Mins
                         </div>
                         <div
                             className="secs size-14 sm:size-20 md:size-28 px-5 rounded bg-primary text-light flex items-center justify-center sm:text-xl md:text-3xl font-semibold p-2 text-center">
-
                             {time.seconds} Secs
                         </div>
-                    </div> : null
-                }
+                    </div>
+                )}
             </div>
         </div>
     );
