@@ -109,7 +109,7 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/eldritch.git
+   git clone https://github.com/fadyxnood/eldritch.git
    ```
 
 2. Navigate to the project directory:
@@ -140,8 +140,9 @@ To run this project locally, follow these steps:
 
 ## 🌐 Deployment
 
-Eldritch is deployed on Vercel. You can access the live application at:
-[https://eldritch.vercel.app](https://eldritch.vercel.app)
+Eldritch is deployed on Vercel. Visit The Demo Live Link Below.
+
+[Live Demo](https://eldritch-7jpi.vercel.app/)
 
 ---
 
