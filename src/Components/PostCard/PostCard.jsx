@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import service from '../../Appwrite/Conf';
 import authService from '../../Appwrite/Auth';
 import { Link } from 'react-router-dom';
-import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
 
 

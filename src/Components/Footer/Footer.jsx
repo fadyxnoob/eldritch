@@ -3,7 +3,7 @@ import Config from '../../Config/Config';
 import DatabaseService from '../../Admin/Appwrite/Database';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
 
 const Footer = () => {

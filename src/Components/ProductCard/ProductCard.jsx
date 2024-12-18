@@ -6,7 +6,7 @@ import { addToCart } from '../../Store/cartSlice';
 import authService from '../../Appwrite/Auth';
 import service from '../../Appwrite/Conf';
 import Alert from '../../Components/Alert/Alert';
-import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap';
 
 const ProductCard = ({ popular = null, style = 'sm:w-[45%] md:w-[28%]', limit=null }) => {

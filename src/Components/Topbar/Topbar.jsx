@@ -5,7 +5,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/f
 import { MdLogin, MdAccountBox } from "react-icons/md";
 import { TbLogin } from "react-icons/tb";
 import { Link } from 'react-router-dom';
-import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
 
 const Topbar = ({ user }) => {

@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { MdOutlineSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import { NavbarMenu } from './data';
 import gsap from 'gsap'
 

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Alert from "../../Components/Alert/Alert";
 import { useSelector } from "react-redux";
 import gsap from 'gsap'
-import useGSAPAnimations from "../../UseGSAPAnimations/UseGSAPAnimations";
+import useGSAPAnimations from "../../Pages/useGSAPAnimations/UseGSAPAnimations";
 
 
 

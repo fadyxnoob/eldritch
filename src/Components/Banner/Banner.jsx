@@ -1,7 +1,7 @@
 import gsap from 'gsap'
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import backgroundImage from '../../assets/images/carousel.jpg'
 
 const Banner = () => {

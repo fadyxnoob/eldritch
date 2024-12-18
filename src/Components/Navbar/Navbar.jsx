@@ -3,7 +3,7 @@ import { NavbarMenu } from './data';
 import { MdMenu, MdOutlineSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import ResponsiveMenu from './ResponsiveMenu';
-import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
 
 const Navbar = () => {

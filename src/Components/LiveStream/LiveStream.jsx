@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { FaPlay } from "react-icons/fa";
 import stream from '../../assets/images/stream.jpg'
-import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
 
 const LiveStream = () => {
