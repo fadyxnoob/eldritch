@@ -3,28 +3,61 @@ import { NavbarMenu } from './data';
 import { MdMenu, MdOutlineSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import ResponsiveMenu from './ResponsiveMenu';
+import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import gsap from 'gsap'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const hamburgerRef = useRef(null);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (hamburgerRef.current && !hamburgerRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
-        window.addEventListener('click', handleClickOutside);
-        return () => {
-            window.removeEventListener('click', handleClickOutside);
-        };
+    const hamburgerRef = useRef(null);
+    const logoRef = useRef(null);
+    const menuItemsRef = useRef([]);
+    const searchRef = useRef(null);
+    // Use the custom GSAP hook
+    useGSAPAnimations(() => {
+        const navTimeLine = gsap.timeline()
+        navTimeLine.from(logoRef.current, {
+            opacity: 0,
+            x: -100,
+            duration: 1,
+            ease: 'power2.out',
+        });
+
+        navTimeLine.from(menuItemsRef.current, {
+            opacity: 0,
+            y: -30,
+            duration: 0.2,
+            stagger: 0.1,
+            ease: 'power2.out',
+        });
+
+        navTimeLine.from(searchRef.current, {
+            opacity: 0,
+            x: 100,
+            duration: 1,
+            ease: 'power2.out',
+        });
+
+        navTimeLine.from(hamburgerRef.current, {
+            opacity: 0,
+            scale: 0.5,
+            duration: 1,
+            rotate: 180,
+            ease: 'elastic.out(1, 0.3)',
+        });
     }, []);
+
+
+    // Function to close the menu
+    const handleClose = () => {
+        setIsOpen(false);
+    };
 
     return (
         <>
-            <nav className='h-16 w-full border px-2 lg:px-20 bg-light flex items-center justify-between'>
+            <nav className='h-16 w-full border px-2 lg:px-20 bg-light flex items-center justify-between z-50'>
                 {/* LOGO section */}
-                <div className="logo flex justify-center items-center">
+                <div className="logo flex justify-center items-center" ref={logoRef}>
                     <Link to='/'>
                         <h1 className='text-4xl text-black font-medium'>ELDRITCH</h1>
                     </Link>
@@ -34,9 +67,9 @@ const Navbar = () => {
                 <div className="hidden md:block navItems">
                     <ul className='flex items-center gap-6'>
                         {
-                            NavbarMenu.map((item) => {
+                            NavbarMenu.map((item, index) => {
                                 return (
-                                    <li key={item.id}>
+                                    <li key={item.id} ref={(el) => (menuItemsRef.current[index] = el)}>
                                         <Link to={item.link}
                                             className='navCustomStyle inline-block text-primary text-lg font-medium'
                                         >{item.title}</Link>
@@ -48,7 +81,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Search input */}
-                <div className='hidden md:flex items-center justify-center'>
+                <div className='hidden md:flex items-center justify-center' ref={searchRef}>
                     <div className="searcIcon">
                         <MdOutlineSearch className='size-5' />
                     </div>
@@ -66,7 +99,7 @@ const Navbar = () => {
             </nav>
 
             {/* Responsive menu */}
-            <ResponsiveMenu isOpen={isOpen} />
+            <ResponsiveMenu isOpen={isOpen} setClose={handleClose} />
         </>
     );
 }

@@ -1,33 +1,90 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Config from '../../Config/Config';
 import DatabaseService from '../../Admin/Appwrite/Database';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import gsap from 'gsap'
 
 const Footer = () => {
     const [socialCollection] = useState(Config.appWriteWebsiteSocialCollID)
     const [socialDocument] = useState('674b138f002decfc99d6')
     const [socialData, setSocialData] = useState({ instagram: '', facebook: '', twitter: '', linkedin: '' })
 
+    const footerRef = useRef(null)
+    const footerLogoRef = useRef(null)
+    const footerSocialRefs = useRef(null)
+    const footerInternalLinksRef = useRef(null)
+    const footerBottomBarRef = useRef(null)
+
+    useGSAPAnimations(() => {
+        const timeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: footerRef.current,
+                start: "top 50%",
+                end: "bottom top",
+                toggleActions: "play none none none",
+            },
+        })
+
+        timeline.from(footerLogoRef.current, {
+            x: -100,
+            duration: 0.6,
+            ease: "power2.out",
+        })
+            .from(footerSocialRefs.current.children, {
+                opacity:0,
+                xPercent: 600,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+            })
+            .from(footerInternalLinksRef.current.children, {
+                opacity:0,
+                yPercent: -100,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+            })
+            .from(footerBottomBarRef.current.children[0], {
+                opacity:0,
+                x: -100,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+            })
+            .from(footerBottomBarRef.current.children[1].children, {
+                opacity:0,
+                y: -100,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+            })
+
+
+    }, [])
+
     const getPageData = useCallback(async () => {
         const socialRes = await DatabaseService.getDocument(socialDocument, socialCollection)
         setSocialData({ instagram: socialRes.insta, facebook: socialRes.facebook, twitter: socialRes.twitter, linkedin: socialRes.linkedIn })
     }, [socialCollection])
-    
+
     useEffect(() => {
         getPageData()
     }, [])
 
     return (
-        <>
+        <div ref={footerRef}>
             <div className='px-10 my-5 flex md:justify-between flex-col md:flex-row items-center border-b-2 border-primary py-5'>
                 <div>
-                    <Link to={'/'}>
-                        <h5 className='text-4xl font-bold'>ELDRITCH</h5>
-                    </Link>
+                    <h5 ref={footerLogoRef} className='text-4xl font-bold'>
+                        <Link to={'/'}>
+                            ELDRITCH
+                        </Link>
+                    </h5>
                 </div>
-                <div className="mt-5">
-                    <ul className='flex gap-10'>
+                <div className="mt-5 overflow-hidden">
+                    <ul ref={footerSocialRefs} className='flex gap-10 overflow-hidden'>
                         <li className='size-10 rounded-full flex items-center justify-center text-light text-lg bg-facebook hover:bg-light hover:border border-facebook hover:text-facebook cursor-pointer'>
                             <a href={socialData.facebook}>
                                 <FaFacebookF />
@@ -52,7 +109,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="flex flex-wrap justify-between gap-1 px-5 mb-10">
+            <div ref={footerInternalLinksRef} className="flex flex-wrap justify-between gap-1 px-5 mb-10 overflow-hidden">
                 {/* Website Section */}
                 <div className="w-1/3 md:w-1/5 mb-2">
                     <h5 className="text-2xl font-normal text-primary titlesSections">Company</h5>
@@ -96,7 +153,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="px-2 py-5 flex flex-wrap sm:justify-between bg-primary text-light sm:px-20">
+            <div ref={footerBottomBarRef} className="px-2 py-5 flex flex-wrap sm:justify-between bg-primary text-light sm:px-20">
                 <div>
                     <p>
                         Copyright @ 2024 Eldritch. All right reserved
@@ -115,7 +172,7 @@ const Footer = () => {
                     </p>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

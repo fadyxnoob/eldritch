@@ -9,27 +9,46 @@
 }
 
 nav .navItems ul .navCustomStyle {
+  /* to  do  */
 }
 
 .bg-hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05)),
-    url("./assets/images/carousel.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   height: 83vh;
+  .background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05)),
+      url("./assets/images/carousel.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }
 
 .productCard {
   height: 500px !important;
 }
 
-/* .liveStream {
-    background-image: url('./assets/images/stream.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-} */
+.card_icon_holder {
+  overflow: hidden !important;
+  .card_icon {
+    position: absolute;
+  }
+  .card_icon_copy {
+    transform: translate(-150%, 0%);
+  }
+  &:hover .card_icon_copy {
+    transition: transform 0.1s ease-in-out 0.1s;
+    transform: translate(0);
+  }
+  &:hover .card_icon {
+    transition: transform 0.1s ease-in-out;
+    transform: translate(0%, -150%);
+  }
+}
 
 .playButton {
   background: linear-gradient(rgba(255, 130, 0), rgba(255, 38, 0) 80%);
@@ -94,22 +113,12 @@ nav .navItems ul .navCustomStyle {
 
 .winnerCard img {
   filter: grayscale(100%);
-  transition: 2s;
+  transition: 0.5s;
 }
 
 .winnerCard:hover img {
   filter: grayscale(0%);
   transform: scale(1.1);
-}
-
-.winnerCard > h2 {
-  transform-origin: right;
-  transition: 1s;
-  transform: perspective(400px) rotateY(90deg);
-}
-
-.winnerCard:hover > h2 {
-  transform: perspective(400px) rotateY(0deg);
 }
 
 .winnerCard ul {
@@ -122,13 +131,6 @@ nav .navItems ul .navCustomStyle {
   width: 40px;
   text-align: center;
   line-height: 40px;
-  transform: perspective(800px) rotateY(90deg);
-  transition: 0.5s;
-  transform-origin: left;
-}
-
-.winnerCard:hover ul li {
-  transform: perspective(800px) rotateY(0deg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,20 +138,7 @@ nav .navItems ul .navCustomStyle {
 }
 
 .winnerCard ul li:nth-child(1) {
-  transition-delay: 0.2s;
   margin-top: 0;
-}
-
-.winnerCard ul li:nth-child(2) {
-  transition-delay: 0.6s;
-}
-
-.winnerCard ul li:nth-child(3) {
-  transition-delay: 0.8s;
-}
-
-.winnerCard ul li:nth-child(4) {
-  transition-delay: 1s;
 }
 
 .winnerCard:hover ul li a {
@@ -369,27 +358,27 @@ nav .navItems ul .navCustomStyle {
 }
 
 .singlePlayerCard {
-    position: relative;
-    overflow: hidden; 
-    z-index: 0; 
-    transition: all 0.5s;
-  }
-  
-  .singlePlayerCard::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #ff5e14; 
-    height: 0%;
-    width: 100%;
-    z-index: -1; 
-    transition: height 0.5s ease; 
-  }
-  
-  .singlePlayerCard:hover::after {
-    height: 100%; 
-  }
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  transition: all 0.5s;
+}
+
+.singlePlayerCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ff5e14;
+  height: 0%;
+  width: 100%;
+  z-index: -1;
+  transition: height 0.5s ease;
+}
+
+.singlePlayerCard:hover::after {
+  height: 100%;
+}
 /* SCHEDULES */
 
 /* ADMIN */

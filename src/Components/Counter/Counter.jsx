@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DatabaseService from '../../Admin/Appwrite/Database';
 import Config from '../../Config/Config';
+import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import gsap from 'gsap'
 
 const Counter = () => {
     const [announce, setAnnounce] = useState(true);
@@ -8,7 +10,98 @@ const Counter = () => {
     const [endTime, setEndTime] = useState(null);
     const collection = Config.appWriteManageTimerCollID;
     const documentID = "674eda5100217e08f20e";
-    console.log({ time, endTime });
+
+    const counterRef = useRef(null)
+   
+    useGSAPAnimations(() => {
+        gsap.from(counterRef.current, {
+            duration: 0.8,
+            opacity: 0,
+            xPercent: -100,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: counterRef.current,
+                start: 'top 50%',
+                end: 'bottom top',
+                toggleActions: 'play none none none',
+            }
+        })
+        gsap.from(counterRef.current.children[0].children[0], {
+            opacity: 0,
+            y: -150,
+            duration: 0.6,
+            delay: 0.3,
+            scale: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: counterRef.current,
+                start: 'top 50%',
+                end: 'bottom top',
+                toggleActions: 'play none none none',
+            }
+        })
+        gsap.from(counterRef.current.children[0].children[1].children[0], {
+            opacity: 0,
+            xPercent: -100,
+            duration: 0.8,
+            delay: 0.6,
+            scale: 0.2,
+            rotate:-360,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: counterRef.current,
+                start: 'top 50%',
+                end: 'bottom top',
+                toggleActions: 'play none none none',
+            }
+        })
+        gsap.from(counterRef.current.children[0].children[1].children[3], {
+            opacity: 0,
+            xPercent: 100,
+            duration: 0.8,
+            delay: 0.6,
+            scale: 0.2,
+            rotate:360,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: counterRef.current,
+                start: 'top 50%',
+                end: 'bottom top',
+                toggleActions: 'play none none none',
+            }
+        })
+        gsap.from(counterRef.current.children[0].children[1].children[1], {
+            opacity: 0,
+            yPercent:100,
+            duration: 0.8,
+            delay: 0.6,
+            scale: 0.2,
+            rotate:360,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: counterRef.current,
+                start: 'top 50%',
+                end: 'bottom top',
+                toggleActions: 'play none none none',
+            }
+        })
+        gsap.from(counterRef.current.children[0].children[1].children[2], {
+            opacity: 0,
+            yPercent:-100,
+            duration: 0.8,
+            delay: 0.6,
+            scale: 0.2,
+            rotate:-360,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: counterRef.current,
+                start: 'top 50%',
+                end: 'bottom top',
+                toggleActions: 'play none none none',
+            }
+        })
+
+    }, [])
     // Fetch timer data from the database
     const fetchTimerData = async () => {
         try {
@@ -61,7 +154,7 @@ const Counter = () => {
     }, [endTime]);
 
     return (
-        <div className='counterSection p-5'>
+        <div ref={counterRef} className='counterSection p-5'>
             <div className="content size-full flex items-center justify-center flex-col">
                 <h3 className='text-3xl md:text-5xl text-light text-center font-semibold mb-10'>
                     {announce ? 'Tournament Start' : 'Entries Closed'}

@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { MdOutlineSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import { NavbarMenu } from './data';
+import gsap from 'gsap'
 
 
-const ResponsiveMenu = ({ isOpen }) => {
+const ResponsiveMenu = ({ isOpen, setClose }) => {
+    const menuItemsRef = useRef([]); // Refs for menu items
+    const searchInputRef = useRef(null); // Ref for search input
+
+    useGSAPAnimations(() => {
+        if (isOpen) {
+            const timeline = gsap.timeline(); 
+            timeline.from(menuItemsRef.current, {
+                opacity: 0,
+                y: -30,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+            });
+
+            timeline.from(searchInputRef.current, {
+                opacity: 0,
+                xPercent: -100,
+                duration: 0.8,
+                ease: 'power2.out',
+            }, "-=0.4"); 
+        }
+    }, [isOpen]); 
+
     return (
         <AnimatePresence mode='wait'>
             {
@@ -13,30 +39,19 @@ const ResponsiveMenu = ({ isOpen }) => {
                     animate={{ opecity: 0, y: 0 }}
                     exit={{ opecity: 0, y: -100 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute top-20 left-0 w-full z-20 md:hidden"
+                    className="absolute top-22 left-0 w-full z-20 md:hidden"
                 >
                     <div className='text-xl font-semibold text-light bg-primary py-10 m-2 rounded-lg h-fit'>
                         <ul className='flex flex-col items-center justify-center gap-5'>
-                            <Link to={'/'}>
-                                <li>Home</li>
-                            </Link>
-                            <Link to={'/aboutus'}>
-                                <li>About</li>
-                            </Link>
-                            <Link to='/schedules'>
-                                <li>Matches</li>
-                            </Link>
-                            <Link to={'/shop'}>
-                                <li>Shop</li>
-                            </Link>
-                            <Link to='/blog'>
-                                <li>Blog</li>
-                            </Link>
-                            <Link to='/contact'>
-                                <li>Contact</li>
-                            </Link>
+                            {NavbarMenu.map((item, idx) => (
+                                <li key={item.id} ref={(el) => (menuItemsRef.current[idx] = el)}>
+                                    <Link to={item.link} onClick={setClose}>
+                                        {item.title}
+                                    </Link>
+                                </li>
+                            ))}
                             <li>
-                                <div className=' flex items-center justify-center'>
+                                <div className=' flex items-center justify-center' ref={searchInputRef} >
                                     <div className="searcIcon">
                                         <MdOutlineSearch className='size-5' />
                                     </div>

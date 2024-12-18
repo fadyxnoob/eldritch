@@ -1,14 +1,88 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaUser } from "react-icons/fa";
 import service from '../../Appwrite/Conf';
 import authService from '../../Appwrite/Auth';
 import { Link } from 'react-router-dom';
+import useGSAPAnimations from '../../UseGSAPAnimations/UseGSAPAnimations';
+import gsap from 'gsap'
+
 
 const PostCard = () => {
     const [posts, setPosts] = useState([]);
     const [images, setImages] = useState({});
     const [loading, setLoading] = useState(true);
     const [catNames, setCatNames] = useState({});
+
+    const cardRefs = useRef([]);
+
+    useGSAPAnimations(() => {
+        if (cardRefs.current.length > 0) {
+            cardRefs.current.forEach((card, idx) => {
+                const cardTimeline = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 80%',
+                        end: 'bottom 50%',
+                        toggleActions: 'play none none none',
+                    },
+                });
+
+                cardTimeline.from(card, {
+                    x: idx % 3 === 0 ? -50 : idx % 3 === 1 ? 0 : 50,
+                    y: idx % 3 === 1 ? 50 : 0,
+                    scale: idx % 3 === 1 ? 0.8 : 1,
+                    opacity: 0,
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+
+                cardTimeline.from(
+                    card.children[0],
+                    {
+                        clipPath: "inset(0% 0% 100% 0%)",
+                        opacity: 0,
+                    },
+                    {
+                        clipPath: "inset(0% 0% 0% 0%)",
+                        opacity: 1,
+                        duration: 1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 80%",
+                            toggleActions: "play none none none",
+                        },
+                    }
+                );
+
+
+                cardTimeline.from(card.children[1].children[0], {
+                    x: -100,
+                    duration: 0.6,
+                    delay: 0.1,
+                    opacity: 0
+                })
+                cardTimeline.from(card.children[1].children[3], {
+                    x: 100,
+                    duration: 0.6,
+                    delay: 0.1
+                })
+                cardTimeline.from(card.children[1].children[1], {
+                    x: 100,
+                    duration: 0.6,
+                    delay: 0.1,
+                    opacity: 0
+                })
+                cardTimeline.from(card.children[1].children[2], {
+                    y: 100,
+                    duration: 0.6,
+                    delay: 0.1,
+                    opacity: 0
+                })
+
+            });
+        }
+    }, [posts]);
 
     // Helper function to parse date
     const parseDate = (dateString) => {
@@ -63,13 +137,10 @@ const PostCard = () => {
         getPosts();
     }, []);
 
-    if (loading) {
-        return <p>Loading...</p>;
-    }
 
     return (
-        <div className={`flex flex-wrap gap-4`}>
-            {posts.map((post) => {
+        <div className={`flex flex-wrap gap-4 blogsCardsParent`}>
+            {posts.map((post, idx) => {
                 const parsedDate = parseDate(post.date);
                 const day = parsedDate ? parsedDate.getDate() : 'N/A';
                 const month = parsedDate
@@ -77,7 +148,9 @@ const PostCard = () => {
                     : 'N/A';
 
                 return (
-                    <div key={post.$id}
+                    <div
+                        ref={(el) => cardRefs.current[idx] = el}
+                        key={post.$id}
                         className={`w-full relative rounded overflow-hidden shadow-md shadow-black sm:w-[45%] md:w-[32%]`}
                     >
                         <div className="overflow-hidden">
@@ -94,15 +167,14 @@ const PostCard = () => {
                                     {catNames[post.cat] || 'Loading...'}
                                 </Link>
                             </p>
-                            <Link to={`/post/${post.$id}`}>
-                                <h4 className="text-lg font-semibold mt-2 hover:text-blue-600 hover:underline">
+                            <h4 className="text-lg font-semibold mt-2 hover:text-blue-600 hover:underline">
+                                <Link to={`/post/${post.$id}`}>
                                     {post.title}
-                                </h4>
-                            </Link>
+                                </Link>
+                            </h4>
                             <div className="flex justify-end gap-2 items-center mt-5">
                                 <FaUser /> <p className="uppercase">{post.author}</p>
                             </div>
-
                             <div className="absolute flex items-center justify-center postDatePart overflow-hidden rounded">
                                 <div className="shadow-sm p-4 border flex items-center justify-center flex-col sectionInner overflow-hidden">
                                     <h4 className="font-bold text-lg">{day}</h4>

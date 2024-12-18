@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaBagShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../Components/Alert/Alert";
 import { useSelector } from "react-redux";
+import gsap from 'gsap'
+import useGSAPAnimations from "../../UseGSAPAnimations/UseGSAPAnimations";
+
+
+
 
 const CartIcon = () => {
   const [total, setTotal] = useState(0);
@@ -11,13 +16,23 @@ const CartIcon = () => {
   const userdata = useSelector((state) => state.auth.userdata);
   const navigate = useNavigate();
 
+  const cartIconRef = useRef(null)
+
+  useGSAPAnimations(() => {
+    gsap.from(cartIconRef.current, {
+      y: -500,
+      duration: 3,
+      ease: 'power2.out',
+    })
+  }, [])
+
   useEffect(() => {
-    userdata? setTotal(cart.length) : setTotal(0);
+    userdata ? setTotal(cart.length) : setTotal(0);
   }, [cart]);
 
   const onClickHandler = (e) => {
     if (!userdata) {
-      e.preventDefault(); 
+      e.preventDefault();
       setAlert({ type: "warning", message: "Please login first." });
     } else {
       navigate("/myCart");
@@ -34,6 +49,7 @@ const CartIcon = () => {
         />
       )}
       <div
+        ref={cartIconRef}
         onClick={onClickHandler}
         className="bg-primary fixed bottom-24 w-24 left-0 h-12 cartIcon flex items-center justify-end px-5 cursor-pointer"
       >

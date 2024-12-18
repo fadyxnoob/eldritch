@@ -15,7 +15,6 @@ const Layout = () => {
     const [progress, setProgress] = useState(0);
     const location = useLocation();
 
-
     useEffect(() => {
         setProgress(30);
         const timer = setTimeout(() => {
