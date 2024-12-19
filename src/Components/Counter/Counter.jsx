@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import DatabaseService from '../../Admin/Appwrite/Database';
 import Config from '../../Config/Config';
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
