@@ -3,8 +3,10 @@ import { FaUser } from "react-icons/fa";
 import service from '../../Appwrite/Conf';
 import authService from '../../Appwrite/Auth';
 import { Link } from 'react-router-dom';
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 
 const PostCard = () => {
@@ -15,72 +17,75 @@ const PostCard = () => {
 
     const cardRefs = useRef([]);
 
-    useGSAPAnimations(() => {
+    useEffect(() => {
         if (cardRefs.current.length > 0) {
-            cardRefs.current.forEach((card, idx) => {
-                const cardTimeline = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 80%',
-                        end: 'bottom 50%',
-                        toggleActions: 'play none none none',
-                    },
-                });
-
-                cardTimeline.from(card, {
-                    x: idx % 3 === 0 ? -50 : idx % 3 === 1 ? 0 : 50,
-                    y: idx % 3 === 1 ? 50 : 0,
-                    scale: idx % 3 === 1 ? 0.8 : 1,
-                    opacity: 0,
-                    duration: 0.6,
-                    ease: "power2.out",
-                });
-
-                cardTimeline.from(
-                    card.children[0],
-                    {
-                        clipPath: "inset(0% 0% 100% 0%)",
-                        opacity: 0,
-                    },
-                    {
-                        clipPath: "inset(0% 0% 0% 0%)",
-                        opacity: 1,
-                        duration: 1,
-                        ease: "power2.out",
+            const ctx = gsap.context(() => {
+                cardRefs.current.forEach((card, idx) => {
+                    const cardTimeline = gsap.timeline({
                         scrollTrigger: {
                             trigger: card,
-                            start: "top 80%",
-                            toggleActions: "play none none none",
+                            start: 'top 80%',
+                            end: 'bottom 50%',
+                            toggleActions: 'play none none none',
                         },
-                    }
-                );
+                    });
+
+                    cardTimeline.from(card, {
+                        x: idx % 3 === 0 ? -50 : idx % 3 === 1 ? 0 : 50,
+                        y: idx % 3 === 1 ? 50 : 0,
+                        scale: idx % 3 === 1 ? 0.8 : 1,
+                        opacity: 0,
+                        duration: 0.6,
+                        ease: "power2.out",
+                    });
+
+                    cardTimeline.from(
+                        card.children[0],
+                        {
+                            clipPath: "inset(0% 0% 100% 0%)",
+                            opacity: 0,
+                        },
+                        {
+                            clipPath: "inset(0% 0% 0% 0%)",
+                            opacity: 1,
+                            duration: 1,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top 80%",
+                                toggleActions: "play none none none",
+                            },
+                        }
+                    );
 
 
-                cardTimeline.from(card.children[1].children[0], {
-                    x: -100,
-                    duration: 0.6,
-                    delay: 0.1,
-                    opacity: 0
-                })
-                cardTimeline.from(card.children[1].children[3], {
-                    x: 100,
-                    duration: 0.6,
-                    delay: 0.1
-                })
-                cardTimeline.from(card.children[1].children[1], {
-                    x: 100,
-                    duration: 0.6,
-                    delay: 0.1,
-                    opacity: 0
-                })
-                cardTimeline.from(card.children[1].children[2], {
-                    y: 100,
-                    duration: 0.6,
-                    delay: 0.1,
-                    opacity: 0
-                })
+                    cardTimeline.from(card.children[1].children[0], {
+                        x: -100,
+                        duration: 0.6,
+                        delay: 0.1,
+                        opacity: 0
+                    })
+                    cardTimeline.from(card.children[1].children[3], {
+                        x: 100,
+                        duration: 0.6,
+                        delay: 0.1
+                    })
+                    cardTimeline.from(card.children[1].children[1], {
+                        x: 100,
+                        duration: 0.6,
+                        delay: 0.1,
+                        opacity: 0
+                    })
+                    cardTimeline.from(card.children[1].children[2], {
+                        y: 100,
+                        duration: 0.6,
+                        delay: 0.1,
+                        opacity: 0
+                    })
 
+                });
             });
+            return () => ctx.revert();
         }
     }, [posts]);
 

@@ -3,6 +3,8 @@ import DatabaseService from '../../Admin/Appwrite/Database';
 import Config from '../../Config/Config';
 import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const Counter = () => {
     const [announce, setAnnounce] = useState(true);
@@ -13,7 +15,8 @@ const Counter = () => {
 
     const counterRef = useRef(null)
    
-    useGSAPAnimations(() => {
+    useEffect(() => {
+        const ctx = gsap.context(() => {
         gsap.from(counterRef.current, {
             duration: 0.8,
             opacity: 0,
@@ -100,6 +103,8 @@ const Counter = () => {
                 toggleActions: 'play none none none',
             }
         })
+        })
+        return () => ctx.revert(); 
 
     }, [])
     // Fetch timer data from the database

@@ -2,34 +2,39 @@ import React, { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 import { MdOutlineSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import { NavbarMenu } from './data';
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 
 const ResponsiveMenu = ({ isOpen, setClose }) => {
     const menuItemsRef = useRef([]); // Refs for menu items
     const searchInputRef = useRef(null); // Ref for search input
 
-    useGSAPAnimations(() => {
+    useEffect(() => {
         if (isOpen) {
-            const timeline = gsap.timeline(); 
-            timeline.from(menuItemsRef.current, {
-                opacity: 0,
-                y: -30,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: 'power2.out',
-            });
+            const ctx = gsap.context(() => {
+                const timeline = gsap.timeline();
+                timeline.from(menuItemsRef.current, {
+                    opacity: 0,
+                    y: -30,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: 'power2.out',
+                });
 
-            timeline.from(searchInputRef.current, {
-                opacity: 0,
-                xPercent: -100,
-                duration: 0.8,
-                ease: 'power2.out',
-            }, "-=0.4"); 
+                timeline.from(searchInputRef.current, {
+                    opacity: 0,
+                    xPercent: -100,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                }, "-=0.4");
+            })
+            return () => ctx.revert();
         }
-    }, [isOpen]); 
+    }, [isOpen]);
 
     return (
         <AnimatePresence mode='wait'>

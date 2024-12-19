@@ -1,37 +1,42 @@
 import gsap from 'gsap'
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import backgroundImage from '../../assets/images/carousel.jpg'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 
 const Banner = () => {
     const bannerImageRef = useRef()
     const bannerTitleRef = useRef()
     const bannerButtonRef = useRef()
 
-    useGSAPAnimations(() => {
-        const timeline = gsap.timeline()
-        timeline.from(bannerImageRef.current, {
-            opacity: 0,
-            duration: 0.6,
-            delay: 0.1,
-            ease: "power2.out"
-        });
-        timeline.from(bannerTitleRef.current, {
-            opacity: 0,
-            y: -150,
-            duration: 0.6,
-            delay: 0.1,
-            scale: 0.2,
-            ease: "power2.out",
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const timeline = gsap.timeline()
+            timeline.from(bannerImageRef.current, {
+                opacity: 0,
+                duration: 0.6,
+                delay: 0.1,
+                ease: "power2.out"
+            });
+            timeline.from(bannerTitleRef.current, {
+                opacity: 0,
+                y: -150,
+                duration: 0.6,
+                delay: 0.1,
+                scale: 0.2,
+                ease: "power2.out",
+            })
+            timeline.from(bannerButtonRef.current, {
+                opacity: 0,
+                y: 200,
+                duration: 0.6,
+                delay: 0.1,
+            })
         })
-        timeline.from(bannerButtonRef.current, {
-            opacity: 0,
-            y: 200,
-            duration: 0.6,
-            delay: 0.1,
-        })
-
+        return () => ctx.revert();
     }, [])
 
     return (

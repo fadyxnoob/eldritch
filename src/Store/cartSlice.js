@@ -24,11 +24,11 @@ const cartSlice = createSlice({
         },
 
         changeQuantity: (state, action) => {
-            const { id, quantity} = action.payload
+            const { id, quantity } = action.payload
             const indexedProductID = (state.products).findIndex(pro => pro.id === id)
-            if(quantity > 0){
+            if (quantity > 0) {
                 state.products[indexedProductID].quantity = quantity
-            }else{
+            } else {
                 // delete state.products[indexedProductID]
                 state.products = (state.products).filter(pro => pro.id !== id)
             }
@@ -36,14 +36,13 @@ const cartSlice = createSlice({
         },
 
         removeItem: (state, action) => {
-            console.log({state, action});
-            const {id} = action.payload
+            const id = action.payload
             const indexedProductID = (state.products).findIndex(pro => pro.id === id)
-            if(indexedProductID >= 0){
+            if (indexedProductID >= 0) {
                 state.products = (state.products).filter(pro => pro.id !== id)
                 setLocalStorage('carts', state.products)
             }
-        }
+        },
 
     }
 })

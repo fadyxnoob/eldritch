@@ -5,8 +5,11 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/f
 import { MdLogin, MdAccountBox } from "react-icons/md";
 import { TbLogin } from "react-icons/tb";
 import { Link } from 'react-router-dom';
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 
 const Topbar = ({ user }) => {
     const [socialCollection] = useState(Config.appWriteWebsiteSocialCollID)
@@ -16,44 +19,47 @@ const Topbar = ({ user }) => {
     const socialRef = useRef();
     const linksRef = useRef();
 
-    useGSAPAnimations(() => {
-        const timeline = gsap.timeline();
-        timeline.from(socialRef.current.children[0], {
-            opacity: 0,
-            x: -30,
-            duration: 0.8,
-            ease: 'power2.out',
-        });
-
-        timeline.from(
-            Array.from(socialRef.current.children).slice(1),
-            {
-                y: -30,
-                duration: 0.6,
-                stagger: 0.1,
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const timeline = gsap.timeline();
+            timeline.from(socialRef.current.children[0], {
+                opacity: 0,
+                x: -30,
+                duration: 0.8,
                 ease: 'power2.out',
-            }
-        );
-
-        user ? timeline.from(linksRef.current.children[0], {
-            opacity: 0,
-            y: -50,
-            duration: 0.6,
-        }) : timeline.from(linksRef.current.children[0], {
-            opacity: 0,
-            y: -50,
-            duration: 0.6,
-        })
-            .from(linksRef.current.children[1], {
-                opacity: 0,
-                y: 50,
-                duration: 0.4,
-            })
-            .from(linksRef.current.children[2], {
-                opacity: 0,
-                x: 100,
-                duration: 0.3,
             });
+
+            timeline.from(
+                Array.from(socialRef.current.children).slice(1),
+                {
+                    y: -30,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: 'power2.out',
+                }
+            );
+
+            user ? timeline.from(linksRef.current.children[0], {
+                opacity: 0,
+                y: -50,
+                duration: 0.6,
+            }) : timeline.from(linksRef.current.children[0], {
+                opacity: 0,
+                y: -50,
+                duration: 0.6,
+            })
+                .from(linksRef.current.children[1], {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.4,
+                })
+                .from(linksRef.current.children[2], {
+                    opacity: 0,
+                    x: 100,
+                    duration: 0.3,
+                });
+        });
+        return () => ctx.revert();
 
     }, []);
 

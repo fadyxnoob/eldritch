@@ -1,8 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap'
 import { Banner, ProductCard, LiveStream, Counter, PostCard, WinnerCard } from '../../index'
 import Candidate3 from '../../assets/images/Candi3.jpg'
-import useGSAPAnimations from '../useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../useGSAPAnimations/UseGSAPAnimations';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+
+
 const Home = () => {
     document.title = 'Byt3Blitz | Home'
 
@@ -11,26 +16,28 @@ const Home = () => {
     const winnersHeadingRef = useRef(null);
     const headingRefs = [proHeadingRef, blogHeadingRef, winnersHeadingRef];
 
-    useGSAPAnimations(() => {
-        headingRefs.forEach((ref) => {
-            if (ref.current) {
-                gsap.from(ref.current, {
-                    scrollTrigger: {
-                        trigger: ref.current,
-                        start: 'top 50%',
-                        end: 'bottom top',
-                        toggleActions: 'play none none none',
-                    },
-                    opacity: 0,
-                    y: -150,
-                    duration: 0.6,
-                    delay: 0.1,
-                    scale: 0.2,
-                    ease: "power2.out", // Add smooth easing
-                });
-            }
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            headingRefs.forEach((ref) => {
+                if (ref.current) {
+                    gsap.from(ref.current, {
+                        scrollTrigger: {
+                            trigger: ref.current,
+                            start: 'top 50%',
+                            end: 'bottom top',
+                            toggleActions: 'play none none none',
+                        },
+                        opacity: 0,
+                        y: -150,
+                        duration: 0.6,
+                        delay: 0.1,
+                        scale: 0.2,
+                        ease: "power2.out", // Add smooth easing
+                    });
+                }
+            });
         });
-
+        return () => ctx.revert();
     }, []);
 
 

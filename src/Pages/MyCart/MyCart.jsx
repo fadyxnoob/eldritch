@@ -1,30 +1,19 @@
 import React, { useState } from 'react';
-import { CiCircleRemove } from "react-icons/ci";
 import { useSelector, useDispatch } from 'react-redux';
 import { changeQuantity, removeItem } from '../../Store/cartSlice';
-import { CiSquarePlus, CiSquareMinus } from "react-icons/ci";
+import { CiSquarePlus, CiSquareMinus, CiCircleRemove } from "react-icons/ci";
+import { MdShoppingCartCheckout } from "react-icons/md";
 import Alert from "../../Components/Alert/Alert";
+import { Link } from 'react-router-dom';
+import { order } from '../../Store/orderSlice';
+
 
 const MyCart = () => {
     const [alert, setAlert] = useState(null);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [postalCode, setPostalCode] = useState('');
-    const [address, setAddress] = useState('');
     document.title = 'Byt3Blitz | MyCart'
 
     const products = useSelector(state => state.cart.products)
     const dispatch = useDispatch()
-
-    const submitHandler = (e) => {
-        e.preventDefault()
-        setName('')
-        setEmail('')
-        setPhone('')
-        setPostalCode('')
-        setAddress('')
-    }
 
     const handleMinusQuantity = (id, quantity) => {
         dispatch(changeQuantity({
@@ -41,11 +30,14 @@ const MyCart = () => {
     }
 
     const handleRemoveItem = (id) => {
-        dispatch(removeItem({ id }))
+        dispatch(removeItem(id))
         setAlert({ type: 'info', message: 'Item removed from the cart.' })
 
     }
 
+    const handleCheckOut = (id, price, quantity) => {
+        dispatch(order({ id, price, quantity}))
+    }
     // Calculate total items, total quantity, and total price
     const totalItems = products.length;
     const totalQuantity = products.reduce((sum, pro) => sum + pro.quantity, 0);
@@ -109,8 +101,10 @@ const MyCart = () => {
                                             </button>
                                         </td>
                                         <td className='text-center border font-light'>
-                                            <button onClick={() => handleRemoveItem(pro.id)}>
-                                                <CiCircleRemove className='text-primary size-8 mx-auto cursor-pointer' />
+                                            <button onClick={() => handleCheckOut(pro.id, pro.price, pro.quantity)}>
+                                                <Link to={`/checkOut/${pro.id}`}>
+                                                    <MdShoppingCartCheckout className='text-primary size-8 mx-auto cursor-pointer' />
+                                                </Link>
                                             </button>
                                         </td>
                                     </tr>
@@ -125,7 +119,7 @@ const MyCart = () => {
                             <td className='text-center border p-2 font-light'>Total Items</td>
                             <td className='text-center border p-2 font-light'>{totalQuantity}</td>
                             <td className='text-center border p-2 font-light'>Total Price</td>
-                            <td  className='text-center border p-2 font-light'>${totalPrice}</td>
+                            <td className='text-center border p-2 font-light'>${totalPrice}</td>
                         </tr>
                     </tfoot>
                 </table>

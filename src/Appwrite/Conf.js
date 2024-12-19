@@ -208,17 +208,52 @@ export class DBService {
         }
     }
 
-    async deleteComment(id){
+    async addUserOrder(user={}, Item={} ) {
+        try {
+            const order = await this.databases.createDocument(
+                Config.appWriteDBID,
+                Config.appWriteManageOrdersCollID,
+                ID.unique(),
+                {
+                    userID: user.userID,
+                    phone: user.formData.phone,
+                    postalCode: user.formData.postalCode,
+                    userAddress: user.formData.address,
+                    date: new Date().toISOString(),
+                    email: user.formData.email,
+                }
+            )
+
+            if (order) {
+                await this.databases.createDocument(
+                    Config.appWriteDBID,
+                    Config.appWriteManageUserOrdersCollID,
+                    order.$id,
+                    {
+                        proID: Item.proID,
+                        quantity: String(Item.quantity),
+                        price: Item.price,
+                    }
+                )
+            }
+
+            return {type:'success', message:'Your order has been placed.'}
+        } catch (error) {
+            console.error(error);
+            return {type:'error', message:'Failed to placing order.'}
+        }
+    }
+    async deleteComment(id) {
         try {
             await this.databases.deleteDocument(
                 Config.appWriteDBID,
                 Config.appWriteCommentsCollID,
                 id
             )
-            return {type:'warning', message:'Your comment is deleted.'}
+            return { type: 'warning', message: 'Your comment is deleted.' }
         } catch (error) {
             console.log(error);
-            return {type:'error', message:'Failed to delete comment'}
+            return { type: 'error', message: 'Failed to delete comment' }
         }
     }
 }

@@ -6,10 +6,12 @@ import { addToCart } from '../../Store/cartSlice';
 import authService from '../../Appwrite/Auth';
 import service from '../../Appwrite/Conf';
 import Alert from '../../Components/Alert/Alert';
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
-const ProductCard = ({ popular = null, style = 'sm:w-[45%] md:w-[28%]', limit=null }) => {
+const ProductCard = ({ popular = null, style = 'sm:w-[45%] md:w-[28%]', limit = null }) => {
 
     const [products, setProducts] = useState([]);
     const [images, setImages] = useState({});
@@ -50,50 +52,53 @@ const ProductCard = ({ popular = null, style = 'sm:w-[45%] md:w-[28%]', limit=nu
         fetchProducts();
     }, [popular]);
 
-    useGSAPAnimations(() => {
-        if (cardRefs.current.length > 0 && iconRefs.current.length > 0) {
-            // Iterate through each card
-            cardRefs.current.forEach((card, idx) => {
-                const cardTimeline = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 80%',
-                        end: 'bottom 50%',
-                        toggleActions: 'play none none none',
-                    },
-                });
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            if (cardRefs.current.length > 0 && iconRefs.current.length > 0) {
+                // Iterate through each card
+                cardRefs.current.forEach((card, idx) => {
+                    const cardTimeline = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 80%',
+                            end: 'bottom 50%',
+                            toggleActions: 'play none none none',
+                        },
+                    });
 
-                // Animate the card first
-                cardTimeline.from(card, {
-                    x: idx % 3 === 0 ? -50 : idx % 3 === 1 ? 0 : 50, // Left, center, right movement
-                    y: idx % 3 === 1 ? 50 : 0, // Add downward movement for center cards
-                    scale: idx % 3 === 1 ? 0.8 : 1, // Scale down only center cards
-                    opacity: 0,
-                    duration: 0.6,
-                    ease: "power2.out",
-                });
-
-                // Then animate the two icons of the current card without using a class
-                const icons = iconRefs.current[idx]?.children; // Accessing all child elements of the icon container
-                if (icons && icons.length === 2) {
-                    cardTimeline.from(icons[0], {
+                    // Animate the card first
+                    cardTimeline.from(card, {
+                        x: idx % 3 === 0 ? -50 : idx % 3 === 1 ? 0 : 50, // Left, center, right movement
+                        y: idx % 3 === 1 ? 50 : 0, // Add downward movement for center cards
+                        scale: idx % 3 === 1 ? 0.8 : 1, // Scale down only center cards
                         opacity: 0,
-                        y: -30, // Slide up effect
-                        rotation: -45, // Rotate counterclockwise
                         duration: 0.6,
                         ease: "power2.out",
                     });
 
-                    cardTimeline.from(icons[1], {
-                        opacity: 0,
-                        y: 30, // Slide down effect
-                        rotation: 45, // Rotate clockwise
-                        duration: 0.6,
-                        ease: "power2.out",
-                    }, '-=0.4'); // Overlap the animation slightly for a smoother effect
-                }
-            });
-        }
+                    // Then animate the two icons of the current card without using a class
+                    const icons = iconRefs.current[idx]?.children; // Accessing all child elements of the icon container
+                    if (icons && icons.length === 2) {
+                        cardTimeline.from(icons[0], {
+                            opacity: 0,
+                            y: -30, // Slide up effect
+                            rotation: -45, // Rotate counterclockwise
+                            duration: 0.6,
+                            ease: "power2.out",
+                        });
+
+                        cardTimeline.from(icons[1], {
+                            opacity: 0,
+                            y: 30, // Slide down effect
+                            rotation: 45, // Rotate clockwise
+                            duration: 0.6,
+                            ease: "power2.out",
+                        }, '-=0.4'); // Overlap the animation slightly for a smoother effect
+                    }
+                });
+            }
+        })
+        return () => ctx.revert();
     }, [products]);
 
     const handleCart = (id, quantity, name, price) => {

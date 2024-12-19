@@ -3,7 +3,7 @@ import { NavbarMenu } from './data';
 import { MdMenu, MdOutlineSearch } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import ResponsiveMenu from './ResponsiveMenu';
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
 
 const Navbar = () => {
@@ -12,8 +12,10 @@ const Navbar = () => {
     const logoRef = useRef(null);
     const menuItemsRef = useRef([]);
     const searchRef = useRef(null);
+
     // Use the custom GSAP hook
-    useGSAPAnimations(() => {
+    useEffect(() => {
+        const ctx = gsap.context(()=> {
         const navTimeLine = gsap.timeline()
         navTimeLine.from(logoRef.current, {
             opacity: 0,
@@ -44,6 +46,9 @@ const Navbar = () => {
             rotate: 180,
             ease: 'elastic.out(1, 0.3)',
         });
+        });
+
+        return () => ctx.revert(); 
     }, []);
 
 

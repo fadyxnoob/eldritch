@@ -1,85 +1,91 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FaPlay } from "react-icons/fa";
 import stream from '../../assets/images/stream.jpg'
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const LiveStream = () => {
 
   const liveStreamRef = useRef();
 
-  useGSAPAnimations(() => {
+  useEffect(() => {
     // const timeline = gsap.timeline();
 
     if (liveStreamRef.current) {
-      gsap.from(liveStreamRef.current.children[0], {
-        opacity: 0,
-        y: -150,
-        scale: 0.2,
-        duration: 0.6,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: liveStreamRef.current.children[0],
-          start: 'top 90%', 
-          end: 'top top',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      });
+      const ctx = gsap.context(() => {
+        gsap.from(liveStreamRef.current.children[0], {
+          opacity: 0,
+          y: -150,
+          scale: 0.2,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: liveStreamRef.current.children[0],
+            start: 'top 90%',
+            end: 'top top',
+            toggleActions: 'play none none none',
+            once: true,
+          },
+        });
 
-      gsap.from(liveStreamRef.current.children[1], {
-        opacity: 0,
-        y: 50,
-        duration: 0.6,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: liveStreamRef.current.children[1],
-          start: 'top 90%', 
-          end: 'top top',
-          toggleActions: 'play none none none',
-          once: true,
-        },
-      });
+        gsap.from(liveStreamRef.current.children[1], {
+          opacity: 0,
+          y: 50,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: liveStreamRef.current.children[1],
+            start: 'top 90%',
+            end: 'top top',
+            toggleActions: 'play none none none',
+            once: true,
+          },
+        });
 
-      // Animate the first child (image)
-      gsap.from(liveStreamRef.current.children[2], {
-        scrollTrigger: {
-          trigger: liveStreamRef.current.children[2],
-          start: 'top 50%',
-          end: 'bottom top',
-          toggleActions: 'play none none none',
-        },
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        ease: "power2.out",
-        transformOrigin: "center",
-        scaleX: 0,
-        scaleY: 1,
-        onStart: () => {
-          gsap.to(liveStreamRef.current.children[2], {
-            scaleX: 1,
-            scaleY: 1,
-            duration: 1,
-            ease: "power2.out",
-          });
-        },
-      });
+        // Animate the first child (image)
+        gsap.from(liveStreamRef.current.children[2], {
+          scrollTrigger: {
+            trigger: liveStreamRef.current.children[2],
+            start: 'top 50%',
+            end: 'bottom top',
+            toggleActions: 'play none none none',
+          },
+          opacity: 0,
+          y: 50,
+          duration: 0.8,
+          ease: "power2.out",
+          transformOrigin: "center",
+          scaleX: 0,
+          scaleY: 1,
+          onStart: () => {
+            gsap.to(liveStreamRef.current.children[2], {
+              scaleX: 1,
+              scaleY: 1,
+              duration: 1,
+              ease: "power2.out",
+            });
+          },
+        });
 
-      // Animate the second child (play button inside the div)
-      gsap.from(liveStreamRef.current.children[2].querySelector('.playButton'), {
-        scale: 5,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: liveStreamRef.current.children[2].querySelector('.playButton'),
-          start: 'top 90%',
-          end: 'top top',
-          toggleActions: 'play none none none',
-          once: true,
-        },
+        // Animate the second child (play button inside the div)
+        gsap.from(liveStreamRef.current.children[2].querySelector('.playButton'), {
+          scale: 5,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: liveStreamRef.current.children[2].querySelector('.playButton'),
+            start: 'top 90%',
+            end: 'top top',
+            toggleActions: 'play none none none',
+            once: true,
+          },
+        });
       });
+      return () => ctx.revert();
+
     }
   }, []);
 

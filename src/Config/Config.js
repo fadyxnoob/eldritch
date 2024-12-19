@@ -23,6 +23,8 @@ const Config = {
     appWriteWebsiteSocialCollID: String(import.meta.env.VITE_APPWRITE_WEBSITE_SOCIALS_COLL_ID),
     appWriteWebsiteCollID: String(import.meta.env.VITE_APPWRITE_MANAGE_WEBSITE_COLL_ID),
     appWriteCommentsCollID: String(import.meta.env.VITE_APPWRITE_MANAGE_COMMENTS_COLL_ID),
+    appWriteManageOrdersCollID: String(import.meta.env.VITE_APPWRITE_MANAGE_ORDERS_COLL_ID),
+    appWriteManageUserOrdersCollID: String(import.meta.env.VITE_APPWRITE_MANAGE_USER_ORDERS_COLL_ID),
 
 }
 export default Config;

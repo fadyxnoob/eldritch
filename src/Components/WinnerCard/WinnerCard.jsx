@@ -1,62 +1,66 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 
 const WinnerCard = ({ image, alt }) => {
   const winnerCardRef = useRef(null)
 
-  useGSAPAnimations(() => {
+  useEffect(() => {
     const imageChildren = winnerCardRef.current.children[0];
     const headingChildren = winnerCardRef.current.children[1];
     const iconsChildren = winnerCardRef.current.children[2];
+    const ctx = gsap.context(() => {
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: winnerCardRef.current,
+          start: "top 50%",
+          end: "bottom top",
+          toggleActions: "play none none none",
+        },
+      });
 
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: winnerCardRef.current,
-        start: "top 50%",
-        end: "bottom top",
-        toggleActions: "play none none none",
-      },
-    });
+      timeline.from(winnerCardRef.current, {
+        opacity: 0,
+        xPercent: -150,
+        duration: 0.6,
+        ease: "power2.out",
+      })
 
-    timeline.from(winnerCardRef.current, {
-      opacity: 0,
-      xPercent: -150,
-      duration: 0.6,
-      ease: "power2.out",
-    })
- 
-    timeline.from(headingChildren, {
-      y: 50,
-      duration: 0.6,
-      ease: "power2.out",
+      timeline.from(headingChildren, {
+        y: 50,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+      timeline.from(iconsChildren.children[0], {
+        yPercent: -100,
+        duration: 0.2,
+        ease: "power2.out",
+        opacity: 0,
+      });
+      timeline.from(iconsChildren.children[1], {
+        yPercent: -100,
+        duration: 0.2,
+        ease: "power2.out",
+        opacity: 0
+      });
+      timeline.from(iconsChildren.children[2], {
+        yPercent: -100,
+        duration: 0.2,
+        ease: "power2.out",
+        opacity: 0
+      });
+      timeline.from(iconsChildren.children[3], {
+        yPercent: -100,
+        duration: 0.2,
+        ease: "power2.out",
+        opacity: 0
+      });
     });
-    timeline.from(iconsChildren.children[0], {
-      yPercent: -100,
-      duration: 0.2,
-      ease: "power2.out",
-      opacity:0,
-    });
-    timeline.from(iconsChildren.children[1], {
-      yPercent: -100,
-      duration: 0.2,
-      ease: "power2.out",
-      opacity:0
-    });
-    timeline.from(iconsChildren.children[2], {
-      yPercent: -100,
-      duration: 0.2,
-      ease: "power2.out",
-      opacity:0
-    });
-    timeline.from(iconsChildren.children[3], {
-      yPercent: -100,
-      duration: 0.2,
-      ease: "power2.out",
-      opacity:0
-    });
-
+    return () => ctx.revert();
   }, []);
 
 

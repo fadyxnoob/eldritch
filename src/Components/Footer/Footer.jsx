@@ -3,8 +3,10 @@ import Config from '../../Config/Config';
 import DatabaseService from '../../Admin/Appwrite/Database';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
+// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
     const [socialCollection] = useState(Config.appWriteWebsiteSocialCollID)
@@ -17,51 +19,53 @@ const Footer = () => {
     const footerInternalLinksRef = useRef(null)
     const footerBottomBarRef = useRef(null)
 
-    useGSAPAnimations(() => {
-        const timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: footerRef.current,
-                start: "top bottom",
-                end: "bottom top",
-                toggleActions: "play none none none",
-            },
-        })
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: footerRef.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    toggleActions: "play none none none",
+                },
+            })
 
-        timeline.from(footerLogoRef.current, {
-            x: -100,
-            duration: 0.6,
-            ease: "power2.out",
-        })
-            .from(footerSocialRefs.current.children, {
-                opacity:0,
-                xPercent: 600,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: 'power2.out',
-            })
-            .from(footerInternalLinksRef.current.children, {
-                opacity:0,
-                yPercent: -100,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: 'power2.out',
-            })
-            .from(footerBottomBarRef.current.children[0], {
-                opacity:0,
+            timeline.from(footerLogoRef.current, {
                 x: -100,
                 duration: 0.6,
-                stagger: 0.1,
-                ease: 'power2.out',
+                ease: "power2.out",
             })
-            .from(footerBottomBarRef.current.children[1].children, {
-                opacity:0,
-                y: -100,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: 'power2.out',
-            })
+                .from(footerSocialRefs.current.children, {
+                    opacity: 0,
+                    xPercent: 600,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: 'power2.out',
+                })
+                .from(footerInternalLinksRef.current.children, {
+                    opacity: 0,
+                    yPercent: -100,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: 'power2.out',
+                })
+                .from(footerBottomBarRef.current.children[0], {
+                    opacity: 0,
+                    x: -100,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: 'power2.out',
+                })
+                .from(footerBottomBarRef.current.children[1].children, {
+                    opacity: 0,
+                    y: -100,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: 'power2.out',
+                })
+        })
 
-
+        return () => ctx.revert();
     }, [])
 
     const getPageData = useCallback(async () => {

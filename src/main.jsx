@@ -27,6 +27,7 @@ const FaqsPage = lazy(() => import('./Pages/FaqsPage/FaqsPage.jsx'));
 const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy/PrivacyPolicy.jsx'));
 const UsersGuide = lazy(() => import('./Pages/UsersGuide/UsersGuide.jsx'));
 const TermsAndConditions = lazy(() => import('./Pages/TermsAndConditions/TermsAndConditions.jsx'));
+const CheckOut = lazy(() => import('./Pages/CheckOut/CheckOut.jsx'));
 
 
 
@@ -111,6 +112,7 @@ createRoot(document.getElementById('root')).render(
               <Route path="privacyPolicy" element={<PrivacyPolicy />} />
               <Route path="usersGuide" element={<UsersGuide />} />
               <Route path="termsAndConditions" element={<TermsAndConditions />} />
+              <Route path="checkOut/:checkOutProductID" element={<CheckOut />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />

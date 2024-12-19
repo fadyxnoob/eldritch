@@ -107,7 +107,8 @@ const Product = () => {
     const handleMinusQuantity = () =>
         setQuantity((prev) => (prev > 0 ? prev - 1 : 0));
 
-    const handlePlusQuantity = () => setQuantity((prev) => prev + 1);
+    const handlePlusQuantity = () => 
+        setQuantity((prev) => prev + 1);
 
     if (loading) return <p>Loading...</p>;
 
@@ -194,7 +195,6 @@ const Product = () => {
             </div>
         </>
     );
-
 }
 
 export default React.memo(Product);

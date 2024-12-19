@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Alert from "../../Components/Alert/Alert";
 import { useSelector } from "react-redux";
 import gsap from 'gsap'
-import useGSAPAnimations from "../../Pages/useGSAPAnimations/UseGSAPAnimations";
+// import useGSAPAnimations from "../../Pages/useGSAPAnimations/UseGSAPAnimations";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 
 
@@ -18,12 +20,15 @@ const CartIcon = () => {
 
   const cartIconRef = useRef(null)
 
-  useGSAPAnimations(() => {
-    gsap.from(cartIconRef.current, {
-      y: -500,
-      duration: 3,
-      ease: 'power2.out',
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(cartIconRef.current, {
+        y: -500,
+        duration: 3,
+        ease: 'power2.out',
+      })
     })
+    return () => ctx.revert();
   }, [])
 
   useEffect(() => {
