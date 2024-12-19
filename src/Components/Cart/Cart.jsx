@@ -48,10 +48,11 @@ const CartIcon = () => {
           onClose={() => setAlert(null)}
         />
       )}
+
       <div
         ref={cartIconRef}
         onClick={onClickHandler}
-        className="bg-primary fixed bottom-24 w-24 left-0 h-12 cartIcon flex items-center justify-end px-5 cursor-pointer"
+        className="bg-primary fixed bottom-2 w-24 left-0 h-12 cartIcon flex items-center justify-end px-5 cursor-pointer"
       >
         <div className="relative">
           <FaBagShopping className="text-white h-[40px] w-[40px] font-light" />

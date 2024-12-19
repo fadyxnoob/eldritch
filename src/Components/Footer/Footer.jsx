@@ -153,7 +153,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div ref={footerBottomBarRef} className="px-2 py-5 flex flex-wrap sm:justify-between bg-primary text-light sm:px-20">
+            <div ref={footerBottomBarRef} className="px-2 py-2 flex flex-wrap sm:justify-between bg-primary text-light sm:px-20">
                 <div>
                     <p>
                         Copyright @ 2024 Eldritch. All right reserved

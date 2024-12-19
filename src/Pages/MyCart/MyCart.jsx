@@ -62,12 +62,14 @@ const MyCart = () => {
                 />
             )}
 
-            <div></div>
+            <div className='forgetBanner banner mb-10'>
+                <h1 className='text-5xl text-light font-bold border-b-4 border-primary'>My Cart</h1>
+            </div>
             <div className="overflow-x-auto mt-10 pt-10">
                 <table className='rounded boxShadow w-full sm:w-[70%] border mx-auto overflow-auto bg-green-200'>
                     <thead>
                         <tr>
-                            <th colSpan={6}>
+                            <th colSpan={7}>
                                 <h1 className='p-0 m-0 bg-primary text-light text-center text-2xl py-2'>My Cart</h1>
                             </th>
                         </tr>
@@ -77,7 +79,8 @@ const MyCart = () => {
                             <th className='border p-2 font-light'>Price</th>
                             <th className='border p-2 font-light'>Quantity</th>
                             <th className='border p-2 font-light'>Total</th>
-                            <th className='border p-2 font-light'>Action</th>
+                            <th className='border p-2 font-light'>Remove</th>
+                            <th className='border p-2 font-light'>Check Out</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,6 +108,11 @@ const MyCart = () => {
                                                 <CiCircleRemove className='text-primary size-8 mx-auto cursor-pointer' />
                                             </button>
                                         </td>
+                                        <td className='text-center border font-light'>
+                                            <button onClick={() => handleRemoveItem(pro.id)}>
+                                                <CiCircleRemove className='text-primary size-8 mx-auto cursor-pointer' />
+                                            </button>
+                                        </td>
                                     </tr>
                                 )
                             })
@@ -112,12 +120,12 @@ const MyCart = () => {
                     </tbody>
                     <tfoot>
                         <tr className='bg-primary text-light'>
-                            <td className='text-center border p-2 font-light'>Total Products</td>
+                            <td colSpan={2} className='text-center border p-2 font-light'>Total Products</td>
                             <td className='text-center border p-2 font-light'>{totalItems}</td>
                             <td className='text-center border p-2 font-light'>Total Items</td>
                             <td className='text-center border p-2 font-light'>{totalQuantity}</td>
                             <td className='text-center border p-2 font-light'>Total Price</td>
-                            <td className='text-center border p-2 font-light'>${totalPrice}</td>
+                            <td  className='text-center border p-2 font-light'>${totalPrice}</td>
                         </tr>
                     </tfoot>
                 </table>

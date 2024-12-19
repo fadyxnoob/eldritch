@@ -15,7 +15,7 @@ const Topbar = ({ user }) => {
 
     const socialRef = useRef();
     const linksRef = useRef();
-                
+
     useGSAPAnimations(() => {
         const timeline = gsap.timeline();
         timeline.from(socialRef.current.children[0], {
@@ -35,7 +35,11 @@ const Topbar = ({ user }) => {
             }
         );
 
-        timeline.from(linksRef.current.children[0], {
+        user ? timeline.from(linksRef.current.children[0], {
+            opacity: 0,
+            y: -50,
+            duration: 0.6,
+        }) : timeline.from(linksRef.current.children[0], {
             opacity: 0,
             y: -50,
             duration: 0.6,
@@ -74,7 +78,7 @@ const Topbar = ({ user }) => {
             </div>
             {
                 user ?
-                    <Link to='/myProfile'  ref={linksRef}>
+                    <Link to='/myProfile' ref={linksRef}>
                         <button
                             className='bg-white px-2 rounded-sm'>
                             {user.name}
