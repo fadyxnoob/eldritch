@@ -15,7 +15,7 @@ const Topbar = ({ user }) => {
 
     const socialRef = useRef();
     const linksRef = useRef();
-
+                
     useGSAPAnimations(() => {
         const timeline = gsap.timeline();
         timeline.from(socialRef.current.children[0], {
@@ -64,7 +64,7 @@ const Topbar = ({ user }) => {
     }, [])
 
     return (
-        <div className='flex bg-primary sm:px-20 py-1 justify-center lg:justify-between'>
+        <div className='fixed w-full top-0 left-0 flex bg-primary sm:px-20 py-1 justify-center lg:justify-between z-50'>
             <div className='hidden md:flex justify-center items-center gap-5 text-light' ref={socialRef}>
                 <span className='font-semibold' >Follow Us :</span>
                 <a href={socialData.facebook}> <FaFacebookF />  </a>
@@ -74,9 +74,9 @@ const Topbar = ({ user }) => {
             </div>
             {
                 user ?
-                    <Link to='/myProfile'>
+                    <Link to='/myProfile'  ref={linksRef}>
                         <button
-                            className='bg-white px-2 rounded-sm py-1'>
+                            className='bg-white px-2 rounded-sm'>
                             {user.name}
                         </button>
                     </Link> : null

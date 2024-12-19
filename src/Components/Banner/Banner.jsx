@@ -35,7 +35,7 @@ const Banner = () => {
     }, [])
 
     return (
-        <div className='bg-hero p-5 flex items-center justify-end flex-col relative overflow-hidden' >
+        <div className='bg-hero p-5 flex items-center justify-end flex-col relative overflow-hidden mt-10' >
             <div ref={bannerImageRef} className="background-container"></div>
             <div className='absolute bottom-40'>
                 <div ref={bannerTitleRef} className='text-center text-light font-bold text-5xl'>

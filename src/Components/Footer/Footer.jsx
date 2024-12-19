@@ -21,7 +21,7 @@ const Footer = () => {
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: footerRef.current,
-                start: "top 50%",
+                start: "top bottom",
                 end: "bottom top",
                 toggleActions: "play none none none",
             },

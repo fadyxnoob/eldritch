@@ -8,7 +8,6 @@ import gsap from 'gsap'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-
     const hamburgerRef = useRef(null);
     const logoRef = useRef(null);
     const menuItemsRef = useRef([]);
@@ -55,7 +54,9 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className='h-16 w-full border px-2 lg:px-20 bg-light flex items-center justify-between z-50'>
+            <nav
+                className={`fixed top-3 left-0 mt-5 h-16 w-full border px-2 lg:px-20 bg-light flex items-center justify-between z-50`}
+            >
                 {/* LOGO section */}
                 <div className="logo flex justify-center items-center" ref={logoRef}>
                     <Link to='/'>

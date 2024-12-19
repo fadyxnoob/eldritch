@@ -53,7 +53,7 @@ const MyCart = () => {
 
 
     return (
-        <div className='mt-10'>
+        <div className='mt-10 pt-10'>
             {alert && (
                 <Alert
                     type={alert.type}
@@ -61,7 +61,9 @@ const MyCart = () => {
                     onClose={() => setAlert(null)}
                 />
             )}
-            <div className="overflow-x-auto">
+
+            <div></div>
+            <div className="overflow-x-auto mt-10 pt-10">
                 <table className='rounded boxShadow w-full sm:w-[70%] border mx-auto overflow-auto bg-green-200'>
                     <thead>
                         <tr>
@@ -120,7 +122,8 @@ const MyCart = () => {
                     </tfoot>
                 </table>
             </div>
-            <div className="mt-20 w-full px-2 mx-auto sm:w-5/6">
+
+            {/* <div className="mt-20 w-full px-2 mx-auto sm:w-5/6">
                 <h2 className='text-center text-4xl'>Order Now</h2>
                 <div className='p-5 boxShadow mt-5'>
                     <form method='POST'>
@@ -168,7 +171,7 @@ const MyCart = () => {
                             className='bg-primary w-full mt-5 h-10 text-light text-lg'>Purchase</button>
                     </form>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
