@@ -14,97 +14,98 @@ const Counter = () => {
     const documentID = "674eda5100217e08f20e";
 
     const counterRef = useRef(null)
-   
+
     useEffect(() => {
         const ctx = gsap.context(() => {
-        gsap.from(counterRef.current, {
-            duration: 0.8,
-            opacity: 0,
-            xPercent: -100,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: counterRef.current,
-                start: 'top 50%',
-                end: 'bottom top',
-                toggleActions: 'play none none none',
-            }
+            gsap.from(counterRef.current, {
+                duration: 0.8,
+                opacity: 0,
+                xPercent: -100,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: counterRef.current,
+                    start: 'top 50%',
+                    end: 'bottom top',
+                    toggleActions: 'play none none none',
+                }
+            })
+            gsap.from(counterRef.current.children[0].children[0], {
+                opacity: 0,
+                y: -150,
+                duration: 0.6,
+                delay: 0.3,
+                scale: 0.2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: counterRef.current,
+                    start: 'top 50%',
+                    end: 'bottom top',
+                    toggleActions: 'play none none none',
+                }
+            })
+            gsap.from(counterRef.current.children[0].children[1].children[0], {
+                opacity: 0,
+                xPercent: -100,
+                duration: 0.8,
+                delay: 0.6,
+                scale: 0.2,
+                rotate: -360,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: counterRef.current,
+                    start: 'top 50%',
+                    end: 'bottom top',
+                    toggleActions: 'play none none none',
+                }
+            })
+            gsap.from(counterRef.current.children[0].children[1].children[3], {
+                opacity: 0,
+                xPercent: 100,
+                duration: 0.8,
+                delay: 0.6,
+                scale: 0.2,
+                rotate: 360,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: counterRef.current,
+                    start: 'top 50%',
+                    end: 'bottom top',
+                    toggleActions: 'play none none none',
+                }
+            })
+            gsap.from(counterRef.current.children[0].children[1].children[1], {
+                opacity: 0,
+                yPercent: 100,
+                duration: 0.8,
+                delay: 0.6,
+                scale: 0.2,
+                rotate: 360,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: counterRef.current,
+                    start: 'top 50%',
+                    end: 'bottom top',
+                    toggleActions: 'play none none none',
+                }
+            })
+            gsap.from(counterRef.current.children[0].children[1].children[2], {
+                opacity: 0,
+                yPercent: -100,
+                duration: 0.8,
+                delay: 0.6,
+                scale: 0.2,
+                rotate: -360,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: counterRef.current,
+                    start: 'top 50%',
+                    end: 'bottom top',
+                    toggleActions: 'play none none none',
+                }
+            })
         })
-        gsap.from(counterRef.current.children[0].children[0], {
-            opacity: 0,
-            y: -150,
-            duration: 0.6,
-            delay: 0.3,
-            scale: 0.2,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: counterRef.current,
-                start: 'top 50%',
-                end: 'bottom top',
-                toggleActions: 'play none none none',
-            }
-        })
-        gsap.from(counterRef.current.children[0].children[1].children[0], {
-            opacity: 0,
-            xPercent: -100,
-            duration: 0.8,
-            delay: 0.6,
-            scale: 0.2,
-            rotate:-360,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: counterRef.current,
-                start: 'top 50%',
-                end: 'bottom top',
-                toggleActions: 'play none none none',
-            }
-        })
-        gsap.from(counterRef.current.children[0].children[1].children[3], {
-            opacity: 0,
-            xPercent: 100,
-            duration: 0.8,
-            delay: 0.6,
-            scale: 0.2,
-            rotate:360,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: counterRef.current,
-                start: 'top 50%',
-                end: 'bottom top',
-                toggleActions: 'play none none none',
-            }
-        })
-        gsap.from(counterRef.current.children[0].children[1].children[1], {
-            opacity: 0,
-            yPercent:100,
-            duration: 0.8,
-            delay: 0.6,
-            scale: 0.2,
-            rotate:360,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: counterRef.current,
-                start: 'top 50%',
-                end: 'bottom top',
-                toggleActions: 'play none none none',
-            }
-        })
-        gsap.from(counterRef.current.children[0].children[1].children[2], {
-            opacity: 0,
-            yPercent:-100,
-            duration: 0.8,
-            delay: 0.6,
-            scale: 0.2,
-            rotate:-360,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: counterRef.current,
-                start: 'top 50%',
-                end: 'bottom top',
-                toggleActions: 'play none none none',
-            }
-        })
-        })
-        return () => ctx.revert(); 
+
+        return () => ctx.revert();
 
     }, [])
     // Fetch timer data from the database
