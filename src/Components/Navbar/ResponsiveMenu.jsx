@@ -10,8 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const ResponsiveMenu = ({ isOpen, setClose }) => {
-    const menuItemsRef = useRef([]); // Refs for menu items
-    const searchInputRef = useRef(null); // Ref for search input
+    const menuItemsRef = useRef([]); 
+    const searchInputRef = useRef(null); 
 
     useEffect(() => {
         if (isOpen) {
@@ -40,13 +40,9 @@ const ResponsiveMenu = ({ isOpen, setClose }) => {
         <AnimatePresence mode='wait'>
             {
                 isOpen && <motion.div
-                    initial={{ opecity: 0, y: -100 }}
-                    animate={{ opecity: 0, y: 0 }}
-                    exit={{ opecity: 0, y: -100 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute top-22 left-0 w-full z-20 md:hidden"
+                    className="fixed top-24 left-0 w-full z-50 md:hidden"
                 >
-                    <div className='text-xl font-semibold text-light bg-primary py-10 m-2 rounded-lg h-fit'>
+                    <div className='left-0 text-xl font-semibold text-light bg-primary py-10 m-2 rounded-lg h-fit'>
                         <ul className='flex flex-col items-center justify-center gap-5'>
                             {NavbarMenu.map((item, idx) => (
                                 <li key={item.id} ref={(el) => (menuItemsRef.current[idx] = el)}>

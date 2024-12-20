@@ -18,7 +18,7 @@ const WinnerCard = ({ image, alt }) => {
         scrollTrigger: {
           trigger: winnerCardRef.current,
           start: "top 50%",
-          end: "bottom top",
+          end: "top bottom",
           toggleActions: "play none none none",
         },
       });
@@ -29,36 +29,19 @@ const WinnerCard = ({ image, alt }) => {
         duration: 0.6,
         ease: "power2.out",
       })
+        .from(headingChildren, {
+          y: 50,
+          duration: 0.6,
+          ease: "power2.out",
+        })
+        .from(iconsChildren.children, {
+          yPercent: -100,
+          duration: 0.2,
+          stagger: 0.1,
+          ease: "power2.out",
+          opacity: 0,
+        });
 
-      timeline.from(headingChildren, {
-        y: 50,
-        duration: 0.6,
-        ease: "power2.out",
-      });
-      timeline.from(iconsChildren.children[0], {
-        yPercent: -100,
-        duration: 0.2,
-        ease: "power2.out",
-        opacity: 0,
-      });
-      timeline.from(iconsChildren.children[1], {
-        yPercent: -100,
-        duration: 0.2,
-        ease: "power2.out",
-        opacity: 0
-      });
-      timeline.from(iconsChildren.children[2], {
-        yPercent: -100,
-        duration: 0.2,
-        ease: "power2.out",
-        opacity: 0
-      });
-      timeline.from(iconsChildren.children[3], {
-        yPercent: -100,
-        duration: 0.2,
-        ease: "power2.out",
-        opacity: 0
-      });
     });
     return () => ctx.revert();
   }, []);

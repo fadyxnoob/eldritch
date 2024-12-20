@@ -85,15 +85,14 @@ const ProductCard = ({ popular = null, style = 'sm:w-[45%] md:w-[28%]', limit = 
                             rotation: -45, // Rotate counterclockwise
                             duration: 0.6,
                             ease: "power2.out",
-                        });
-
-                        cardTimeline.from(icons[1], {
-                            opacity: 0,
-                            y: 30, // Slide down effect
-                            rotation: 45, // Rotate clockwise
-                            duration: 0.6,
-                            ease: "power2.out",
-                        }, '-=0.4'); // Overlap the animation slightly for a smoother effect
+                        })
+                            .from(icons[1], {
+                                opacity: 0,
+                                y: 30, // Slide down effect
+                                rotation: 45, // Rotate clockwise
+                                duration: 0.6,
+                                ease: "power2.out",
+                            }, '-=0.4'); // Overlap the animation slightly for a smoother effect
                     }
                 });
             }

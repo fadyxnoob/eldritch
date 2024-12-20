@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap'
 import { Banner, ProductCard, LiveStream, Counter, PostCard, WinnerCard } from '../../index'
 import Candidate3 from '../../assets/images/Candi3.jpg'
-// import useGSAPAnimations from '../useGSAPAnimations/UseGSAPAnimations';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 

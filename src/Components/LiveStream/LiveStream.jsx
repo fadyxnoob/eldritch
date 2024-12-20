@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { FaPlay } from "react-icons/fa";
 import stream from '../../assets/images/stream.jpg'
-// import useGSAPAnimations from '../../Pages/useGSAPAnimations/UseGSAPAnimations';
 import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -11,8 +10,6 @@ const LiveStream = () => {
   const liveStreamRef = useRef();
 
   useEffect(() => {
-    // const timeline = gsap.timeline();
-
     if (liveStreamRef.current) {
       const ctx = gsap.context(() => {
         gsap.from(liveStreamRef.current.children[0], {
