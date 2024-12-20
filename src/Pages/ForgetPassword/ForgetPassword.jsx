@@ -1,4 +1,5 @@
 import React from 'react';
+
 const ForgetPassword = () => {
 
         document.title = 'Byt3Blitz | Forgetpassword'

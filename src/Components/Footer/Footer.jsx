@@ -89,26 +89,26 @@ const Footer = () => {
                 </div>
                 <div className="mt-5 overflow-hidden">
                     <ul ref={footerSocialRefs} className='flex gap-10 overflow-hidden'>
-                        <li className='size-10 rounded-full flex items-center justify-center text-light text-lg bg-facebook hover:bg-light hover:border border-facebook hover:text-facebook cursor-pointer'>
                             <a href={socialData.facebook}>
+                        <li className='size-10 rounded-full flex items-center justify-center text-light text-lg bg-facebook hover:bg-light hover:border border-facebook hover:text-facebook cursor-pointer'>
                                 <FaFacebookF />
-                            </a>
                         </li>
-                        <li className='size-10 rounded-full flex items-center justify-center text-light text-lg bg-black hover:bg-light hover:border border-black hover:text-black cursor-pointer'>
+                            </a>
                             <a href={socialData.twitter}>
+                        <li className='size-10 rounded-full flex items-center justify-center text-light text-lg bg-black hover:bg-light hover:border border-black hover:text-black cursor-pointer'>
                                 <FaTwitter />
-                            </a>
                         </li>
-                        <li className='size-10 rounded-full flex items-center justify-center text-light text-lg bg-instagram hover:bg-black hover:border border-black hover:text-instagram cursor-pointer'>
+                            </a>
                             <a href={socialData.instagram}>
+                        <li className='size-10 rounded-full flex items-center justify-center text-light text-lg bg-instagram hover:bg-black hover:border border-black hover:text-instagram cursor-pointer'>
                                 <FaInstagram />
-                            </a>
                         </li>
-                        <li className='size-10 rounded-full flex items-center justify-center text-light text-lg bg-linkedin hover:bg-light hover:border border-linkedin hover:text-linkedin cursor-pointer'>
+                            </a>
                             <a href={socialData.linkedin}>
+                        <li className='size-10 rounded-full flex items-center justify-center text-light text-lg bg-linkedin hover:bg-light hover:border border-linkedin hover:text-linkedin cursor-pointer'>
                                 <FaLinkedinIn />
-                            </a>
                         </li>
+                            </a>
                     </ul>
                 </div>
             </div>

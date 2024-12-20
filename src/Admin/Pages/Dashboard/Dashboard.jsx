@@ -16,16 +16,20 @@ const Dashboard = () => {
   const [counter, setCounter] = useState({
     newMembers: 0,
     newComments: 0,
+    newOrders: 0,
   });
 
   const getCountersFromDB = useCallback(async () => {
     const candiColl = Config.appWriteUsersColl;
+    const ordersColl = Config.appWriteManageUserOrdersCollID;
     const params = [Query.equal('status', 'pending')];
     const memberRes = await DatabaseService.getAllDocuments(candiColl, params);
-
+    const orderRes = await DatabaseService.getAllDocuments(ordersColl, params);
+    console.log({orderRes});
     setCounter((prev) => ({
       ...prev,
       newMembers: memberRes.total,
+      newOrders: orderRes.total,
     }));
   }, []);
 
@@ -78,7 +82,7 @@ const Dashboard = () => {
             <Card title={'Pending Reports'} counter={'9'} path={''} />
           </div>
           <div className="w-full">
-            <Card title={'Pending Orders'} counter={'90'} path={'pendingOrders'} />
+            <Card title={'Pending Orders'} counter={counter.newOrders} path={'pendingOrders'} />
           </div>
           <div className="w-full">
             <Card

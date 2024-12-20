@@ -131,8 +131,9 @@ class AppWriteDatabase {
             console.log('Getting Matches ERROR ::', error);
         }
     }
-
+ 
     async getDocument(docID, collection) {
+        console.log({ docID, collection });
         try {
             return await this.databases.getDocument(
                 Config.appWriteDBID,
@@ -140,7 +141,7 @@ class AppWriteDatabase {
                 docID
             )
         } catch (error) {
-            console.log('Getting Document ERROR ::', docID, 'in', collection, error.message);
+            console.error('Getting Document ERROR ::', docID, 'in', collection, error.message);
         }
     }
 
