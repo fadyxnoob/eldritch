@@ -34,7 +34,7 @@ import Post from "./Pages/Post/Post";
 import Schedules from "./Pages/Schedules/Schedules";
 import Tab from "./Components/Tab/Tab";
 import Tabs from "./Components/Tabs/Tabs";
-
+import Loader from "./Components/Loader/Loader";
 
 
 
@@ -77,5 +77,6 @@ export {
     Post,
     Schedules,
     Tab,
-    Tabs
+    Tabs,
+    Loader
 }

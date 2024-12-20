@@ -28,6 +28,7 @@ const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy/PrivacyPolicy.jsx
 const UsersGuide = lazy(() => import('./Pages/UsersGuide/UsersGuide.jsx'));
 const TermsAndConditions = lazy(() => import('./Pages/TermsAndConditions/TermsAndConditions.jsx'));
 const CheckOut = lazy(() => import('./Pages/CheckOut/CheckOut.jsx'));
+const Placeholder = lazy(()=> import('./Pages/Placeholder/Placeholder.jsx'))
 
 
 
@@ -90,7 +91,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={Store}>
       <BrowserRouter>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Placeholder/>}>
           <Routes>
             {/* Main Site Routes */}
             <Route path="/" element={<Layout />}>
@@ -116,6 +117,7 @@ createRoot(document.getElementById('root')).render(
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            {/* <Route path="/" element={<Placeholder />} /> */}
 
             {/* Admin Login */}
             <Route path="/admin/adminLogin" element={<AdminLogin />} />

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { Topbar, Navbar, Footer, CartIcon } from '../../';
+import { Topbar, Navbar, Footer, CartIcon } from '../../'
 import { useDispatch, useSelector } from 'react-redux';
 import { authLogin, logout } from '../../Store/authSlice';
 import authService from '../../Appwrite/Auth';
 import LoadingBar from 'react-top-loading-bar';
 import { getLocalStorage } from '../../LocalStorage/LocalStorage';
+import Placeholder from '../Placeholder/Placeholder';
 
 const Layout = () => {
     const dispatch = useDispatch();
@@ -67,7 +68,7 @@ const Layout = () => {
             <CartIcon />
         </main>
     ) : (
-        'Loading ......'
+        <Placeholder />
     );
 };
 

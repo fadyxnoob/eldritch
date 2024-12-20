@@ -11,7 +11,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-const ProductCard = ({ popular = null, style = 'sm:w-[45%] md:w-[28%]', limit = null }) => {
+const ProductCard = ({ popular = null, style = 'sm:w-[45%] md:w-[28%]', limit }) => {
 
     const [products, setProducts] = useState([]);
     const [images, setImages] = useState({});
@@ -111,9 +111,11 @@ const ProductCard = ({ popular = null, style = 'sm:w-[45%] md:w-[28%]', limit = 
 
         setAlert({ type: 'success', message: 'Item added to the cart.' });
     }
-
+     
     if (loading) {
-        return <p>Loading....</p>
+        return <div className="h-screen">
+            
+        </div>
     }
 
     return (

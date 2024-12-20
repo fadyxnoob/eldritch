@@ -14,7 +14,7 @@ const Footer = () => {
     const [socialData, setSocialData] = useState({ instagram: '', facebook: '', twitter: '', linkedin: '' })
 
     const footerRef = useRef(null)
-    const footerLogoRef = useRef(null)
+    const footerLogoRef = useRef(null) 
     const footerSocialRefs = useRef(null)
     const footerInternalLinksRef = useRef(null)
     const footerBottomBarRef = useRef(null)
