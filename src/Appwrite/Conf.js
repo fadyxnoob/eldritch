@@ -208,7 +208,7 @@ export class DBService {
         }
     }
 
-    async addUserOrder(user={}, Item={} ) {
+    async addUserOrder(user = {}, Item = {}) {
         try {
             const order = await this.databases.createDocument(
                 Config.appWriteDBID,
@@ -237,10 +237,10 @@ export class DBService {
                 )
             }
 
-            return {type:'success', message:'Your order has been placed.'}
+            return { type: 'success', message: 'Your order has been placed.' }
         } catch (error) {
             console.error(error);
-            return {type:'error', message:'Failed to placing order.'}
+            return { type: 'error', message: 'Failed to placing order.' }
         }
     }
     async deleteComment(id) {

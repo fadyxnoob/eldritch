@@ -29,6 +29,7 @@ const UsersGuide = lazy(() => import('./Pages/UsersGuide/UsersGuide.jsx'));
 const TermsAndConditions = lazy(() => import('./Pages/TermsAndConditions/TermsAndConditions.jsx'));
 const CheckOut = lazy(() => import('./Pages/CheckOut/CheckOut.jsx'));
 const Placeholder = lazy(()=> import('./Pages/Placeholder/Placeholder.jsx'))
+const ResetPassword = lazy(() => import('./Pages/ResetPassword/ResetPassword.jsx'));
 
 
 
@@ -113,6 +114,7 @@ createRoot(document.getElementById('root')).render(
               <Route path="privacyPolicy" element={<PrivacyPolicy />} />
               <Route path="usersGuide" element={<UsersGuide />} />
               <Route path="termsAndConditions" element={<TermsAndConditions />} />
+              <Route path="resetPassword" element={<ResetPassword />} />
               <Route path="checkOut/:checkOutProductID" element={<CheckOut />} />
             </Route>
             <Route path="/login" element={<Login />} />

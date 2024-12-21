@@ -133,7 +133,6 @@ class AppWriteDatabase {
     }
  
     async getDocument(docID, collection) {
-        console.log({ docID, collection });
         try {
             return await this.databases.getDocument(
                 Config.appWriteDBID,

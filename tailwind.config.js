@@ -6,7 +6,6 @@ export default {
   ],
   theme: {
     extend: {
-      
       height: {
         'screen-minus-header': 'calc(100vh - 3rem)',
       },

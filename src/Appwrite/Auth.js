@@ -1,10 +1,9 @@
 import Config from "../Config/Config";
 import { Client, Account, ID, Databases, Storage, Query } from "appwrite";
-  
+
 export class Service {
     client = new Client();
     account;
-
     databases;
     storage;
 
@@ -52,7 +51,7 @@ export class Service {
                 id: userAccount.$id,
                 userName,
                 image: uploadResponse.$id,
-                status : 'pending'
+                status: 'pending'
             };
 
             await this.databases.createDocument(
@@ -395,7 +394,38 @@ export class Service {
         }
     }
 
-    
+    async createPasswordRecovery(email) {
+        try {
+            console.log("Attempting password recovery for email:", email);
+            const response = await this.account.createRecovery(
+                email,
+                'http://localhost:5173/resetPassword'
+            )
+            console.log("Password recovery response:", response);
+            return response;
+        } catch (error) {
+            console.error("Password recovery error:", error);
+            return error;
+        }
+    }
+
+    async updatePassword(password = null, secret = null, userId = null) {
+       
+        console.log({ secret, userId, password });
+
+        try {
+            return await this.account.updateRecovery(
+                userId,
+                secret,
+                password,
+                password
+            );
+        } catch (error) {
+            console.error("Error updating password:", error);
+            return error;
+        }
+    }
+
 
 }
 
