@@ -145,6 +145,7 @@ const Footer = () => {
                         <li><Link to="/signup" className="underline hover:text-blue-700 font-normal">Signup</Link></li>
                         <li><Link to="/login" className="underline hover:text-blue-700 font-normal">Login</Link></li>
                         <li><Link to="/myProfile" className="underline hover:text-blue-700 font-normal">Profile</Link></li>
+                        <li><Link to="/forgetPassword" className="underline hover:text-blue-700 font-normal">Forget Password</Link></li>
                     </ul>
                 </div>
 

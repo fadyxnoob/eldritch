@@ -11,8 +11,8 @@ const Alert = ({ message, type = 'error', onClose }) => {
         if (message) {
             setVisible(true);
             const timer = setTimeout(() => {
-                setVisible(false);
-            }, 1000);
+            setVisible(false);
+            }, 2000);
 
             return () => clearTimeout(timer);
         }

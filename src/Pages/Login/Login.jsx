@@ -13,31 +13,30 @@ const Login = () => {
     const [isText, setIsText] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null)
+    const [alert, setAlert] = useState(null);
     const navigate = useNavigate()
     const dispatch = useDispatch();
-     
-    const handleLogin = async (email, password) => {
-        try {
-            const session = await authService.login({ email, password }, setError);
 
-            if (session) {
-                localStorage.setItem('authStatus', 'true');
-                const userData = await authService.getCurrentUser();
-                if (userData && userData.$id) {
-                    dispatch(authLogin({ userdata: userData }));
-                    localStorage.setItem('authStatus', 'true')
-                    navigate('/myProfile');
-                }
-            } else {
-                setError('No session created.');
-                console.error('No session created.');
-                return;
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const session = await authService.login(email, password);
+        console.log(session.type);
+        if (session.type === 'success') {
+            localStorage.setItem('authStatus', 'true');
+            setAlert({ message: session.message, type: session.type });
+            const userData = await authService.getCurrentUser();
+            if (userData && userData.$id) {
+                dispatch(authLogin({ userdata: userData }));
+                setTimeout(() => {
+                    setAlert(null);
+                    navigate('/');
+                }, 2000);
             }
-        } catch (error) {
-            console.error('Login ERROR:', error);
+        } else {
+            localStorage.setItem('authStatus', '');
+            setAlert({ message: session.message, type: session.type });
         }
-    };
+    }
 
 
     const changeInput = () => {
@@ -49,20 +48,17 @@ const Login = () => {
 
     return (
         <div className='loginWrapper h-screen w-full flex-col'>
-            
+
             {
-                error ? <div className='mb-5 w-80 bg-[#00000049] rounded mx-auto'>
-                    <Alert message={error} />
+                alert ? <div className='mb-5 w-80 bg-[#00000049] rounded mx-auto'>
+                    <Alert message={alert.message} type={alert.type} />
                 </div> : null
             }
 
             <div className='border w-80 h-96 bg-[#00000049] rounded p-7 mx-auto'>
                 <h1 className='text-center text-3xl font-bold text-white'>Login</h1>
                 <form
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        handleLogin(email, password);
-                    }}
+                    onSubmit={handleLogin}
                     className='mt-5 flex flex-col gap-5'>
                     <div className='flex bg-white p-2 gap-2 rounded items-center px-1'>
                         <span>@</span>

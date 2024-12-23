@@ -38,7 +38,6 @@ const Layout = () => {
                 })
                 .finally(() => setLoading(false));
         } else {
-            console.log('User is not logged in');
             setLoading(false)
         }
 

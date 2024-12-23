@@ -86,23 +86,15 @@ export class Service {
         }
     }
 
-    async login({ email, password }, setLoginError) {
 
+    async login(email, password) {
         try {
             const session = await this.account.createEmailPasswordSession(email, password);
-            if (session) {
-                setLoginError("Login successful");
-                return session;
-            } else {
-                setLoginError("Failed to create login session.");
-                return;
-            }
+            return { type: 'success', message: 'Login successful', data: session };
         } catch (error) {
-            setLoginError(`Login User ERROR :: ${error.message}`);
-            console.error('Error during login:', error);
-            throw error;
+            console.error('Login ERR:', error);
+            return { type: 'error', message: 'Please check your email and password', data: error };
         }
-
     }
 
     async getCurrentUser() {
@@ -110,14 +102,10 @@ export class Service {
             const user = await this.account.get();
             return user;
         } catch (error) {
-            if (error.response && error.response.status === 401) {
-                console.warn("Unauthorized: No active session. Please log in again.");
-            } else {
-                console.error("An error occurred while fetching user data:", error);
-            }
-            throw error;
+            console.error('User Data ERR:', error);
+            return error.message || error;
         }
-    };
+    }
 
     async logout() {
         try {
@@ -399,7 +387,7 @@ export class Service {
             console.log("Attempting password recovery for email:", email);
             const response = await this.account.createRecovery(
                 email,
-                'http://localhost:5173/resetPassword'
+                'https://eldritch-7jpi.vercel.app/resetPassword'
             )
             console.log("Password recovery response:", response);
             return response;
@@ -410,19 +398,21 @@ export class Service {
     }
 
     async updatePassword(password = null, secret = null, userId = null) {
-       
+
         console.log({ secret, userId, password });
 
         try {
-            return await this.account.updateRecovery(
+            const response = await this.account.updateRecovery(
                 userId,
                 secret,
                 password,
                 password
             );
+
+            return { type: 'success', message: 'Password reset successfully', data: response };
         } catch (error) {
             console.error("Error updating password:", error);
-            return error;
+            return { type: 'error', message: error.message || 'Password reset failed' };
         }
     }
 

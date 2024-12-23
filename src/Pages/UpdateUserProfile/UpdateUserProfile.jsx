@@ -132,7 +132,7 @@ const UpdateUserProfile = () => {
                         />
                     )}
                 </div>
-                <div className='text-end md:text-start mt-10 md:mt-0'>
+                <div className='text-end md:text-start mt-10 md:mt-2'>
                     <button
                         type='submit'
                         className='bg-primary px-5 text-light py-2 rounded'
