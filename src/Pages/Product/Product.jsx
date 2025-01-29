@@ -144,7 +144,7 @@ const Product = () => {
                         <strong>Category :</strong>
                         <p className='capitalize text-lg'>{cat.cat_name}</p>
                     </div>
-                    <div className='flex mt-5 bg-primary w-[20%] h-8 items-center justify-between rounded'>
+                    <div className='flex mt-5 bg-primary w-[30%] md:w-[20%] h-8 items-center justify-between rounded'>
                         <button onClick={handleMinusQuantity} >
                             <CiSquareMinus className='size-8 text-light cursor-pointer' />
                         </button>

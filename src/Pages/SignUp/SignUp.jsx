@@ -101,7 +101,7 @@ const SignUp = () => {
                     <Alert message={error} />
                 </div> : null
             }
-            <div className='w-full border border-primary md:w-[40%] h-96 bg-[#00000049] rounded px-7 py-10 mx-auto'>
+            <div className='w-full border border-primary md:w-[40%] md:h-96 bg-[#00000049] rounded px-7 py-10 mx-auto overflow-hidden'>
                 <h1 className='text-center text-3xl font-bold text-white'>Sign Up</h1>
                 <form
                     onSubmit={handleSignup}

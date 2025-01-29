@@ -161,9 +161,7 @@ nav .navItems ul .navCustomStyle {
 }
 
 @media screen and (max-width: 992px) {
-  .productCard {
-    width: 45%;
-  }
+ 
 
   .productCardContainer {
     padding: 0px 10px !important;

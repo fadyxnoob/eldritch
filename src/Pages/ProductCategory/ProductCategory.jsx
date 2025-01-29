@@ -50,20 +50,20 @@ const ProductCategory = ({ customWidth = "w-[40%]", id }) => {
   return (
     <>
       <div className="banner shopBg">
-        <h1 className="text-5xl text-light font-bold border-b-4 border-primary capitalize">
+        <h1 className="text-4xl md:text-5xl text-light font-bold border-b-4 border-primary capitalize">
           Our {selectedCat.cat_name || "Products"}
         </h1>
       </div>
 
-      <div className="flex mx-20">
-        <div className="w-[70%]">
-          <div className="flex flex-wrap gap-5 mt-5 mobile:px-2 mobile:flex-col sm:items-center sm:justify-start productCardContainer">
+      <div className="sm:flex md:mx-20 mx-2">
+        <div className="sm:w-[70%]">
+          <div className="flex flex-wrap gap-5 mt-5 px-2 flex-col sm:items-start sm:justify-start productCardContainer">
             {pros.length > 0 ? (
               pros.map((pro) => {
                 return (
                   pro.status && (
                     <div
-                      className={`${customWidth} productCard cursor-pointer relative rounded overflow-hidden mobile:w-full shadow-md shadow-black`}
+                      className={`${customWidth} productCard md:w-1/2 cursor-pointer relative rounded overflow-hidden w-full shadow-md shadow-black`}
                       key={pro.$id}
                     >
                       <div className="size-full">
@@ -95,7 +95,7 @@ const ProductCategory = ({ customWidth = "w-[40%]", id }) => {
           </div>
         </div>
 
-        <div className="w-[30%] pt-8">
+        <div className="sm:w-[30%] pt-8">
           <Category getType="product" setType="pro" />
         </div>
       </div>

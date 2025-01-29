@@ -94,25 +94,25 @@ const MyProfile = () => {
                         <h2 className='text-2xl font-medium'>{userdata?.name}</h2>
                         <p>{userDets?.userName}</p>
                     </div>
-                    <div className='flex flex-start gap-2 mt-5'>
+                    <div className='flex flex-start justify-center md:justify-start gap-2 mt-5'>
                         <button
                             onClick={handleLogout}
                             type='submit'
-                            className='bg-primary px-5 py-1 text-light rounded-sm'
+                            className='bg-primary px-2 md:px-5 py-1 text-light rounded-sm'
                         >
                             Logout
                         </button>
                         <Link
                             to={`/update_user`}
                             type='submit'
-                            className='bg-primary px-5 py-1 text-light rounded-sm'
+                            className='bg-primary px-2 md:px-5 py-1 text-light rounded-sm'
                         >
                             Update
                         </Link>
                         <button
                             onClick={() => setOpenModel(true)}
                             type='submit'
-                            className='bg-primary px-5 py-1 text-light rounded-sm'
+                            className='bg-primary px-2 md:px-5 py-1 text-light rounded-sm'
                         >
                             Social Media
                         </button>

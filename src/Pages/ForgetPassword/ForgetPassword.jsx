@@ -25,7 +25,7 @@ const ForgetPassword = () => {
         <div>
             {alert && <Alert type={alert.type} message={alert.message} />}
             <div className='banner forgetBanner'>
-                <h1 className='text-5xl text-light font-bold border-b-4 border-primary'>Forget Password</h1>
+                <h1 className='md:text-5xl text-4xl text-light font-bold border-b-4 border-primary'>Forget Password</h1>
             </div>
             <form onSubmit={handleSubmit}>
                 <div className='p-5 md:w-1/2 mx-auto my-10 border'>

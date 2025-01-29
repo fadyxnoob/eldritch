@@ -30,7 +30,7 @@ const FaqsPage = () => {
             <div className='banner forgetBanner'>
                 <h1 className='text-5xl text-light font-bold border-b-4 border-primary'>FAQs</h1>
             </div>
-            <div className="faq-container w-3/4 mx-auto boxShadow my-10">
+            <div className="faq-container mx-5 md:w-3/4 md:mx-auto boxShadow my-10">
                 {faqsData.map((faq) => (
                     <div className='p-2 rounded' key={faq.$id}>
                         {/* FAQ Question */}
@@ -38,7 +38,7 @@ const FaqsPage = () => {
                             className='flex items-center justify-between cursor-pointer px-5 py-3 transition-all'
                             onClick={() => handleFaqToggle(faq.$id)}
                         >
-                            <h1 className="text-xl font-semibold">{faq.question}</h1>
+                            <h1 className="md:text-xl font-semibold">{faq.question}</h1>
                             {openFaq === faq.$id ? (
                                 <IoIosArrowDropupCircle size={24} className='text-primary' />
                             ) : (

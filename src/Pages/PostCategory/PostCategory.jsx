@@ -85,7 +85,7 @@ const PostCategory = ({ id }) => {
           {selectedCat.cat_name}
         </h1>
       </div>
-      <div className={`flex flex-wrap gap-4 my-20 mx-20`}>
+      <div className={`flex flex-wrap gap-4 my-20 md:mx-20 mx-5`}>
         {posts.map((post) => {
           const parsedDate = parseDate(post.date);
           const day = parsedDate ? parsedDate.getDate() : 'N/A';
@@ -95,7 +95,7 @@ const PostCategory = ({ id }) => {
 
           return (
             <div key={post.$id}
-              className={`w-[30%]  cursor-pointer relative rounded overflow-hidden mobile:w-full shadow-md shadow-black `}
+              className={`sm:w-[50%] md:w-[30%] cursor-pointer relative rounded overflow-hidden mobile:w-full shadow-md shadow-black `}
             >
               <div className="overflow-hidden">
                 <img
@@ -128,10 +128,10 @@ const PostCategory = ({ id }) => {
         })}
       </div>
 
-      <div className="flex mx-20">
-        <div className="w-[70%]">
+      <div className="md:flex md:mx-20 mx-5">
+        <div className="md:w-[70%] md:block">
         </div>
-        <div className="w-[30%] pt-8">
+        <div className="w-full sm:w-[40%] md:w-[30%] pt-8">
           <Category getType='post' setType='post' />
         </div>
       </div>
