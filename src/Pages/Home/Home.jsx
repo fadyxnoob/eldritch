@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const Home = () => {
-    document.title = 'Byt3Blitz | Home'
+    document.title = 'Eldritch | Home'
 
     const proHeadingRef = useRef(null);
     const blogHeadingRef = useRef(null);
