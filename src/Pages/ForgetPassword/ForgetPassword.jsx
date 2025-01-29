@@ -13,7 +13,7 @@ const ForgetPassword = () => {
         console.log('onclick is working');
         try {
             const res = await authService.createPasswordRecovery(email);
-            setAlert({ type: 'success', message: 'Password recovery email sent successfully.' });
+            setAlert({ type: 'success', message: 'Recovery email sent successfully.' });
             console.log({ res });
         } catch (error) {
             setAlert({ type: 'error', message: error.message });
@@ -28,7 +28,7 @@ const ForgetPassword = () => {
                 <h1 className='text-5xl text-light font-bold border-b-4 border-primary'>Forget Password</h1>
             </div>
             <form onSubmit={handleSubmit}>
-                <div className='p-5 w-1/2 mx-auto my-10 border'>
+                <div className='p-5 md:w-1/2 mx-auto my-10 border'>
                     <h2 className='text-2xl mb-2 font-medium'>Enter Email Address</h2>
                     <input
                         type="email"

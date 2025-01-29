@@ -41,7 +41,7 @@ const ResetPassword = () => {
         }
 
         try {
-            const response = await authService.updatePassword(secret, userId, password);
+            const response = await authService.updatePassword(password, secret, userId);
             setAlert(response);
             setTimeout(() => {
                 navigate('/login');

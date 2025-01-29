@@ -387,7 +387,8 @@ export class Service {
             console.log("Attempting password recovery for email:", email);
             const response = await this.account.createRecovery(
                 email,
-                'https://eldritch-7jpi.vercel.app/resetPassword'
+                // 'https://eldritch-7jpi.vercel.app/resetPassword'
+                'http://localhost:5173/resetPassword'
             )
             console.log("Password recovery response:", response);
             return response;
@@ -399,8 +400,6 @@ export class Service {
 
     async updatePassword(password = null, secret = null, userId = null) {
 
-        console.log({ secret, userId, password });
-
         try {
             const response = await this.account.updateRecovery(
                 userId,
@@ -408,7 +407,6 @@ export class Service {
                 password,
                 password
             );
-
             return { type: 'success', message: 'Password reset successfully', data: response };
         } catch (error) {
             console.error("Error updating password:", error);
